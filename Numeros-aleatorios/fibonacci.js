@@ -1,25 +1,13 @@
 /**
- * Consiste en:
-    1. Elegir 3 (tres) parámetros (enteros no negativos de 3 a 7
-    dígitos): V 1 , V 2 y A, que se asignan como valores del
-    primer y segundo términos de la serie y de un parámetro de
-    control, respectivamente.
-    2. Aplicar: V 3 = V 2 + V 1 + k A, donde k es un parámetro real y
-    entero que se define como:
-        * 0 si V 2 + V 1 <= A
-        * -1 en otro caso
-    3. Asignar V 3 a V 2 , y V 2 a V 1 .
-    4. Repetir los pasos del 2 al 3 n veces, siendo n la cantidad de
-    nros pseudoaleatorios a generar.
- */
-
-/**
  * calcula n numeros pseudoaleatorios usando el
  * metodo de fibonacci.
- * @param v1 primer termino semilla.
- * @param v2 segundo termino semilla.
- * @param A constante de control.
- * @param n cantidad de iteraciones.
+ * consideraciones:
+ * - asignar numeros primos a v1 y v2.
+ * - la constante de control A debe ser mayor a v1 y v2.
+ * @param {Number} v1 primer termino semilla.
+ * @param {Number} v2 segundo termino semilla.
+ * @param {Number} A constante de control.
+ * @param {Number} n cantidad de iteraciones.
  * @returns array con n numeros pseudoaleatorios.
  */
 function pseudoAleatoriosFibonacci(v1, v2, A, n) {
@@ -47,7 +35,7 @@ function pseudoAleatoriosFibonacci(v1, v2, A, n) {
  * Recibe un array de numeros y los descompone
  * retornando un array de sus digitos.
  * ejemplo: [3, 14, 145] pasa a: [3, 1, 4, 1, 4, 5]
- * @param {*} arrayNumerico 
+ * @param {Number} arrayNumerico 
  * @returns array de digitos
  */
 function descomponerEnDigitos(arrayNumerico) {
@@ -71,7 +59,7 @@ function descomponerEnDigitos(arrayNumerico) {
  * (ES6+) Recibe un array de numeros y los descompone
  * retornando un array de sus digitos.
  * ejemplo: [3, 14, 145] pasa a: [3, 1, 4, 1, 4, 5]
- * @param {*} arrayNumerico 
+ * @param {Number} arrayNumerico 
  * @returns array de digitos
  */
 function descomponerEnDigitosES6(arrayNumerico) {
@@ -105,16 +93,26 @@ function descomponerEnDigitosES6(arrayNumerico) {
 
 /**
  * * Funcion para ejecutar este algoritmo en node.js:
+ * * Comprueba los parametros primero.
  * calcula n numeros pseudoaleatorios usando el
  * metodo de fibonacci.
- * @param v1 primer termino semilla.
- * @param v2 segundo termino semilla.
- * @param A constante de control.
- * @param n cantidad de iteraciones.
+ * consideraciones:
+ * - asignar numeros primos a v1 y v2.
+ * - la constante de control A debe ser mayor a v1 y v2.
+ * @param {Number} v1 primer termino semilla.
+ * @param {Number} v2 segundo termino semilla.
+ * @param {Number} A constante de control.
+ * @param {Number} n cantidad de iteraciones.
  * @returns array con n numeros pseudoaleatorios.
  * 
  */
 function nFibonacci(v1, v2, A, n) {
+
+    // A debe ser mayor que v1 y v2
+    if (!(A > v1 && A > v2)) {
+        return 'ERROR: la constante de control debe ser mayor que las semillas para iniciar.';
+    }
+
     let pseudoaleatorios = pseudoAleatoriosFibonacci(v1, v2, A, n);
     return descomponerEnDigitosES6(pseudoaleatorios);
 }
@@ -123,4 +121,4 @@ function nFibonacci(v1, v2, A, n) {
  * * Para node.js:
  * ejecutar por consola en la carpeta del script: node fibonacci.js
  */
-console.log(nFibonacci(37,77,7,10));
+console.log(nFibonacci(371,177,745,15));

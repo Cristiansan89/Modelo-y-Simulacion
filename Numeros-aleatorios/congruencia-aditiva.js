@@ -24,10 +24,11 @@ function aleatoriosCongruencia(v1, v2, k, m, a, c, i){
     }
 
     //Declaramos el vector resultado de nuestra operación
-    let vectorResultado = [v1,v2];
+    let v3 = (v1 * a + v2 * c) % m;
+    let vectorResultado = [v1,v2,v3];
 
     for(let j = 2; j < i; j++){
-        let vi = (vectorResultado[j-1] * a + vectorResultado[j-2] * c) % m;
+        let vi = (vectorResultado[j] * a + vectorResultado[j-k] * c) % m;
         vectorResultado.push(vi); 
     }
 
@@ -35,14 +36,32 @@ function aleatoriosCongruencia(v1, v2, k, m, a, c, i){
 
 }
 
+/**
+ * (ES6+) Recibe un array de numeros y los descompone
+ * retornando un array de sus digitos.
+ * ejemplo: [3, 14, 145] pasa a: [3, 1, 4, 1, 4, 5]
+ * @param {*} arrayNumerico 
+ * @returns array de digitos
+ */
+function descomponerEnDigitosES6(arrayNumerico) {
+    return arrayNumerico.map(numero => {
+        // cada numero es un array de caracteres
+        let arrayDeCaracteres = numero.toString().split('');
+        // cada array de caracteres se transforma en un array de digitos
+        let arrayDeDigitos = arrayDeCaracteres.map(caracter => parseInt(caracter, 10));
+        // retornamos el array de digitos para flat()
+        return arrayDeDigitos;
+    }).flat();
+}
+
 //Declaramos las variables cy le asignamos valores correspondientes
-let v1 = 117;
+let v1 = 113;
 let v2 = 237;
 let m = 1000;
 let a = 4;
 let c = 8;
 let k = 2;
-let i = 15;
+let i = 21;
 
 //Llamamos a la función
-console.log(aleatoriosCongruencia(v1, v2, k, m, a, c, i))
+console.log(descomponerEnDigitosES6(aleatoriosCongruencia(v1, v2, k, m, a, c, i)))

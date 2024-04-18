@@ -1,9 +1,9 @@
 /**
  * 
- * @param v1 Semilla inicial
- * @param v2 La segunda semilla 
- * @param A Parametro de control
- * @param n Número pseudoaleatorio 
+ * @param {*} v1 Semilla inicial
+ * @param {*} v2 La segunda semilla 
+ * @param {*} A Parametro de control
+ * @param {*} n Número pseudoaleatorio 
  */
 function fibonacci(v1, v2, A, n) {
     const resultado = [];
@@ -59,7 +59,10 @@ const n = 10;
 
 if (isPrimo(v1) && isPrimo(v2) && isPrimo(A)) {
     const randomNumbers = fibonacci(v1, v2, A, n);
-    console.error("Generando números: ", randomNumbers);
+    console.error("Generando números pseudo-random: ", randomNumbers);
+    const separarComaNumbers = randomNumbers.join('');
+    const numberSeparado = separarComaNumbers.split('');
+    console.log("Generando fibo(): (", numberSeparado.join(', '), ")");
 } else {
     console.error("La semilla inicial no es un número primo.");
 }

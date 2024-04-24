@@ -25,25 +25,31 @@ function aleatoriosCongruencia(v1, v2, k, m, a, c, i) {
 
     //Declaramos el vector resultado de nuestra operación
     let v3 = (v1 * a + v2 * c) % m;
-<<<<<<< HEAD
+
+
     let vectorResultado = [v1, v2, v3];
+    /*
+    for(let j = 2; j < i; j++){
+        let vi = (vectorResultado[j] * a + vectorResultado[j-k] * c) % m;
+        vectorResultado.push(vi); 
+    }
+
+    */
 
     for (let j = 2; j < i; j++) {
         let vi = (vectorResultado[j] * a + vectorResultado[j - k] * c) % m;
         vectorResultado.push(vi);
-=======
-    let vectorResultado = [v1,v2,v3];
 
-    for(let j = 2; j < i; j++){
-        let vi = (vectorResultado[j] * a + vectorResultado[j-k] * c) % m;
-        vectorResultado.push(vi); 
->>>>>>> f527bf2572ac2e08c75301fd663637c9933f444c
+        for (let j = 2; j < i; j++) {
+            let vi = (vectorResultado[j] * a + vectorResultado[j - k] * c) % m;
+            vectorResultado.push(vi);
+
+
+            return vectorResultado;
+
+        }
     }
-
-    return vectorResultado;
-
 }
-
 /**
  * (ES6+) Recibe un array de numeros y los descompone
  * retornando un array de sus digitos.

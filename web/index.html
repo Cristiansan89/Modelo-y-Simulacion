@@ -44,19 +44,29 @@
                                     <div class="card card-body mx-auto" style="width: 75%;">
                                         <h3>Parametros</h3>
                                         <ul>
-                                            <li><b>v1</b> Primer t&eacute;rmino de la semilla.
-                                            <li><b>v2</b> Segundo t&eacute;rmino de la semilla.</li>
+                                            <li><b>V<sub>1</sub></b> Primer t&eacute;rmino de la semilla.
+                                            <li><b>V<sub>2</sub></b> Segundo t&eacute;rmino de la semilla.</li>
                                             <li><b>A</b> Constante de control.</li>
-                                            <li><b>n</b> Cantidad de iteraci&oacute;n.</li>
+                                            <li><b>n</b> Cantidad de n&uacute;meros aleatorios que se generan.</li>
                                             <li><b>*Array con n n&uacute;meros pseudoaleatorios.</b></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="p-2" style="min-height: 120px;">
                                     <div class="card card-body mx-auto" style="width: 75%;">
-                                        <h3>Condiciones</h3>
+                                        <h3>Descripci&oacute;n</h3>
                                         <ul>
-                                            <p><b>*</b>ss</p>
+                                            <p><b>1.</b> Elegir tres par&aacute;metros (enteros no negativos de 3 a 7
+                                                d&iacute;gitos): V<sub>1</sub>, V<sub>2</sub> y A.</p>
+                                            <p><b>2.</b> V<sub>3</sub> = V<sub>2</sub> + V<sub>1</sub> + k * A, donde k
+                                                es un par&aacute;metro real y
+                                                entero que se define como:
+                                                <br> 0 si V<sub>2</sub> + V<sub>1</sub>
+                                                <= A <br> -1 en otro caso
+                                            </p>
+                                            <p><b>3.</b> Asignar V<sub>3</sub> a V<sub>2</sub>, a V<sub>1</sub>.</p>
+                                            <p><b>4.</b> Repetir los pasos del 2 al 3 n veces, siendo n la cantidad de
+                                                n&uacute;meros pseudoaleatorios a generar.</p>
                                         </ul>
                                     </div>
                                 </div>
@@ -125,8 +135,8 @@
                                     <div class="card card-body mx-auto" style="width: 75%;">
                                         <h3>Parametros</h3>
                                         <ul>
-                                            <li><b>v1</b> Primer Valor.
-                                            <li><b>v2</b> Segundo Valor.</li>
+                                            <li><b>V<sub>s</sub></b> Semilla iniciales.</li>
+                                            <li><b>*s Cantidad de semilla a cargar.</b></li>
                                             <li><b>k</b> Semilla.</li>
                                             <li><b>m</b> M&oacute;dulo.</li>
                                             <li><b>a</b> Constante a.</li>
@@ -137,9 +147,14 @@
                                 </div>
                                 <div class="p-2" style="min-height: 120px;">
                                     <div class="card card-body mx-auto" style="width: 75%;">
-                                        <h3>Condiciones</h3>
+                                        <h3>Descripci&oacute;n</h3>
                                         <ul>
-                                            <p><b>*</b>ss</p>
+                                            <p>Se basan en: V<sub>i+1</sub> = (a V<sub>i</sub> + c V<sub>i-k</sub>) mod
+                                                m</p>
+                                            <p>donde V<sub>i</sub>, V<sub>i-k</sub>, a, c, k, m son enteros no negativos
+                                                y arbitrarios que cumplen las siguientes condiciones: V<sub>i</sub> >=
+                                                0, a >= 0, c >= 0, m > V<sub>i</sub>, m > a, m > 0.
+                                            </p>
                                         </ul>
                                     </div>
                                 </div>
@@ -148,18 +163,18 @@
                                         <h4>Ingresar Parametros</h4>
                                         <div class="input-group p-2" style="width: 95%;">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="valor1" type="text"
-                                                    placeholder="Ingrese el parametro">
-                                                <label for="name">Primer Valor</label>
+                                                <input class="form-control" id="s" type="number"
+                                                    placeholder="Ingrese el parametro" min="1" autocomplete="off"
+                                                    required>
+                                                <label for="name">Ingrese Cantidad de Semilla a generar.</label>
                                             </div>
+
                                         </div>
-                                        <div class="input-group p-2" style="width: 95%;">
-                                            <div class="form-floating mb-3">
-                                                <input class="form-control" id="valor2" type="number"
-                                                    placeholder="Ingrese el parametro">
-                                                <label for="name">Segundo Valor</label>
-                                            </div>
+                                        <div class="text-center p-2">
+                                            <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
+                                                style="width: 25%;" onclick="generarSemilla()">Generar</button>
                                         </div>
+                                        <div id="contenedorSemilla"></div>
                                         <div class="input-group p-2" style="width: 95%;">
                                             <div class="form-floating mb-2">
                                                 <input class="form-control" id="k" type="number"
@@ -167,6 +182,7 @@
                                                 <label for="name">Semilla</label>
                                             </div>
                                         </div>
+
                                         <div class="input-group p-2" style="width: 95%;">
                                             <div class="form-floating mb-2">
                                                 <input class="form-control" id="m" type="number"
@@ -237,7 +253,53 @@
     </div>
 
 
+    <script>
+        function generarSemilla() {
+            const s = document.getElementById('s').value;
+            const contenedorSemilla = document.getElementById('contenedorSemilla');
 
+            contenedorSemilla.innerHTML = ' ';
+
+            for (let i = 1; i <= s; i++) {
+                const groupInput = document.createElement('div');
+                groupInput.classList.add('input-group', 'p-2');
+                groupInput.style.width = '95%';
+
+                const contenedorFlotante = document.createElement('div');
+                contenedorFlotante.classList.add('form-floating', 'mb-2');
+
+
+
+                const nuevoInput = document.createElement('input');
+                nuevoInput.type = 'number';
+                nuevoInput.id = `semilla${i}`;
+                nuevoInput.classList.add('form-control');
+                nuevoInput.placeholder = `Ingrese semilla V`;
+
+                const spanV = document.createElement('span');
+                spanV.textContent = 'Ingrese la semilla V';
+
+                const subIndice = document.createElement('sub');
+                subIndice.textContent = i;
+
+                spanV.appendChild(subIndice);
+
+                const etiqueta = document.createElement('label');
+                etiqueta.setAttribute('for', `semilla${1}`);
+                etiqueta.textContent = '';
+
+                etiqueta.appendChild(spanV);
+
+                contenedorFlotante.appendChild(nuevoInput);
+                contenedorFlotante.appendChild(etiqueta);
+                groupInput.appendChild(contenedorFlotante);
+
+                contenedorSemilla.appendChild(groupInput);
+
+
+            }
+        }
+    </script>
 
 
 

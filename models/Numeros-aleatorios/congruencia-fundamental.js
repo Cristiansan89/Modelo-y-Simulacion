@@ -28,14 +28,14 @@ function aleatoriosCongruencia(v1, v2, k, m, a, c, i) {
 
 
     let vectorResultado = [v1, v2, v3];
-    /*
+    
     for(let j = 2; j < i; j++){
         let vi = (vectorResultado[j] * a + vectorResultado[j-k] * c) % m;
         vectorResultado.push(vi); 
     }
 
-    */
-
+    return vectorResultado;
+    /*
     for (let j = 2; j < i; j++) {
         let vi = (vectorResultado[j] * a + vectorResultado[j - k] * c) % m;
         vectorResultado.push(vi);
@@ -48,7 +48,7 @@ function aleatoriosCongruencia(v1, v2, k, m, a, c, i) {
             return vectorResultado;
 
         }
-    }
+    }*/
 }
 /**
  * (ES6+) Recibe un array de numeros y los descompone

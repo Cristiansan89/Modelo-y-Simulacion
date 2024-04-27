@@ -47,9 +47,10 @@ function congruencia(v1, v2, k, m, a, c, i) {
 const v1 = 113;
 const v2 = 237;
 const m = 1000;
+const k = 2;
 const a = 4;
 const c = 8;
-const i = 15;
+const i = 10;
 
-console.log("conf: ", congruencia(v1, v2, m, a, c, i));
+console.log("conf: ", congruencia(v1, v2, k, m, a, c, i));
 //console.log("Congruencia Fundamental: ", congruencia(v1, m, a, c, i));

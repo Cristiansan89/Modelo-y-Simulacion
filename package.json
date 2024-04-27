@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "express": "^4.19.2"
+  },
+  "dependencies": {
+    "bootstrap-icons": "1.11.3"
   }
 }

@@ -10,6 +10,7 @@
  * @param {Number} n cantidad de iteraciones.
  * @returns array con n numeros pseudoaleatorios.
  */
+
 function pseudoAleatoriosFibonacci(v1, v2, A, n) {
 
     let k, v3;
@@ -121,4 +122,4 @@ function nFibonacci(v1, v2, A, n) {
  * * Para node.js:
  * ejecutar por consola en la carpeta del script: node fibonacci.js
  */
-console.log(nFibonacci(371,177,745,15));
+console.log(nFibonacci(371, 177, 745, 15));

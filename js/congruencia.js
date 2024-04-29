@@ -1,111 +1,104 @@
 /**
- * calcula n numeros pseudoaleatorios usando
- * el metodo de congruencias fundamental.
- * * TOMA K DINAMICO.
- * @param {Number} semillas array.
- * @param {Number} A constante.
- * @param {Number} C constante.
- * @param {Number} M modulo.
- * @param {Number} n cantidad de numeros a generar.
+ * 
+ * @param {*} v1 Valor 1
+ * @param {*} v2 Valor 2
+ * @param {*} k Semillas
+ * @param {*} m Modulo
+ * @param {*} a Constante
+ * @param {*} c Constante
+ * @param {*} i N° de iteraciones
  */
-function pseudoAleatoriosCF(semillas, A, C, M, n) {
 
-    const K = semillas.length; //k cantidad de semillas iniciales
-    const pseudoaleatorios = [...semillas];
-    let i = K - 1;
+function aleatoriosCongruencia(semillas, k, m, a, c, i) {
+    let semilla = [...semillas];
+    let cantSemilla = semilla.length;
+    let n = k - 1;
 
-    // si K = 2, necesito hallar una tercer semilla.
-    if (K === 2) {
-        let v = ((pseudoaleatorios[1] * A + pseudoaleatorios[0] * C) % M);
-        pseudoaleatorios.push(v);
-        i++;
+    for (let j = 0; j <= cantSemilla; j++) {
+        if (semilla[j] < 0) {
+            return "El valor de la semilla [", j, "] debe ser no negativo.";
+        }
     }
 
-    // si K > 2, itero normalmente.
-    while (i <= n) {
-        let v = ((pseudoaleatorios[i] * A + pseudoaleatorios[Math.abs(i - K)] * C) % M);
-        pseudoaleatorios.push(v);
-        i++;
+    for (let j = 0; j <= cantSemilla; j++) {
+        if (Number.isInteger(semilla[j] > 0)) {
+            return "El valor de la semilla [", j, "] debe ser entero.";
+        }
     }
 
-    return pseudoaleatorios;
-};
+    if (m < 0) {
+        return "El valor 'm' deben ser no negativos.";
+    }
+
+    if (a < 0) {
+        return "El valor 'a' deben ser no negativos.";
+    }
+
+    if (c < 0) {
+        return "El valor 'c' deben ser no negativos.";
+    }
+
+    if (k <= 0) {
+        return "El valor 'k' deben ser no negativos.";
+    }
+
+    if (!(Number.isInteger(m) && Number.isInteger(a) && Number.isInteger(c))) {
+        return "El valor 'm' debe se entero.";
+    }
+
+    if (m > a) {
+        for (let j = 0; j <= cantSemilla; j++) {
+            if (semilla[j] > m) {
+                return "Los valores de la 'semilla' deber ser menor a 'm'";
+            }
+        }
+    } else {
+        return "El valor de 'm' debe ser mayor a 'a'.";
+    }
+
+    semilla[cantSemilla] = ((semilla[cantSemilla - 2] * a + semilla[cantSemilla - 1] * c) % m);
+    for (let j = cantSemilla; j < i; j++) {
+        let seed = (semilla[j] * a + semilla[j - k] * c) % m;
+        semilla.push(seed);
+    }
+
+    return semilla;
+}
 
 /**
  * (ES6+) Recibe un array de numeros y los descompone
  * retornando un array de sus digitos.
  * ejemplo: [3, 14, 145] pasa a: [3, 1, 4, 1, 4, 5]
- * @param {*} arrayNumerico a descomponer.
- * @returns array de digitos.
+ * @param {*} arrayNumerico 
+ * @returns array de digitos
  */
 function descomponerEnDigitosES6(arrayNumerico) {
-    let arrayDeDigitos = arrayNumerico.join('').split('').map(elem => Number.parseInt(elem));
-    return arrayDeDigitos;
+    return arrayNumerico.map(numero => {
+        // cada numero es un array de caracteres
+        let arrayDeCaracteres = numero.toString().split('');
+        // cada array de caracteres se transforma en un array de digitos
+        let arrayDeDigitos = arrayDeCaracteres.map(caracter => parseInt(caracter, 10));
+        // retornamos el array de digitos para flat()
+        return arrayDeDigitos;
+    }).flat();
 }
 
-/**
- * * Para probar con quokka:
- * 1 - instalar el plugin en vsc
- * 2 - con este archivo js abierto presionar F1 para abrir la paleta de comandos y escribir "quokka toggle"
- * 3 - seleccionar la opcion "Quokka.js Toggle (Start/Stop) on Current File"
- * 4 - descomentar las lineas siguientes para ver las salidas
- */
 
-// let pseudoaleatorios1 = pseudoAleatoriosCF([113, 237], 4, 8, 1000, 100);
-// let pseudoaleatorios2 = pseudoAleatoriosCF([113, 237, 18], 4, 8, 2000, 10);
-
-// let test1 = descomponerEnDigitosES6(pseudoaleatorios1);
-// let test2 = descomponerEnDigitosES6(pseudoaleatorios2);
-
-// test1
-// test2
-
-/**
- * * funcion para ejecutar este algoritmo en node.js:
- * * comprueba los parametros primero.
- * calcula n numeros pseudoaleatorios usando
- * el metodo de congruencias fundamental.
- * @param {Number} semillas array.
- * @param {Number} A constante.
- * @param {Number} C constante.
- * @param {Number} M modulo.
- * @param {Number} n cantidad de numeros a generar.
- * @returns {Array<Number> | String} array de digitos pseudoaletorios o un string detallando un error.
- */
-function nCongruencia(semillas, A, C, M, n) {
-
-    // las semillas, A, C, M, n, deben ser enteros no negativos.
-    let args = [...semillas, A, C, M, n];
-    for (let i = 0; i < args.length; i++) {
-        if (!(Number.isInteger(args[i]) && args[i] > 0)) {
-            return 'ERROR: los parametros deben ser enteros no negativos para iniciar.'
-        };
-    }
-
-    // M > semillas[i]
-    for (let i = 0; i < semillas.length; i++) {
-        if (!(M > semillas[i])) {
-            return 'ERROR: el valor M debe ser superior a cada semilla para iniciar.';
-        }
-    }
-
-    // si semillas.length < 2 ERROR, necesito al menos 2 semillas.
-    if (semillas.length < 2) {
-        return 'ERROR: se necesitan minimo 2 semillas para iniciar.';
-    }
-
-    // M > A
-    if (!(M > A)) {
-        return 'ERROR: M debe ser mayor que A para iniciar.'
-    }
-
-    let aux = pseudoAleatoriosCF(semillas, A, C, M, n);
-    const resultadoCongruencia = descomponerEnDigitosES6(aux);
-    return resultadoCongruencia;
+function nCongruencia(semillas, k, m, a, c, i) {
+    let resultado = descomponerEnDigitosES6(aleatoriosCongruencia(semillas, k, m, a, c, i));
+    return resultado;
 }
 
-/**
- * * para node.js:
- * ejecutar por consola en la carpeta del script: node nCongrFund.js
- */
-//console.log(nCongruencia([113, 237], 4, 8, 1000, 10));
+
+//Declaramos las variables cy le asignamos valores correspondientes
+/*let semillas = [113, 237];
+let v1 = 113;
+let v2 = 237;
+let m = 1000;
+let a = 4;
+let c = 8;
+let k = 2;
+let i = 21;
+
+//Llamamos a la función
+console.log(nCongruencia(semillas, k, m, a, c, i));*/

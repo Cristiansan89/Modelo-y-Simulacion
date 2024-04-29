@@ -290,8 +290,13 @@
             const A = parseInt(document.getElementById('A').value);
             const n = parseInt(document.getElementById('n').value);
 
-            const resultadoFibonacci = nFibonacci(v1, v2, A, n);
-            document.getElementById('fibonacciResultado').textContent = resultadoFibonacci;
+            if (isNaN(v1) || isNaN(v2) || isNaN(A) || isNaN(n)) {
+                document.getElementById('fibonacciResultado').textContent = 'Datos Incompletos, revisa completar los parámetros';
+            }
+            else {
+                const resultadoFibonacci = nFibonacci(v1, v2, A, n);
+                document.getElementById('fibonacciResultado').textContent = "[ " + resultadoFibonacci + " ]";
+            }
         }
     </script>
 

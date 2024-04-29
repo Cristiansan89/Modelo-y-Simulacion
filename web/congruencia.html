@@ -199,7 +199,7 @@
                                         <div class="form-floating mb-2">
                                             <input class="form-control" id="k" type="number"
                                                 placeholder="Ingrese el parametro">
-                                            <label for="name">Semilla</label>
+                                            <label for="name">Semilla 'k'</label>
                                         </div>
                                     </div>
 
@@ -207,28 +207,28 @@
                                         <div class="form-floating mb-2">
                                             <input class="form-control" id="m" type="number"
                                                 placeholder="Ingrese el parametro">
-                                            <label for="name">M&oacute;dulo</label>
+                                            <label for="name">M&oacute;dulo 'm'</label>
                                         </div>
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <div class="form-floating mb-2">
                                             <input class="form-control" id="a" type="number"
                                                 placeholder="Ingrese el parametro">
-                                            <label for="name">Constante a</label>
+                                            <label for="name">Constante 'a'</label>
                                         </div>
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <div class="form-floating mb-2">
                                             <input class="form-control" id="c" type="number"
                                                 placeholder="Ingrese el parametro">
-                                            <label for="name">Constante c</label>
+                                            <label for="name">Constante 'c'</label>
                                         </div>
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <div class="form-floating mb-2">
                                             <input class="form-control" id="i" type="number"
                                                 placeholder="Ingrese el parametro">
-                                            <label for="name">Cantidad de Iteraciones</label>
+                                            <label for="name">Cantidad de Iteraciones 'i'</label>
                                         </div>
                                     </div>
                                     <div class="text-center">
@@ -352,9 +352,18 @@
         function generarCongruencia() {
             const semillas = [];
             const s = parseInt(document.getElementById('s').value);
-            for (let j = 1; j <= s; j++) {
-                const semilla = parseInt(document.getElementById(`semilla${j}`).value);
-                semillas.push(semilla);
+
+            if (isNaN(s)) {
+                document.getElementById('congruenciaResultado').textContent = 'Falta ingresar la cantidad de semilla a generar.';
+            } else {
+                for (let j = 1; j <= s; j++) {
+                    const semilla = parseInt(document.getElementById(`semilla${j}`).value);
+                    if (isNaN(semilla)) {
+                        document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, faltan semilla iniciales';
+                    } else {
+                        semillas.push(semilla);
+                    }
+                }
             }
 
             const k = parseInt(document.getElementById('k').value);
@@ -363,8 +372,13 @@
             const c = parseInt(document.getElementById('c').value);
             const i = parseInt(document.getElementById('i').value);
 
-            const resultadoCongruencia = nCongruencia(semillas, a, c, m, i);
-            document.getElementById('congruenciaResultado').textContent = resultadoCongruencia;
+            if (isNaN(k) || isNaN(m) || isNaN(a) || isNaN(c) || isNaN(i)) {
+                document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, revisa completar los parámetros';
+            } else {
+                const resultadoCongruencia = nCongruencia(semillas, k, m, a, c, i);
+                document.getElementById('congruenciaResultado').textContent = "[ " + resultadoCongruencia + " ]";
+            }
+
         }
     </script>
 

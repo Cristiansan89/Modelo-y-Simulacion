@@ -28,10 +28,10 @@ function aleatoriosCongruencia(v1, v2, k, m, a, c, i) {
 
 
     let vectorResultado = [v1, v2, v3];
-    
-    for(let j = 2; j < i; j++){
-        let vi = (vectorResultado[j] * a + vectorResultado[j-k] * c) % m;
-        vectorResultado.push(vi); 
+
+    for (let j = 2; j < i; j++) {
+        let vi = (vectorResultado[j] * a + vectorResultado[j - k] * c) % m;
+        vectorResultado.push(vi);
     }
 
     return vectorResultado;
@@ -78,4 +78,4 @@ let k = 2;
 let i = 21;
 
 //Llamamos a la función
-console.log(descomponerEnDigitosES6(aleatoriosCongruencia(v1, v2, k, m, a, c, i)))
+console.log(descomponerEnDigitosES6(aleatoriosCongruencia(v1, v2, k, m, a, c, i)));

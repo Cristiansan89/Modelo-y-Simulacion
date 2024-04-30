@@ -168,7 +168,7 @@
                                     <h4>Ingresar Parametros</h4>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="v1" type="text"
+                                            <input class="form-control" id="v1" type="number"
                                                 placeholder="Ingrese el parametro">
                                             <label for="name">Primera Semilla 'V<sub>1</sub>'</label>
                                         </div>
@@ -201,7 +201,7 @@
                                 </div>
                             </div>
                             <div class="p-2" style="min-height: 120px;">
-                                <div class="card card-body mx-auto" style="width: 60%;">
+                                <div class="card card-body mx-auto" style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
                                     <h3>Resultado</h3>
                                     <p id="fibonacciResultado"></p>
                                 </div>
@@ -269,6 +269,15 @@
             const v2 = parseInt(document.getElementById('v2').value);
             const A = parseInt(document.getElementById('A').value);
             const n = parseInt(document.getElementById('n').value);
+
+            // A debe ser mayor que v1 y v2
+            if (!(A > v1 && A > v2)) {
+                document.getElementById('fibonacciResultado').textContent = 'La constante de control debe ser mayor que las semillas para iniciar.';
+                return;
+            }
+
+            // control por consola
+            console.log(`v1:${v1}, v2:${v2}, A:${A}, n:${n}`);
 
             if (isNaN(v1) || isNaN(v2) || isNaN(A) || isNaN(n)) {
                 document.getElementById('fibonacciResultado').textContent = 'Datos Incompletos, revisa completar los parámetros';

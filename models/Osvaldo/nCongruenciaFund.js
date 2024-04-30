@@ -1,18 +1,17 @@
 /**
  * calcula n numeros pseudoaleatorios usando
  * el metodo de congruencias fundamental.
- * * TOMA K DINAMICO.
  * @param {Number} semillas array.
+ * @param {Number} K pasos hacia atras.
  * @param {Number} A constante.
  * @param {Number} C constante.
  * @param {Number} M modulo.
  * @param {Number} n cantidad de numeros a generar.
  */
-function pseudoAleatoriosCF(semillas, A, C, M, n) {
+function pseudoAleatoriosCF(semillas, K, A, C, M, n) {
 
-    const K = semillas.length; //k cantidad de semillas iniciales
     const pseudoaleatorios = [...semillas];
-    let i = K - 1;
+    let i = semillas.length - 1;
 
     // si K = 2, necesito hallar una tercer semilla.
     if(K === 2) {
@@ -43,22 +42,6 @@ function descomponerEnDigitosES6(arrayNumerico) {
     return arrayDeDigitos;
 }
 
-/**
- * * Para probar con quokka:
- * 1 - instalar el plugin en vsc
- * 2 - con este archivo js abierto presionar F1 para abrir la paleta de comandos y escribir "quokka toggle"
- * 3 - seleccionar la opcion "Quokka.js Toggle (Start/Stop) on Current File"
- * 4 - descomentar las lineas siguientes para ver las salidas
- */
-
-// let pseudoaleatorios1 = pseudoAleatoriosCF([113, 237], 4, 8, 1000, 100);
-// let pseudoaleatorios2 = pseudoAleatoriosCF([113, 237, 18], 4, 8, 2000, 10);
-
-// let test1 = descomponerEnDigitosES6(pseudoaleatorios1);
-// let test2 = descomponerEnDigitosES6(pseudoaleatorios2);
-
-// test1
-// test2
 
 /**
  * * funcion para ejecutar este algoritmo en node.js:
@@ -66,16 +49,22 @@ function descomponerEnDigitosES6(arrayNumerico) {
  * calcula n numeros pseudoaleatorios usando
  * el metodo de congruencias fundamental.
  * @param {Number} semillas array.
+ * @param {Number} K pasos hacia atras.
  * @param {Number} A constante.
  * @param {Number} C constante.
  * @param {Number} M modulo.
  * @param {Number} n cantidad de numeros a generar.
  * @returns {Array<Number> | String} array de digitos pseudoaletorios o un string detallando un error.
  */
-function nCongrFund(semillas, A, C, M, n) {
+function nCongrFund(semillas, K, A, C, M, n) {
+
+    // K <= cantidad de semillas
+    if (K > semillas.length) {
+        return 'ERROR: K debe ser <= a la cantidad de semillas.'
+    }
 
     // las semillas, A, C, M, n, deben ser enteros no negativos.
-    let args = [...semillas, A, C, M, n];
+    let args = [...semillas, K, A, C, M, n];
     for (let i = 0; i < args.length; i++) {
         if(!(Number.isInteger(args[i]) && args[i] > 0)) {
             return 'ERROR: los parametros deben ser enteros no negativos para iniciar.'
@@ -99,7 +88,7 @@ function nCongrFund(semillas, A, C, M, n) {
         return 'ERROR: M debe ser mayor que A para iniciar.'
     }
 
-    let aux = pseudoAleatoriosCF(semillas, A, C, M, n);
+    let aux = pseudoAleatoriosCF(semillas, K, A, C, M, n);
     return descomponerEnDigitosES6(aux);
 }
 
@@ -107,5 +96,5 @@ function nCongrFund(semillas, A, C, M, n) {
  * * para node.js:
  * ejecutar por consola en la carpeta del script: node nCongrFund.js
  */
-console.log(nCongrFund([113, 237], 4, 8, 1000, 10));
-console.log(nCongrFund([177, 33, 'b'], 17, 45, 2000, 15));
+//console.log(nCongrFund([113, 237], 2, 4, 8, 1000, 10));
+//console.log(nCongrFund([177, 332, 1766], 3, 17, 45, 2000, 15));

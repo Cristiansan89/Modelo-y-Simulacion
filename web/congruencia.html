@@ -219,7 +219,7 @@
                                 </div>
                             </div>
                             <div class="p-2" style="min-height: 120px;">
-                                <div class="card card-body mx-auto" style="width: 60%;">
+                                <div class="card card-body mx-auto" style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
                                     <h3>Resultado</h3>
                                     <p id="congruenciaResultado"></p>
                                 </div>
@@ -333,17 +333,28 @@
             const semillas = [];
             const s = parseInt(document.getElementById('s').value);
 
+            /* recibi la cantidad de semillas a generar para crear los campos */
             if (isNaN(s)) {
-                document.getElementById('congruenciaResultado').textContent = 'Falta ingresar la cantidad de semilla a generar.';
-            } else {
-                for (let j = 1; j <= s; j++) {
-                    const semilla = parseInt(document.getElementById(`semilla${j}`).value);
-                    if (isNaN(semilla)) {
+                document.getElementById('congruenciaResultado').textContent = 'Falta ingresar la cantidad de semillas a generar.';
+                return;
+            }
+
+            /* hay al menos una campo semilla creado? */
+            const hayInputsGenerados = document.getElementById("semilla1");
+            if (hayInputsGenerados === null) {
+                document.getElementById('congruenciaResultado').textContent = 'Debe generar los campos semilla y completarlos.';
+                return;
+            }
+
+            /* capturar las semillas de los input generados */
+            for (let j = 1; j <= s; j++) {
+                const semilla = parseInt(document.getElementById(`semilla${j}`).value);
+                if (isNaN(semilla)) {
                         document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, faltan semilla iniciales';
+                        return;
                     } else {
                         semillas.push(semilla);
                     }
-                }
             }
 
             const k = parseInt(document.getElementById('k').value);
@@ -351,11 +362,52 @@
             const a = parseInt(document.getElementById('a').value);
             const c = parseInt(document.getElementById('c').value);
             const i = parseInt(document.getElementById('i').value);
+            
+            /* validaciones de los parametros k, m, a, c, i */
+            // K <= cantidad de semillas
+            if (k > semillas.length) {
+                document.getElementById('congruenciaResultado').textContent = 'K debe ser menor o igual a la cantidad de semillas.';
+                return;
+            }
 
+            // las semillas, k, a, c, m, i, deben ser enteros no negativos.
+            let args = [...semillas, k, a, c, m, i];
+            for (let i = 0; i < args.length; i++) {
+                if(!(Number.isInteger(args[i]) && args[i] > 0)) {
+                    document.getElementById('congruenciaResultado').textContent = 'los parametros deben ser enteros no negativos para iniciar.';
+                    return;
+                };
+            }
+
+            // M > semillas[i]
+            for (let i = 0; i < semillas.length; i++) {
+                if(!(m > semillas[i])) {
+                    document.getElementById('congruenciaResultado').textContent = 'el valor M debe ser superior a cada semilla para iniciar.';
+                    return; 
+                }
+            }
+
+            // si semillas.length < 2 ERROR, necesito al menos 2 semillas.
+            if(semillas.length < 2) {
+                document.getElementById('congruenciaResultado').textContent = 'ERROR: se necesitan minimo 2 semillas para iniciar.';
+                return;
+            }
+            
+            // M > A
+            if (!(m > a)) {
+                document.getElementById('congruenciaResultado').textContent = 'ERROR: M debe ser mayor que A para iniciar.';
+                return;
+            }
+
+            // comprobacion por consola del navegador
+            console.log(`semillas: ${semillas}`);
+            console.log(`k:${k}, m:${m}, a:${a}, c:${c}, i:${i}`);
+
+            // no deben haber valores nulos
             if (isNaN(k) || isNaN(m) || isNaN(a) || isNaN(c) || isNaN(i)) {
-                document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, revisa completar los parámetros';
+                document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, revisa para completar los parámetros';
             } else {
-                const resultadoCongruencia = nCongruencia(semillas, k, m, a, c, i);
+                const resultadoCongruencia = nCongruencia(semillas, k, a, c, m, i);
                 document.getElementById('congruenciaResultado').textContent = "[ " + resultadoCongruencia + " ]";
             }
 

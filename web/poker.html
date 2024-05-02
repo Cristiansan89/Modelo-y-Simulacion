@@ -199,6 +199,40 @@
                             <div class="p-2" style="min-height: 120px;">
                                 <div class="card card-body mx-auto" style="width: 60%;">
                                     <h4>Ingresar Parametros</h4>
+                                    <div class="input-group p-2" style="width: 95%;">
+                                        <span class="input-group-text font-weight-bold text-gray-900">Ingresar la
+                                            cantidad de d&iacute;gito</span>
+                                        <input type="number" class="form-control" id="n">
+                                    </div>
+                                    <div class="text-center">
+                                        <button class="btn btn-primary btn-xl fw-bold p-2" onclick="generarDigito()"
+                                            type="submit" style="width: 25%;">Generar</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2" style="min-height: 120px;">
+                                <div class="card card-body mx-auto" style="width: 60%;">
+                                    <div class="text-center">
+                                        <h4>Tabla N&uacute;meros Pseudoaleatorios</h4>
+                                    </div>
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th scope="col">#</th>
+                                                <th scope="col">N&uacute;mero Pseudoaleatorio</th>
+                                                <th scope="col">Categor&iacute;a</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th id="x" scope="row">a</th>
+                                                <td id="numPseudo" scope="col">0.0</td>
+                                                <td id="categoria" scope="col">Pokers</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
 
                                 </div>
                             </div>
@@ -266,6 +300,15 @@
     <!--<script src="js/fibonacci.js"></script>-->
 
     <!--Asignando los parametro de las funciones de js al html -->
+    <script>
+        function generarDigito() {
+            const n = parseInt(document.getElementById('n').value);
+            //const cantSemilla = 
+            for (let x = 1; x <= cnatSemilla; x++) {
+
+            }
+        }
+    </script>
     <script>
         function generarPoker() {
             /*   const v1 = parseInt(document.getElementById('v1').value);

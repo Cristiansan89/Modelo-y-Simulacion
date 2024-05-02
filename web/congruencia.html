@@ -90,6 +90,28 @@
                 </div>
             </li>
 
+            <!-- Nav Item - Test -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
+                    aria-expanded="true" aria-controls="collapseThree">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-sort-numeric-down" viewBox="0 0 16 16">
+                        <path d="M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z" />
+                        <path fill-rule="evenodd"
+                            d="M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98" />
+                        <path
+                            d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                    </svg>
+                    <span>Test de Aleatoriedad</span>
+                </a>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="poker.html">Poker</a>
+                        <a class="collapse-item" href="chi-cuadrada.html">Chi - Cuadrada</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -116,7 +138,7 @@
                 <nav
                     class="navbar navbar-expand navbar-light bg-primary topbar mb-4 static-top shadow rounded-pill m-2">
                     <div style="margin-left: 35%;">
-                        <p class="display-6 fw-bolder text-white">~ Modelo y Simulaci&oacute;n ~</p>
+                        <p class="h1 fw-bolder text-white font-weight-bold">~ Modelo y Simulaci&oacute;n ~</p>
                     </div>
                 </nav>
                 <!-- End of Topbar -->
@@ -126,11 +148,11 @@
                     <!-- Page Heading -->
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <div class="h4 text-black text-center">
+                            <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
                                 <p>Modelo Congruencia Fundamental</p>
                             </div>
                         </li>
-                        <li class="list-group-item">
+                        <li class="list-group-item text-gray-900">
                             <div class="p-2" style="min-height: 120px;">
                                 <div class="card card-body mx-auto" style="width: 60%;">
                                     <div class="text-black">
@@ -153,7 +175,7 @@
                                     <ul>
                                         <p>Se basan en: V<sub>i+1</sub> = (a V<sub>i</sub> + c V<sub>i-k</sub>) mod
                                             m</p>
-                                        <p>donde V<sub>i</sub>, V<sub>i-k</sub>, a, c, k, m son enteros no negativos
+                                        <p>Donde V<sub>i</sub>, V<sub>i-k</sub>, a, c, k, m son enteros no negativos
                                             y arbitrarios que cumplen las siguientes condiciones: V<sub>i</sub> >=
                                             0, a >= 0, c >= 0, m > V<sub>i</sub>, m > a, m > 0.
                                         </p>
@@ -164,11 +186,10 @@
                                 <div class="card card-body mx-auto" style="width: 60%;">
                                     <h4>Ingresar Parametros</h4>
                                     <div class="input-group p-2" style="width: 95%;">
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" id="s" type="number"
-                                                placeholder="Ingrese el parametro" min="1" autocomplete="off" required>
-                                            <label for="name">Ingrese Cantidad de Semilla a generar.</label>
-                                        </div>
+                                        <span class="input-group-text font-weight-bold text-gray-900">Ingrese Cantidad
+                                            de Semilla a generar</span>
+                                        <input type="number" class="form-control" id="s" min="2" autocomplete="off"
+                                            required>
                                     </div>
                                     <div class="text-center p-2">
                                         <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
@@ -176,40 +197,28 @@
                                     </div>
                                     <div id="contenedorSemilla"></div>
                                     <div class="input-group p-2" style="width: 95%;">
-                                        <div class="form-floating mb-2">
-                                            <input class="form-control" id="k" type="number"
-                                                placeholder="Ingrese el parametro">
-                                            <label for="name">Semilla 'k'</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="input-group p-2" style="width: 95%;">
-                                        <div class="form-floating mb-2">
-                                            <input class="form-control" id="m" type="number"
-                                                placeholder="Ingrese el parametro">
-                                            <label for="name">M&oacute;dulo 'm'</label>
-                                        </div>
+                                        <span class="input-group-text font-weight-bold text-gray-900">Semilla 'k'</span>
+                                        <input type="number" class="form-control" id="k">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
-                                        <div class="form-floating mb-2">
-                                            <input class="form-control" id="a" type="number"
-                                                placeholder="Ingrese el parametro">
-                                            <label for="name">Constante 'a'</label>
-                                        </div>
+                                        <span class="input-group-text font-weight-bold text-gray-900">M&oacute;dulo
+                                            'm'</span>
+                                        <input type="number" class="form-control" id="m">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
-                                        <div class="form-floating mb-2">
-                                            <input class="form-control" id="c" type="number"
-                                                placeholder="Ingrese el parametro">
-                                            <label for="name">Constante 'c'</label>
-                                        </div>
+                                        <span class="input-group-text font-weight-bold text-gray-900">Constante
+                                            'a'</span>
+                                        <input type="number" class="form-control" id="a">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
-                                        <div class="form-floating mb-2">
-                                            <input class="form-control" id="i" type="number"
-                                                placeholder="Ingrese el parametro">
-                                            <label for="name">Cantidad de Iteraciones 'i'</label>
-                                        </div>
+                                        <span class="input-group-text font-weight-bold text-gray-900">Constante
+                                            'c'</span>
+                                        <input type="number" class="form-control" id="c">
+                                    </div>
+                                    <div class="input-group p-2" style="width: 95%;">
+                                        <span class="input-group-text font-weight-bold text-gray-900">Cantidad de
+                                            Iteraciones 'i'</span>
+                                        <input type="number" class="form-control" id="i">
                                     </div>
                                     <div class="text-center">
                                         <button class="btn btn-primary btn-xl fw-bold p-2"
@@ -219,7 +228,8 @@
                                 </div>
                             </div>
                             <div class="p-2" style="min-height: 120px;">
-                                <div class="card card-body mx-auto" style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
+                                <div class="card card-body mx-auto text-gray-900"
+                                    style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
                                     <h3>Resultado</h3>
                                     <p id="congruenciaResultado"></p>
                                 </div>
@@ -295,33 +305,34 @@
                 groupInput.classList.add('input-group', 'p-2');
                 groupInput.style.width = '95%';
 
-                const contenedorFlotante = document.createElement('div');
-                contenedorFlotante.classList.add('form-floating', 'mb-2');
+                const labelSpan = document.createElement('span');
+                labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
+                labelSpan.textContent = `Semilla V`;
+
+                const subIndice = document.createElement('sub');
+                subIndice.textContent = i;
+
+                labelSpan.appendChild(subIndice);
+
 
                 const nuevoInput = document.createElement('input');
                 nuevoInput.type = 'number';
                 nuevoInput.id = `semilla${i}`;
                 nuevoInput.classList.add('form-control');
-                nuevoInput.placeholder = `Ingrese semilla V`;
 
-                const spanV = document.createElement('span');
-                spanV.textContent = 'Ingrese la semilla V';
+                const seedLabelText = document.createElement('span');
+                seedLabelText.textContent = 'Ingrese la semilla V';
 
-                const subIndice = document.createElement('sub');
-                subIndice.textContent = i;
+                const label = document.createElement('label');
+                label.setAttribute('for', `semilla${i}`);  // Use the current `i` for dynamic ID
 
-                spanV.appendChild(subIndice);
+                // Combine seedLabelText and subIndice for clearer label content
+                label.textContent = seedLabelText.textContent;  // Set label text directly
 
-                const etiqueta = document.createElement('label');
-                etiqueta.setAttribute('for', `semilla${1}`);
-                etiqueta.textContent = '';
+                groupInput.appendChild(labelSpan);  // Append labelSpan first
+                groupInput.appendChild(nuevoInput); // Then append nuevoInput
 
-                etiqueta.appendChild(spanV);
-
-                contenedorFlotante.appendChild(nuevoInput);
-                contenedorFlotante.appendChild(etiqueta);
-                groupInput.appendChild(contenedorFlotante);
-
+                // Assuming you want to append groupInput to a specific element:
                 contenedorSemilla.appendChild(groupInput);
             }
         }
@@ -350,11 +361,11 @@
             for (let j = 1; j <= s; j++) {
                 const semilla = parseInt(document.getElementById(`semilla${j}`).value);
                 if (isNaN(semilla)) {
-                        document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, faltan semilla iniciales';
-                        return;
-                    } else {
-                        semillas.push(semilla);
-                    }
+                    document.getElementById('congruenciaResultado').textContent = 'Datos Incompletos, faltan semilla iniciales';
+                    return;
+                } else {
+                    semillas.push(semilla);
+                }
             }
 
             const k = parseInt(document.getElementById('k').value);
@@ -362,7 +373,7 @@
             const a = parseInt(document.getElementById('a').value);
             const c = parseInt(document.getElementById('c').value);
             const i = parseInt(document.getElementById('i').value);
-            
+
             /* validaciones de los parametros k, m, a, c, i */
             // K <= cantidad de semillas
             if (k > semillas.length) {
@@ -373,7 +384,7 @@
             // las semillas, k, a, c, m, i, deben ser enteros no negativos.
             let args = [...semillas, k, a, c, m, i];
             for (let i = 0; i < args.length; i++) {
-                if(!(Number.isInteger(args[i]) && args[i] > 0)) {
+                if (!(Number.isInteger(args[i]) && args[i] > 0)) {
                     document.getElementById('congruenciaResultado').textContent = 'los parametros deben ser enteros no negativos para iniciar.';
                     return;
                 };
@@ -381,18 +392,18 @@
 
             // M > semillas[i]
             for (let i = 0; i < semillas.length; i++) {
-                if(!(m > semillas[i])) {
+                if (!(m > semillas[i])) {
                     document.getElementById('congruenciaResultado').textContent = 'el valor M debe ser superior a cada semilla para iniciar.';
-                    return; 
+                    return;
                 }
             }
 
             // si semillas.length < 2 ERROR, necesito al menos 2 semillas.
-            if(semillas.length < 2) {
+            if (semillas.length < 2) {
                 document.getElementById('congruenciaResultado').textContent = 'ERROR: se necesitan minimo 2 semillas para iniciar.';
                 return;
             }
-            
+
             // M > A
             if (!(m > a)) {
                 document.getElementById('congruenciaResultado').textContent = 'ERROR: M debe ser mayor que A para iniciar.';

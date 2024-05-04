@@ -61,7 +61,9 @@ if (isPrimo(v1) && isPrimo(v2) && isPrimo(A)) {
     const randomNumbers = fibonacci(v1, v2, A, n);
     console.error("Generando números pseudo-random: ", randomNumbers);
     const separarComaNumbers = randomNumbers.join('');
+
     const numberSeparado = separarComaNumbers.split('');
+
     console.log("Generando fibo(): (", numberSeparado.join(', '), ")");
 } else {
     console.error("La semilla inicial no es un número primo.");

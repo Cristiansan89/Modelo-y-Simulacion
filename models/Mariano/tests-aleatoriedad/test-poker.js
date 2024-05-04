@@ -1,49 +1,73 @@
 /**
  * 
- * @param {*} a Nivel de significancia
- * @param {*} gl Grados de libertad
- * @param {*} m Cantidad de categorías
+ * @param {*} a Nivel de significancia (0.05)
+ * @param {*} gl Grados de libertad - cant categorias-1
  * @param {*} fo Frecuencia observada
  * @param {*} fe Frecuencia esperada
  * @param {*} prob Probabilidad
  * @param {*} categorias Categorías del poker
  * @param {*} numeros Números generados aleatoriamente
+ * @param {*} m Cantidad de dígitos a evaluar (5)
  */
 
 
 /* Función para obtener la frecuencia observada de cada categoría */
-function contarTD(numeros, fo){
+function contarDigitos(numeros, fo, m){
     let digitos = [];
-
     for (let i = 0; i < numeros.length; i++) {
-        if(digitos.length == 3){
-            if(digitos[0] != digitos[1] && digitos[0] != digitos[2] && digitos[1] != digitos[2]){
-                fo[0] = (fo[0] + 1);
+        if(digitos.length == m){
+            let count = {};
+            digitos.forEach(digito => {
+                count[digito] = (count[digito] || 0) + 1;
+            });
+
+            let valores = Object.values(count);
+            let unicos = valores.length;
+
+            if (unicos === 5) {
+                // Todos distintos
+                fo[0]++;
+            } else if (unicos === 4) {
+                // 1 par
+                fo[1]++;
+            } else if (unicos === 3) {
+                // 2 pares o tercia
+                if (valores.some(val => val === 3)) {
+                    // tercia
+                    fo[3]++;
+                } else {
+                    // 2 pares
+                    fo[2]++;
+                }
+            } else if (unicos === 2) {
+                // Full o Poker
+                if (valores.some(val => val === 4)) {
+                    // Poker
+                    fo[5]++;
+                } else {
+                    // Full
+                    fo[4]++;
+                }
+            } else if (unicos === 1) {
+                // Quintilla
+                fo[6]++;
             }
 
-            if(((digitos[0] == digitos[1] && digitos[0] != digitos[2]) || (digitos[0] == digitos[2] && digitos[0] != digitos[1]) || (digitos[1] == digitos[2] && digitos[1] != digitos[0]))){
-                fo[1] = (fo[1] + 1); 
-            }
-
-            if(digitos[0] == digitos[1] && digitos[1] == digitos[2]){
-                fo[2] = (fo[2] + 1)
-            }
-
-            digitos = [];
+            digitos.shift();
         }
-
-        digitos = numeros[i].toString().split('');
-
-        while (digitos.length < 3) {
-            digitos.unshift('0');
-        }
+        digitos.push(numeros[i]);
     }
 
     return fo;
 }
 
 function poker(prob, fo, fe){
-    let frec_obs_total = fo[0] + fo[1] + fo[2];
+    let a = 0.05;
+    let frec_obs_total = 0;
+
+    for(i=0; i < fo.length; i++){
+        frec_obs_total += fo[i];
+    }
     
     //Calculamos la frecuencia esperada de cada categoría
     for (let i = 0; i < fe.length; i++) {
@@ -64,14 +88,17 @@ function poker(prob, fo, fe){
 
 
 //Datos necesarios
-//Hacemos un programa de 3 categorías
-let m = 3;
-let categorias = ['TD', '1P', 'T'];
-let prob = [0.72, 0.27, 0.01];
-let fo = [0, 0, 0];
-let fe = [0, 0, 0];
+//Hacemos un programa de 5 dígitos
+let m = 5;
+let categorias = ['TD', '1P', '2P', 'T', 'F', 'P', 'Q'];
+let prob = [0.3024, 0.5040, 0.1080, 0.0720, 0.0090, 0.0045, 0.0001];
+let fo = [0, 0, 0, 0, 0, 0, 0];
+let fe = [0, 0, 0, 0, 0, 0, 0];
 
-let numeros = [113, 237, 348, 296, 80, 104, 784, 776, 936, 16, 272, 576, 432, 904, 224, 352, 640, 352, 224, 16, 880, 312] ;
+let numeros = [1, 1, 3, 2, 3, 7, 3, 4, 8, 2, 9, 6, 8, 0, 1, 0, 4, 7, 8, 4, 7, 7, 6, 9, 3, 6, 1, 6, 2, 7, 2, 5, 7, 6, 4, 3, 2, 9, 0, 4, 2, 2, 4, 3, 5, 2, 6, 4, 0, 3, 5, 2, 2, 2, 4, 1, 6, 8, 8, 0, 3, 1, 2];
+console.log(numeros.length);
+let gl = categorias.length - 1;
 
-console.log(contarTD(numeros,fo));
+console.log(contarDigitos(numeros,fo,m));
 console.log(poker(prob, fo, fe))
+

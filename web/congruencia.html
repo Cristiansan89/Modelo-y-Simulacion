@@ -238,6 +238,396 @@
                     </ul>
                 </div>
                 <!-- /.container-fluid -->
+
+                <!-- Test Poker y Chi Cuadrada -->
+                <div class="accordion container-fluid pt-4" id="accordionExample">
+                    <!-- Test Poker -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header " id="headingOne">
+                            <button
+                                class="accordion-button collapsed text-gray-900 text-center font-weight-bold collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                                Test Poker
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <!-- Begin Page Content -->
+                            <div>
+                                <!-- Page Heading -->
+                                <ul class="list-group">
+                                    <li class="list-group-item text-gray-900">
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Hip&oacute;tesis</p>
+                                                </div>
+                                                <ul>
+                                                    <li>H<sub>0</sub> si X<sup>2</sup> confiabilidad > &#931;
+                                                        (O<sub>i</sub> -
+                                                        E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se aprueba que
+                                                        los
+                                                        d&iacute;gitos est&aacute;n ordenados al azar.
+                                                    </li>
+                                                    <li>H<sub>1</sub> si X<sup>2</sup> confiabilidad < &#931; (O<sub>
+                                                            i</sub> -
+                                                            E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se rechaza
+                                                            que
+                                                            los
+                                                            d&iacute;gitos est&aacute;n ordenados al azar.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Descripci&oacute;n</p>
+                                                </div>
+                                                <ul>
+                                                    <li>Para aplicar la prueba del p&oacute;quer:</li>
+                                                    <li><b>a.</b>Escogemos primeramente un nivel de significancia,
+                                                        &#945;, y
+                                                        enumeramos el grado de repetici&oacute;n de los
+                                                        d&iacute;gitos.
+                                                    </li>
+                                                    <li><b>b. </b>A continuaci&oacute;n, calculamos la probabilidad
+                                                        de
+                                                        aparici&oacute;n de cada una de esas combinaciones.</li>
+                                                    <li><b>c. </b>Luego, se examina la frecuencia con que se
+                                                        presenta
+                                                        cada
+                                                        combinaci&oacute;n en la secuencia de n&uacute;meros
+                                                        estudiados.
+                                                    </li>
+                                                    <li><b>d. </b>Posteriormente, se puede comparar la frecuencia
+                                                        observada con que
+                                                        aparece cada combinaci&oacute;n con la frecuencia esperada,
+                                                        mediante la
+                                                        prueba ji cuadrada. Para comprobar que los datos perencen a
+                                                        una
+                                                        distribuci&oacute;n uniforme, se debe cumplir la
+                                                        condici&oacute;n de que
+                                                        X<sup>2</sup> calculada < x<sup>2</sup> * &#945;/2, g.l.
+                                                            &#8594;
+                                                            se obtiene
+                                                            de la
+                                                            tabla de la distribuci&oacute;n Chi-Cuadrada, con un
+                                                            nivel
+                                                            de
+                                                            significancia &#945; y los grados de libertad g.l. = N°
+                                                            de
+                                                            par&acute;metros
+                                                            de la distribuci&oacute;n de probabilidad a probar menos
+                                                            l.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="resolution" style="display: none;">
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h3 font-weight-bold">
+                                                        <p>Generar el Test Poker</p>
+                                                    </div>
+                                                    <div>
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            id="pChiCuadrado">
+                                                            <option value="-1" selected>Seleccione la probabilidad
+                                                            </option>
+                                                            <option value="0">0,001</option>
+                                                            <option value="1">0,0025</option>
+                                                            <option value="2">0,0005</option>
+                                                            <option value="3">0,01</option>
+                                                            <option value="4">0,025</option>
+                                                            <option value="5">0,05</option>
+                                                            <option value="6">0,1</option>
+                                                            <option value="7">0,15</option>
+                                                            <option value="8">0,2</option>
+                                                            <option value="9">0,25</option>
+                                                            <option value="10">0,3</option>
+                                                            <option value="11">0,35</option>
+                                                            <option value="12">0,4</option>
+                                                            <option value="13">0,45</option>
+                                                            <option value="14">0,5</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="text-center p-2">
+                                                        <button class="btn btn-primary btn-xl fw-bold p-2"
+                                                            onclick="generarDigito()" type="submit"
+                                                            style="width: 25%;">Generar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Oculto -->
+                                        <div id="tabla" style="display: none;">
+                                            <!--Tabla N° Pseudo -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold">
+                                                        <p>Tabla N&uacute;meros Pseudoaleatorios</p>
+                                                    </div>
+
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center">
+                                                                <th scope="col">#</th>
+                                                                <th scope="col">N&uacute;mero Pseudoaleatorio</th>
+                                                                <th scope="col">Categor&iacute;a</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbody">
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--Fin Tabla N° Pseudo -->
+                                            <!-- Tabla de Analisis Poker -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold ">
+                                                        <p>Tabla del An&aacute;lisis del Poker</p>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center">
+                                                                <th scope="col">Categor&iacute;a</th>
+                                                                <th scope="col">O(i)</th>
+                                                                <th scope="col">Probabilidad</th>
+                                                                <th scope="col">E(i)</th>
+                                                                <th scope="col">X<sup>2</sup></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">TD - Todos Diferentes</th>
+                                                                <td class="text-right" id="oTD" scope="col"></td>
+                                                                <td class="text-right" id="pTD" scope="col"></td>
+                                                                <td class="text-right" id="eTD" scope="col"></td>
+                                                                <td class="text-right" id="xTD" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">1P - Un Par</th>
+                                                                <td class="text-right" id="oUP" scope="col"></td>
+                                                                <td class="text-right" id="pUP" scope="col"></td>
+                                                                <td class="text-right" id="eUP" scope="col"></td>
+                                                                <td class="text-right" id="xUP" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">2P - Dos Par</th>
+                                                                <td class="text-right" id="oDP" scope="col"></td>
+                                                                <td class="text-right" id="pDP" scope="col"></td>
+                                                                <td class="text-right" id="eDP" scope="col"></td>
+                                                                <td class="text-right" id="xDP" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">T - Tercia</th>
+                                                                <td class="text-right" id="oT" scope="col"></td>
+                                                                <td class="text-right" id="pT" scope="col"></td>
+                                                                <td class="text-right" id="eT" scope="col"></td>
+                                                                <td class="text-right" id="xT" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">F - Full</th>
+                                                                <td class="text-right" id="oF" scope="col"></td>
+                                                                <td class="text-right" id="pF" scope="col"></td>
+                                                                <td class="text-right" id="eF" scope="col"></td>
+                                                                <td class="text-right" id="xF" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">P - Poker</th>
+                                                                <td class="text-right" id="oP" scope="col"></td>
+                                                                <td class="text-right" id="pP" scope="col"></td>
+                                                                <td class="text-right" id="eP" scope="col"></td>
+                                                                <td class="text-right" id="xP" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">Q - Quintilla</th>
+                                                                <td class="text-right" id="oQ" scope="col"></td>
+                                                                <td class="text-right" id="pQ" scope="col"></td>
+                                                                <td class="text-right" id="eQ" scope="col"></td>
+                                                                <td class="text-right" id="xQ" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="h5 font-weight-bold" scope="row">&#931; -
+                                                                    Sumatoria</th>
+                                                                <td class="h5 text-right font-weight-bold" id="oS"
+                                                                    scope="col"></td>
+                                                                <td colspan="2" scope="col"></td>
+                                                                <td class="h5 text-right font-weight-bold" id="xS"
+                                                                    scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--Fin Tabla de Analisis Poker -->
+                                            <!--Resultado Test Poker -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-left font-weight-bold ">
+                                                        <p>Resultado del Test</p>
+                                                    </div>
+                                                    <div>
+                                                        <ul>
+                                                            <li>En el an&aacute;lisis del test de poker se tienen
+                                                                siete
+                                                                (7) categor&iacute;as. Y se tienen un total de <span
+                                                                    id="sumU"></span> freccuencia observada (O).
+                                                            </li>
+                                                            <li>El resultado estad&iacute;stico de la sumatoria
+                                                                X<sup>2</sup> es:
+                                                                <span id="sumatoria"></span>.
+                                                            </li>
+                                                            <li>El Grado de Libertad para este test es <span
+                                                                    id="mGL"></span> donde la
+                                                                probabilidad de chi cuadrado es <span id="pChi"></span>,
+                                                                lo cual el valor de la tabla de distribucci&oacute;n
+                                                                es
+                                                                <span id="valorChi"></span>.
+                                                            </li>
+                                                            <li><b><span id="hipotesisPoker"></span></b></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin Resultado Test Poker -->
+                                            <!--Tabla Inmediatas Superiores -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold ">
+                                                        <p>Tabla Inmediatas Superiores</p>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center">
+                                                                <th scope="col">Categor&iacute;a</th>
+                                                                <th scope="col">O(i)</th>
+                                                                <th scope="col">Probabilidad</th>
+                                                                <th scope="col">E(i)</th>
+                                                                <th scope="col">X<sup>2</sup></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">TD - Todos Diferentes</th>
+                                                                <td class="text-right" id="isoTD" scope="col"></td>
+                                                                <td class="text-right" id="ispTD" scope="col"></td>
+                                                                <td class="text-right" id="iseTD" scope="col"></td>
+                                                                <td class="text-right" id="isxTD" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">1P - Un Par</th>
+                                                                <td class="text-right" id="isoP" scope="col"></td>
+                                                                <td class="text-right" id="ispP" scope="col"></td>
+                                                                <td class="text-right" id="iseP" scope="col"></td>
+                                                                <td class="text-right" id="isxP" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row">T - Tercia</th>
+                                                                <td class="text-right" id="isoT" scope="col"></td>
+                                                                <td class="text-right" id="ispT" scope="col"></td>
+                                                                <td class="text-right" id="iseT" scope="col"></td>
+                                                                <td class="text-right" id="isxT" scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="h5 font-weight-bold" scope="row">&#931; -
+                                                                    Sumatoria</th>
+                                                                <td class="h5 text-right font-weight-bold" id="isoS"
+                                                                    scope="col"></td>
+                                                                <td colspan="2" scope="col"></td>
+                                                                <td class="h5 text-right font-weight-bold" id="isxS"
+                                                                    scope="col"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- Fin Tabla Inmediatas Superiores -->
+                                            <!-- Resultado Test Inmediatas Superiores -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-left font-weight-bold ">
+                                                        <p>Resultado del Test en Inmediatas Superiores</p>
+                                                    </div>
+                                                    <div>
+                                                        <ul>
+                                                            <li>Para la inmediatas superiores el test de poker se
+                                                                redujo
+                                                                a tres (3)
+                                                                categor&iacute;as. Y se sigue teniendo un total de
+                                                                <span id="sumD"></span> frecuencia observada (O).
+                                                            </li>
+                                                            <li>El resultado estad&iacute;stico de la sumatoria
+                                                                X<sup>2</sup> es:
+                                                                <span id="sumatoriaIS"></span>.
+                                                            </li>
+                                                            <li>El Grado de Libertad para este test es <span
+                                                                    id="mGLIS"></span> donde la
+                                                                probabilidad de chi cuadrado es <span
+                                                                    id="pChiIS"></span>,
+                                                                lo cual el valor de la tabla de distribucci&oacute;n
+                                                                es
+                                                                <span id="valorChiIS"></span>.
+                                                            </li>
+                                                            <li><b><span id="hipotesisPokerIS"></span></b></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin Resultado Test Inmediatas Superiores -->
+                                        </div>
+                                        <!-- Fin oculto -->
+                                    </li>
+                                </ul>
+                                <!-- Fin Page Heading -->
+                            </div>
+                            <!-- /.End Page Content -->
+                        </div>
+                    </div>
+                    <!-- Fin Test Poker -->
+                    <!-- Test Chi Cuadrada -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                aria-expanded="false" aria-controls="collapseTwo">
+
+                                Test Chi Cuadrada
+
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                            data-bs-parent="#accordionExample">
+                            dwdw
+                        </div>
+                    </div>
+                    <!-- Fin Test Chi Cuadrada -->
+                </div>
+                <!-- Fin Test Poker y Chi Cuadrada-->
+
             </div>
             <!-- End of Main Content -->
 
@@ -289,6 +679,10 @@
 
     <!--Path de las Funciones -->
     <script src="js/congruencia.js"></script>
+    <script src="js/categoria.js"></script>
+    <script src="js/tablachi.js"></script>
+    <script src="js/probabilidad.js"></script>
+    <script src="js/poker.js"></script>
 
     <!--Script para implementar la generación de n cantindad de semilla para congruencia fundamental-->
     <script>
@@ -420,9 +814,222 @@
             } else {
                 const resultadoCongruencia = nCongruencia(semillas, k, a, c, m, i);
                 document.getElementById('congruenciaResultado').textContent = "[ " + resultadoCongruencia + " ]";
+                resolution.style.display = "block";
+                return;
             }
 
         }
+
+        function generarDigito() {
+            let congruencia = document.getElementById('congruenciaResultado').textContent;
+
+            let seleccionPChi = document.getElementById('pChiCuadrado').value;
+
+            let metodo = "congruencia";
+
+            if (isNaN(congruencia) && seleccionPChi >= 0) {
+                let probaSeleccion = probabilidadChi(seleccionPChi);
+                document.getElementById('pChi').textContent = probaSeleccion;
+                tabla.style.display = "block";
+
+                const numerosCongruencia = congruencia.slice(1, -1).trim();
+                let arrayDeDigitos = numerosCongruencia.split(',').map(Number);
+
+                let longitud = arrayDeDigitos.length;
+                const numPseudo = [];
+                let n = 5;
+                let cantidadFila = Math.floor(longitud / 5);
+                let distinto = 0, unPar = 0, dosPar = 0, tercia = 0, full = 0, poker = 0, quintilla = 0;
+
+                const tbody = document.getElementById("tbody");
+
+                let probaTD = 0.30240;
+                let probaUnPar = 0.50400;
+                let probaDosPar = 0.10800;
+                let probaTercia = 0.07200;
+                let probaFull = 0.00900;
+                let probaPoker = 0.000450;
+                let probaQuintilla = 0.00010;
+
+                for (let i = 0; i < cantidadFila; i++) {
+                    let segmento = arrayDeDigitos.slice(n - 5, n);
+                    numPseudo.push(segmento);
+                    n = n + 5;
+
+                    const tr = document.createElement("tr");
+                    const numfila = document.createElement("th");
+                    numfila.setAttribute("scope", "row");
+                    numfila.classList.add('text-center');
+                    numfila.textContent = i + 1;
+                    tr.appendChild(numfila);
+                    const pseudo = document.createElement("td");
+                    pseudo.setAttribute("scope", "col");
+                    pseudo.classList.add('text-center');
+                    pseudo.textContent = segmento;
+                    tr.appendChild(pseudo);
+
+                    let tipoCategoria = compararSegmento(segmento);
+
+                    switch (tipoCategoria) {
+                        case "Todos Distintos":
+                            distinto = distinto + 1;
+                            break;
+                        case "Un Par":
+                            unPar = unPar + 1;
+                            break;
+                        case "Dos Par":
+                            dosPar = dosPar + 1;
+                            break;
+                        case "Tercia":
+                            tercia = tercia + 1;
+                            break;
+                        case "Full":
+                            full = full + 1;
+                            break;
+                        case "Poker":
+                            poker = poker + 1;
+                            break;
+                        case "Quintilla":
+                            quintilla = quintilla + 1;
+                            break;
+                    }
+                    const categoria = document.createElement("td");
+                    categoria.setAttribute("scope", "col");
+                    categoria.classList.add('text-left');
+                    categoria.textContent = tipoCategoria;
+                    tr.appendChild(categoria);
+                    tbody.appendChild(tr);
+                }
+
+                let sumatoria = 0;
+                sumatoria = distinto + unPar + dosPar + tercia + full + poker + quintilla;
+
+                document.getElementById('sumU').textContent = sumatoria;
+                document.getElementById('sumD').textContent = sumatoria;
+
+                // Tabla análisis de poker
+
+                // Para todos diferentes
+                document.getElementById('oTD').textContent = distinto;
+                document.getElementById('pTD').textContent = probaTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoTD = probaTD * sumatoria;
+                document.getElementById('eTD').textContent = esperadoTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiTD = Math.pow((esperadoTD - distinto), 2) / esperadoTD;
+                document.getElementById('xTD').textContent = chiTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para un par
+                document.getElementById('oUP').textContent = unPar;
+                document.getElementById('pUP').textContent = probaUnPar.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoUP = probaUnPar * sumatoria;
+                document.getElementById('eUP').textContent = esperadoUP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiUP = Math.pow((esperadoUP - unPar), 2) / esperadoUP;
+                document.getElementById('xUP').textContent = chiUP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para dos par
+                document.getElementById('oDP').textContent = dosPar;
+                document.getElementById('pDP').textContent = probaDosPar.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoDP = probaDosPar * sumatoria;
+                document.getElementById('eDP').textContent = esperadoDP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiDP = Math.pow((esperadoDP - dosPar), 2) / esperadoDP;
+                document.getElementById('xDP').textContent = chiDP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para Tercia
+                document.getElementById('oT').textContent = tercia;
+                document.getElementById('pT').textContent = probaTercia.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoT = probaTercia * sumatoria;
+                document.getElementById('eT').textContent = esperadoT.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiT = Math.pow((esperadoT - tercia), 2) / esperadoT;
+                document.getElementById('xT').textContent = chiT.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para Full
+                document.getElementById('oF').textContent = full;
+                document.getElementById('pF').textContent = probaDosPar.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoF = probaFull * sumatoria;
+                document.getElementById('eF').textContent = esperadoF.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiF = Math.pow((esperadoF - full), 2) / esperadoF;
+                document.getElementById('xF').textContent = chiF.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para Poker
+                document.getElementById('oP').textContent = poker;
+                document.getElementById('pP').textContent = probaPoker.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoP = probaPoker * sumatoria;
+                document.getElementById('eP').textContent = esperadoP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiP = Math.pow((esperadoP - poker), 2) / esperadoP;
+                document.getElementById('xP').textContent = chiP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para quintilla
+                document.getElementById('oQ').textContent = quintilla;
+                document.getElementById('pQ').textContent = probaQuintilla.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoQ = probaQuintilla * sumatoria;
+                document.getElementById('eQ').textContent = esperadoP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiQ = Math.pow((esperadoQ - quintilla), 2) / esperadoQ;
+                document.getElementById('xQ').textContent = chiQ.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Sumatoria analisis poker
+                document.getElementById('oS').textContent = sumatoria;
+                let sumatoriaChi = (chiTD + chiUP + chiDP + chiT + chiF + chiP + chiQ);
+                document.getElementById('xS').textContent = sumatoriaChi.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                document.getElementById('sumatoria').textContent = sumatoriaChi.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                let cantCategoria = 7;
+                let mGL = cantCategoria - 1;
+                document.getElementById('mGL').textContent = mGL;
+                const chiCuadrada = tablachi(mGL, seleccionPChi);
+
+                document.getElementById('valorChi').textContent = chiCuadrada.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                const hipotesis = hipotesisPoker(sumatoriaChi, chiCuadrada, metodo);
+                document.getElementById('hipotesisPoker').textContent = hipotesis;
+
+                // tabla inmediata superior
+                // Para inmediata superior todos diferentes
+                document.getElementById('isoTD').textContent = distinto;
+                document.getElementById('ispTD').textContent = probaTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoISTD = probaTD * sumatoria;
+                document.getElementById('iseTD').textContent = esperadoISTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiISTD = Math.pow((esperadoISTD - distinto), 2) / esperadoISTD;
+                document.getElementById('isxTD').textContent = chiISTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para inmediata superior un par
+                let isPar = unPar;
+                document.getElementById('isoP').textContent = isPar;
+                document.getElementById('ispP').textContent = probaUnPar.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoISP = probaUnPar * sumatoria;
+                document.getElementById('iseP').textContent = esperadoISP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiISP = Math.pow((esperadoISP - isPar), 2) / esperadoISP;
+                document.getElementById('isxP').textContent = chiISP.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Para inmediata superior tercia
+                let isTercia = dosPar + tercia + full + poker + quintilla;
+                document.getElementById('isoT').textContent = isTercia;
+                document.getElementById('ispT').textContent = probaTercia.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let esperadoIST = probaTercia * sumatoria;
+                document.getElementById('iseT').textContent = esperadoIST.toLocaleString(undefined, { minimumFractionDigits: 4 });
+                let chiIST = Math.pow((esperadoIST - isTercia), 2) / esperadoIST;
+                document.getElementById('isxT').textContent = chiIST.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                // Sumatoria
+                document.getElementById('isoS').textContent = sumatoria;
+                let sumatoriaISChi = (chiISTD + chiISP + chiIST);
+                document.getElementById('isxS').textContent = sumatoriaISChi.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                document.getElementById('sumatoriaIS').textContent = sumatoriaISChi.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                let cantCategoriaIS = 3;
+                let mGLIS = cantCategoriaIS - 1;
+                document.getElementById('mGLIS').textContent = mGLIS;
+                const chiCuadradaIS = tablachi(mGLIS, seleccionPChi);
+
+                document.getElementById('valorChiIS').textContent = chiCuadradaIS.toLocaleString(undefined, { minimumFractionDigits: 4 });
+
+                const hipotesisIS = hipotesisPoker(sumatoriaISChi, chiCuadradaIS, metodo);
+                document.getElementById('hipotesisPokerIS').textContent = hipotesisIS;
+
+            }
+            return;
+        }
+
     </script>
 
 </body>

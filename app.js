@@ -15,7 +15,11 @@ const staticFiles = {
     '/vendor/js/sb-admin-2.min.js': 'vendor/js/sb-admin-2.min.js',
     '/js/fibonacci.js': 'js/fibonacci.js',
     '/js/categoria.js': 'js/categoria.js',
-    '/js/congruencia.js': 'js/congruencia.js'
+    '/js/congruencia.js': 'js/congruencia.js',
+    '/js/tablachi.js': 'js/tablachi.js',
+    '/js/probabilidad.js': 'js/probabilidad.js',
+    '/js/poker.js': 'js/poker.js'
+
 }
 
 for (const [route, filePath] of Object.entries(staticFiles)) {

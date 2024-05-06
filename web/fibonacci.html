@@ -199,7 +199,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-2" style="min-height: 120px;">
+                            <div class="p-2" id="resultate" style="min-height: 120px; display: none;">
                                 <div class="card card-body mx-auto text-gray-900"
                                     style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
                                     <div class="h3 font-weight-bold">
@@ -232,28 +232,6 @@
                                 <!-- Page Heading -->
                                 <ul class="list-group">
                                     <li class="list-group-item text-gray-900">
-                                        <div class="p-2" style="min-height: 120px;">
-                                            <div class="card card-body mx-auto" style="width: 60%;">
-                                                <div class="h3 font-weight-bold">
-                                                    <p>Hip&oacute;tesis</p>
-                                                </div>
-                                                <ul>
-                                                    <li>H<sub>0</sub> si X<sup>2</sup> confiabilidad > &#931;
-                                                        (O<sub>i</sub> -
-                                                        E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se aprueba que
-                                                        los
-                                                        d&iacute;gitos est&aacute;n ordenados al azar.
-                                                    </li>
-                                                    <li>H<sub>1</sub> si X<sup>2</sup> confiabilidad < &#931; (O<sub>
-                                                            i</sub> -
-                                                            E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se rechaza
-                                                            que
-                                                            los
-                                                            d&iacute;gitos est&aacute;n ordenados al azar.
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
                                         <div class="p-2" style="min-height: 120px;">
                                             <div class="card card-body mx-auto" style="width: 60%;">
                                                 <div class="h3 font-weight-bold">
@@ -295,6 +273,28 @@
                                                             par&acute;metros
                                                             de la distribuci&oacute;n de probabilidad a probar menos
                                                             l.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Hip&oacute;tesis</p>
+                                                </div>
+                                                <ul>
+                                                    <li>H<sub>0</sub> si X<sup>2</sup> confiabilidad > &#931;
+                                                        (O<sub>i</sub> -
+                                                        E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se aprueba que
+                                                        los
+                                                        d&iacute;gitos est&aacute;n ordenados al azar.
+                                                    </li>
+                                                    <li>H<sub>1</sub> si X<sup>2</sup> confiabilidad < &#931; (O<sub>
+                                                            i</sub> -
+                                                            E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se rechaza
+                                                            que
+                                                            los
+                                                            d&iacute;gitos est&aacute;n ordenados al azar.
                                                     </li>
                                                 </ul>
                                             </div>
@@ -587,14 +587,126 @@
                             <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                 aria-expanded="false" aria-controls="collapseTwo">
-
                                 Test Chi Cuadrada
-
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
-                            dwdw
+                            <div>
+                                <!-- Page Heading -->
+                                <ul class="list-group">
+                                    <li class="list-group-item text-gray-900">
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Descripci&oacute;n</p>
+                                                </div>
+                                                <ul>
+                                                    <li>La prueba de Chi-cuadrado se usa para comparar los resultados
+                                                        observados de los resultados esperados por una hip&oacute;tesis
+                                                        y si la desviaci&oacute;n obtenida no es significativa y puede
+                                                        atribuirse al azar o es significativa y otras variables
+                                                        diferentes al azar est&aacute;n influyendo en nuestros
+                                                        resultados.
+                                                    </li>
+                                                    <li> Sea A un fen&oacute;meno aleatorio formado por los sucesos
+                                                        elementales (o casos posibles) A<sub>1</sub>; A<sub>2</sub>;
+                                                        ...; A<sub>k</sub>;
+                                                    </li>
+                                                    <ul style="list-style-type: none; padding: 0;">
+                                                        <li style="margin-right: 5px;">
+                                                            <span
+                                                                style="font-weight: bold; margin-right: 24px;">(I)</span>
+                                                            A = A<sub>1</sub> + A<sub>2</sub> + ... + A<sub>k</sub>;
+                                                        </li>
+                                                        <li style="margin-right: 5px;">
+                                                            <span
+                                                                style="font-weight: bold; margin-right: 18px;">(II)</span>
+                                                            P(A<sub>i</sub>) = p<sub>i</sub> &#8805; 0; &#8704;i = 1;
+                                                            2; ....; k,
+                                                        </li>
+                                                        <li style="margin-right: 5px;" class="mp-2 mt-2">
+                                                            <span
+                                                                style="font-weight: bold; margin-right: 20px;">(III)</span>
+                                                            <sum style="position: relative;">
+                                                                <span style="font-size: 25px;">&Sigma;</span>
+                                                                <sup
+                                                                    style="position: absolute; top: -10px; left: 3px;">k</sup>
+                                                                <sub
+                                                                    style="position: absolute; left: -2px; font-size: 10px;">i
+                                                                    = 1</sub>
+                                                            </sum>
+                                                            p<sub>i</sub> = 1
+                                                        </li>
+                                                    </ul>
+                                                    <li>
+                                                        El m&eacute;todo de control por <sup>2</sup> se expone mediante
+                                                        el siguiente teorema:
+                                                        <br>
+                                                        "La variable aleatoria:
+                                                    </li>
+
+                                                    <ul style="list-style-type: none; padding: 0;">
+                                                        <li style="margin-left: 200px;">
+                                                            <span style="margin-right: 24px;">
+                                                                <i>X</i><sup>2</sup> =
+                                                                <sum style="position: relative;">
+                                                                    <span style="font-size: 25px;">&Sigma;</span>
+                                                                    <sup
+                                                                        style="position: absolute; top: -10px; left: 3px;">k</sup>
+                                                                    <sub
+                                                                        style="position: absolute; left: -2px; font-size: 10px;">i
+                                                                        = 1</sub>
+                                                                </sum>
+                                                                (<span style="font-size: smaller;">f<sub>i</sub> - n
+                                                                    &#183;
+                                                                    p<sub>i</sub></span>)<sup>2</sup> / (n &#183;
+                                                                p<sub>i</sub>)
+                                                            </span> <b>(1)</b>
+                                                        </li>
+                                                    </ul>
+                                                    <li>
+                                                        Converge a la distribuci&oacute;n <sup>2</sup> con (k-1) grados
+                                                        de libertad, cuando el n&uacute;mero n de pruebas tiende a
+                                                        infinito".
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Hip&oacute;tesis</p>
+                                                </div>
+                                                <ul>
+                                                    <span>Se desea probar la hip&oacute;tesis:</span>
+                                                    <li class="pt-2">
+                                                        <b>H<sub>0</sub>:</b> las distintas probabilidades de los
+                                                        sucesos
+                                                        A<sub>i</sub> son, P(A<sub>i</sub>) = p<sub>i</sub> ; &#8704;i =
+                                                        1; 2; ....; k, donde cada p<sub>i</sub> es un valor
+                                                        num&eacute;rico conocido, en el intervalo (0,1).
+                                                    </li>
+                                                    <li>
+                                                        <b>H<sub>1</sub>:</b> P(A<sub>i</sub>) &#8800; p<sub>i</sub>
+                                                        para alg&uacute;n i = 1; 2;...; k
+                                                    </li>
+                                                    <br>
+                                                    <li>Si H<sub>0</sub> es verdadero, la variable aleatoria dada por la
+                                                        expresi&oacute;n (1) sigue, para n grande, una
+                                                        distribuci&oacute;n <i>X</i><sup>2</sup> con k-1 grados de
+                                                        libertad. Se aceptará H<sub>0</sub>, si <i>X</i><sup>2</sup>
+                                                        < <i>X</i><sup>2</sup><sub>E</sub>, donde el segundo miembro es
+                                                            el valor de <i>X</i><sup>2</sup> dado por la tablas para un
+                                                            nivel de significaci&oacute;n E y (k-1) grados de libertad.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- Fin Page Heading -->
+                            </div>
                         </div>
                     </div>
                     <!-- Fin Test Chi Cuadrada -->
@@ -660,6 +772,7 @@
     <script>
 
         function generarFibonacci() {
+            resultate.style.display = "block";
             const v1 = parseInt(document.getElementById('v1').value);
             const v2 = parseInt(document.getElementById('v2').value);
             const A = parseInt(document.getElementById('A').value);

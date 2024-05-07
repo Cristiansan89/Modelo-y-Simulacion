@@ -345,7 +345,7 @@
                                                     </div>
                                                     <table class="table table-bordered">
                                                         <thead>
-                                                            <tr class="h5 text-center">
+                                                            <tr class="h5 text-center table-secondary">
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">N&uacute;mero Pseudoaleatorio</th>
                                                                 <th scope="col">Categor&iacute;a</th>
@@ -365,7 +365,7 @@
                                                     </div>
                                                     <table class="table table-bordered">
                                                         <thead>
-                                                            <tr class="h5 text-center">
+                                                            <tr class="h5 text-center table-secondary">
                                                                 <th scope="col">Categor&iacute;a</th>
                                                                 <th scope="col">O(i)</th>
                                                                 <th scope="col">Probabilidad</th>
@@ -376,7 +376,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">TD - Todos Diferentes</th>
-                                                                <td class="text-right" id="oTD" scope="col"></td>
+                                                                <td class="text-center" id="oTD" scope="col"></td>
                                                                 <td class="text-right" id="pTD" scope="col"></td>
                                                                 <td class="text-right" id="eTD" scope="col"></td>
                                                                 <td class="text-right" id="xTD" scope="col"></td>
@@ -385,7 +385,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">1P - Un Par</th>
-                                                                <td class="text-right" id="oUP" scope="col"></td>
+                                                                <td class="text-center" id="oUP" scope="col"></td>
                                                                 <td class="text-right" id="pUP" scope="col"></td>
                                                                 <td class="text-right" id="eUP" scope="col"></td>
                                                                 <td class="text-right" id="xUP" scope="col"></td>
@@ -394,7 +394,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">2P - Dos Par</th>
-                                                                <td class="text-right" id="oDP" scope="col"></td>
+                                                                <td class="text-center" id="oDP" scope="col"></td>
                                                                 <td class="text-right" id="pDP" scope="col"></td>
                                                                 <td class="text-right" id="eDP" scope="col"></td>
                                                                 <td class="text-right" id="xDP" scope="col"></td>
@@ -403,7 +403,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">T - Tercia</th>
-                                                                <td class="text-right" id="oT" scope="col"></td>
+                                                                <td class="text-center" id="oT" scope="col"></td>
                                                                 <td class="text-right" id="pT" scope="col"></td>
                                                                 <td class="text-right" id="eT" scope="col"></td>
                                                                 <td class="text-right" id="xT" scope="col"></td>
@@ -412,7 +412,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">F - Full</th>
-                                                                <td class="text-right" id="oF" scope="col"></td>
+                                                                <td class="text-center" id="oF" scope="col"></td>
                                                                 <td class="text-right" id="pF" scope="col"></td>
                                                                 <td class="text-right" id="eF" scope="col"></td>
                                                                 <td class="text-right" id="xF" scope="col"></td>
@@ -421,7 +421,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">P - Poker</th>
-                                                                <td class="text-right" id="oP" scope="col"></td>
+                                                                <td class="text-center" id="oP" scope="col"></td>
                                                                 <td class="text-right" id="pP" scope="col"></td>
                                                                 <td class="text-right" id="eP" scope="col"></td>
                                                                 <td class="text-right" id="xP" scope="col"></td>
@@ -430,7 +430,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">Q - Quintilla</th>
-                                                                <td class="text-right" id="oQ" scope="col"></td>
+                                                                <td class="text-center" id="oQ" scope="col"></td>
                                                                 <td class="text-right" id="pQ" scope="col"></td>
                                                                 <td class="text-right" id="eQ" scope="col"></td>
                                                                 <td class="text-right" id="xQ" scope="col"></td>
@@ -438,13 +438,15 @@
                                                         </tbody>
                                                         <tbody>
                                                             <tr>
-                                                                <th class="h5 font-weight-bold" scope="row">&#931; -
+                                                                <th class="h5 font-weight-bold table-success"
+                                                                    scope="row">&#931; -
                                                                     Sumatoria</th>
-                                                                <td class="h5 text-right font-weight-bold" id="oS"
-                                                                    scope="col"></td>
-                                                                <td colspan="2" scope="col"></td>
-                                                                <td class="h5 text-right font-weight-bold" id="xS"
-                                                                    scope="col"></td>
+                                                                <td class="h5 text-center font-weight-bold table-warning"
+                                                                    id="oS" scope="col"></td>
+                                                                <td class="table-secondary" colspan="2" scope="col">
+                                                                </td>
+                                                                <td class="h5 text-right font-weight-bold table-danger"
+                                                                    id="xS" scope="col"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -475,7 +477,8 @@
                                                                 es
                                                                 <span id="valorChi"></span>.
                                                             </li>
-                                                            <li><b><span id="hipotesisPoker"></span></b></li>
+                                                            <li><b><span class="bg-light"
+                                                                        id="hipotesisPoker"></span></b></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -489,7 +492,7 @@
                                                     </div>
                                                     <table class="table table-bordered">
                                                         <thead>
-                                                            <tr class="h5 text-center">
+                                                            <tr class="h5 text-center table-secondary">
                                                                 <th scope="col">Categor&iacute;a</th>
                                                                 <th scope="col">O(i)</th>
                                                                 <th scope="col">Probabilidad</th>
@@ -500,7 +503,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">TD - Todos Diferentes</th>
-                                                                <td class="text-right" id="isoTD" scope="col"></td>
+                                                                <td class="text-center" id="isoTD" scope="col"></td>
                                                                 <td class="text-right" id="ispTD" scope="col"></td>
                                                                 <td class="text-right" id="iseTD" scope="col"></td>
                                                                 <td class="text-right" id="isxTD" scope="col"></td>
@@ -509,7 +512,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">1P - Un Par</th>
-                                                                <td class="text-right" id="isoP" scope="col"></td>
+                                                                <td class="text-center" id="isoP" scope="col"></td>
                                                                 <td class="text-right" id="ispP" scope="col"></td>
                                                                 <td class="text-right" id="iseP" scope="col"></td>
                                                                 <td class="text-right" id="isxP" scope="col"></td>
@@ -518,7 +521,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <th scope="row">T - Tercia</th>
-                                                                <td class="text-right" id="isoT" scope="col"></td>
+                                                                <td class="text-center" id="isoT" scope="col"></td>
                                                                 <td class="text-right" id="ispT" scope="col"></td>
                                                                 <td class="text-right" id="iseT" scope="col"></td>
                                                                 <td class="text-right" id="isxT" scope="col"></td>
@@ -526,13 +529,15 @@
                                                         </tbody>
                                                         <tbody>
                                                             <tr>
-                                                                <th class="h5 font-weight-bold" scope="row">&#931; -
+                                                                <th class="h5 font-weight-bold table-success"
+                                                                    scope="row">&#931; -
                                                                     Sumatoria</th>
-                                                                <td class="h5 text-right font-weight-bold" id="isoS"
-                                                                    scope="col"></td>
-                                                                <td colspan="2" scope="col"></td>
-                                                                <td class="h5 text-right font-weight-bold" id="isxS"
-                                                                    scope="col"></td>
+                                                                <td class="h5 text-center font-weight-bold table-success"
+                                                                    id="isoS" scope="col"></td>
+                                                                <td class="table-secondary" colspan="2" scope="col">
+                                                                </td>
+                                                                <td class="h5 text-right font-weight-bold table-danger"
+                                                                    id="isxS" scope="col"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -565,7 +570,9 @@
                                                                 es
                                                                 <span id="valorChiIS"></span>.
                                                             </li>
-                                                            <li><b><span id="hipotesisPokerIS"></span></b></li>
+                                                            <br>
+                                                            <li><b><span class="bg-light"
+                                                                        id="hipotesisPokerIS"></span></b></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -645,7 +652,6 @@
                                                         <br>
                                                         "La variable aleatoria:
                                                     </li>
-
                                                     <ul style="list-style-type: none; padding: 0;">
                                                         <li style="margin-left: 200px;">
                                                             <span style="margin-right: 24px;">
@@ -702,6 +708,92 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                        </div>
+                                        <div id="resolutionChi" style="display: none;">
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h3 font-weight-bold">
+                                                        <p>Generar el Test Chi Cuadrada</p>
+                                                    </div>
+                                                    <div class="text-center p-2">
+                                                        <button class="btn btn-primary btn-xl fw-bold p-2"
+                                                            onclick="generarDigitoChi()" type="submit"
+                                                            style="width: 25%;">Generar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tablaChi" style="display: none;">
+                                            <!--Tabla Chi cuadrado -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold">
+                                                        <p>Tabla Chi Cuadrado</p>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center font-weight-bold table-secondary">
+                                                                <th scope="col">D&iacute;gitos</th>
+                                                                <th scope="col">f<sub>i</sub></th>
+                                                                <th scope="col">n &#183; p<sub>i</sub></th>
+                                                                <th scope="col">f<sub>i</sub> - n &#183; p<sub>i</sub>
+                                                                </th>
+                                                                <th scope="col">(Q<sub>i</sub>)<sup>2</sup></th>
+                                                                <th scope="col">(Q<sub>i</sub>)<sup>2</sup>/n &#183;
+                                                                    p<sub>i</sub></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="testChi"></tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="table-secondary" scope="col" colspan="4">
+                                                                </td>
+                                                                <td class="text-center table-success" scope="row"
+                                                                    style="font-size: 25px; font-weight: bold;">&Sigma;
+                                                                </td>
+                                                                <td class="text-right table-danger"
+                                                                    style="font-size: 25px; font-weight: bold;"
+                                                                    scope="col" id="sumatoriaChi">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- Fin tabla chi cuadrado -->
+                                            <!-- Resultado Test Chi cuadrado -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-left font-weight-bold ">
+                                                        <p>Resultado del Test Chi Cuadrada</p>
+                                                    </div>
+                                                    <div>
+                                                        <ul>
+                                                            <li>La cantidad de n&uacute;mero aleatorio generado es
+                                                                <span id="nCant"></span>.
+                                                            </li>
+                                                            <li>Se tienen un total de 10 d&iacute;gitos. Por lo
+                                                                cu&aacute;l la frecuencia te&oacute;rica (n &#183;
+                                                                p<sub>i</sub>) es de <span id="npi"></span>.</li>
+                                                            <li>El Grado de Libertad es de 9.</li>
+                                                            <li>Al trabajar con 10 d&iacute;gito, se tendr&aacute; un
+                                                                porcentaje de error admitido de 10/100 es equivalente a
+                                                                0,1.</li>
+                                                            <li>El valor de referencia de la tabla chi cuadrada
+                                                                (<i>X</i><sup>2</sup>) es de 14,6837.</li>
+                                                            <li>El resultado del test de chi cuadrado es de: </li>
+                                                            <br>
+                                                            <li>
+                                                                <b>
+                                                                    <span class="bg-light" id="hipotesisChiCuadrado">
+                                                                    </span>
+                                                                </b>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin resultado chi cuadrado -->
                                         </div>
                                     </li>
                                 </ul>
@@ -767,6 +859,8 @@
     <script src="js/tablachi.js"></script>
     <script src="js/probabilidad.js"></script>
     <script src="js/poker.js"></script>
+    <script src="js/digito.js"></script>
+
 
     <!--Asignando los parametro de las funciones de js al html -->
     <script>
@@ -794,6 +888,7 @@
                 const resultadoFibonacci = nFibonacci(v1, v2, A, n);
                 document.getElementById('fibonacciResultado').textContent = "[ " + resultadoFibonacci + " ]";
                 resolution.style.display = "block";
+                resolutionChi.style.display = "block";
                 return;
             }
         }
@@ -813,14 +908,17 @@
                 const numerosFibo = fibonacci.slice(1, -1).trim();
                 let arrayDeDigitos = numerosFibo.split(',').map(Number);
 
+                // Para tomar la cantidad de digito y separarlo en 5
                 let longitud = arrayDeDigitos.length;
                 const numPseudo = [];
                 let n = 5;
                 let cantidadFila = Math.floor(longitud / 5);
                 let distinto = 0, unPar = 0, dosPar = 0, tercia = 0, full = 0, poker = 0, quintilla = 0;
 
+                // Creación de tabla
                 const tbody = document.getElementById("tbody");
 
+                // Columna 
                 let probaTD = 0.30240;
                 let probaUnPar = 0.50400;
                 let probaDosPar = 0.10800;
@@ -1003,7 +1101,82 @@
 
                 const hipotesisIS = hipotesisPoker(sumatoriaISChi, chiCuadradaIS, metodo);
                 document.getElementById('hipotesisPokerIS').textContent = hipotesisIS;
+                return;
+            }
+            return;
+        }
 
+        function generarDigitoChi() {
+            let fibonacci = document.getElementById('fibonacciResultado').textContent;
+
+            const numerosFibo = fibonacci.slice(1, -1).trim();
+            let arrayDeDigitos = numerosFibo.split(',').map(Number);
+            let nCant = arrayDeDigitos.length;
+            let npiF = nCant / 10;
+            document.getElementById('nCant').textContent = nCant;
+            document.getElementById('npi').textContent = npiF;
+
+            if (isNaN(fibonacci)) {
+                tablaChi.style.display = "block";
+
+                let sumatoriaChi = 0;
+
+                const tableTestChi = document.getElementById('testChi');
+
+                for (let i = 0; i < 10; i++) {
+
+                    const trChi = document.createElement('tr');
+                    let digito = i;
+                    const tdDigito = document.createElement('td');
+                    tdDigito.setAttribute("scope", "col");
+                    tdDigito.classList.add('text-center');
+                    tdDigito.textContent = digito;
+                    trChi.appendChild(tdDigito);
+
+                    let fi = contarDigitos(arrayDeDigitos, i);
+                    const tdFi = document.createElement('td');
+                    tdFi.setAttribute("scope", "col");
+                    tdFi.classList.add('text-center');
+                    tdFi.textContent = fi;
+                    trChi.appendChild(tdFi);
+
+                    let npi = (arrayDeDigitos.length) / 10; // k = 10 digitos
+                    const tdNPi = document.createElement('td');
+                    tdNPi.setAttribute("scope", "col");
+                    tdNPi.classList.add('text-right');
+                    tdNPi.textContent = npi.toLocaleString(undefined, { minimumFractionDigits: 2 });
+                    trChi.appendChild(tdNPi);
+
+                    let finpi = fi - npi;
+                    const tdFiNPi = document.createElement('td');
+                    tdFiNPi.setAttribute("scope", "col");
+                    tdFiNPi.classList.add('text-right');
+                    tdFiNPi.textContent = finpi.toLocaleString(undefined, { minimumFractionDigits: 1 });
+                    trChi.appendChild(tdFiNPi);
+
+                    let qi = finpi ** 2;
+                    const tdQi = document.createElement('td');
+                    tdQi.setAttribute("scope", "col");
+                    tdQi.classList.add('text-right');
+                    tdQi.textContent = qi.toLocaleString(undefined, { minimumFractionDigits: 2 });
+                    trChi.appendChild(tdQi);
+
+                    let qinpi = qi / npi;
+                    const tdQiNPi = document.createElement('td');
+                    tdQiNPi.setAttribute("scope", "col");
+                    tdQiNPi.classList.add('text-right');
+                    tdQiNPi.textContent = qinpi.toLocaleString(undefined, { minimumFractionDigits: 5 });
+                    trChi.appendChild(tdQiNPi);
+
+                    sumatoriaChi = sumatoriaChi + qinpi;
+                    tableTestChi.appendChild(trChi);
+                }
+
+                document.getElementById('sumatoriaChi').textContent = sumatoriaChi.toLocaleString(undefined, { minimumFractionDigits: 5 });
+                let hipotesisChi = (sumatoriaChi > 14.6837) ? ['No Pasa la prueba de aleatoriedad.'] : ['Si pasa la prueba de aleatoriedad.'];
+
+                document.getElementById('hipotesisChiCuadrado').textContent = hipotesisChi;
+                return;
             }
             return;
         }

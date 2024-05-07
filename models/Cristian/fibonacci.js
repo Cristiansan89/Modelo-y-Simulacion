@@ -51,10 +51,10 @@ const A = 929;
 const n = 10;
 */
 
-const v1 = 23;
-const v2 = 67;
-const A = 17;
-const n = 10;
+const v1 = 375;
+const v2 = 177;
+const A = 745;
+const n = 15;
 
 
 if (isPrimo(v1) && isPrimo(v2) && isPrimo(A)) {

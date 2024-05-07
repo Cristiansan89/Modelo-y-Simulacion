@@ -205,7 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-2" id="resultate" style="min-height: 120px; display: none;">
+                            <div class="p-2" id="displayResultado" style="min-height: 120px; display: none;">
                                 <div class="card card-body mx-auto text-gray-900"
                                     style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
                                     <div class="h3 font-weight-bold">
@@ -218,7 +218,6 @@
                     </ul>
                 </div>
                 <!-- /.container-fluid -->
-
                 <!-- Test Poker y Chi Cuadrada -->
                 <div class="accordion container-fluid pt-4" id="accordionExample">
                     <!-- Test Poker -->
@@ -349,10 +348,9 @@
                                                     <div class="h4 text-center font-weight-bold">
                                                         <p>Tabla N&uacute;meros Pseudoaleatorios</p>
                                                     </div>
-
                                                     <table class="table table-bordered">
                                                         <thead>
-                                                            <tr class="h5 text-center">
+                                                            <tr class="h5 text-center table-secondary">
                                                                 <th scope="col">#</th>
                                                                 <th scope="col">N&uacute;mero Pseudoaleatorio</th>
                                                                 <th scope="col">Categor&iacute;a</th>
@@ -372,7 +370,7 @@
                                                     </div>
                                                     <table class="table table-bordered">
                                                         <thead>
-                                                            <tr class="h5 text-center">
+                                                            <tr class="h5 text-center table-secondary">
                                                                 <th scope="col">Categor&iacute;a</th>
                                                                 <th scope="col">O(i)</th>
                                                                 <th scope="col">Probabilidad</th>
@@ -445,13 +443,15 @@
                                                         </tbody>
                                                         <tbody>
                                                             <tr>
-                                                                <th class="h5 font-weight-bold" scope="row">&#931; -
+                                                                <th class="h5 font-weight-bold table-success"
+                                                                    scope="row">&#931; -
                                                                     Sumatoria</th>
-                                                                <td class="h5 text-right font-weight-bold" id="oS"
-                                                                    scope="col"></td>
-                                                                <td colspan="2" scope="col"></td>
-                                                                <td class="h5 text-right font-weight-bold" id="xS"
-                                                                    scope="col"></td>
+                                                                <td class="h5 text-right font-weight-bold table-warning"
+                                                                    id="oS" scope="col"></td>
+                                                                <td class="table-secondary" colspan="2" scope="col">
+                                                                </td>
+                                                                <td class="h5 text-right font-weight-bold table-danger"
+                                                                    id="xS" scope="col"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -482,6 +482,7 @@
                                                                 es
                                                                 <span id="valorChi"></span>.
                                                             </li>
+                                                            <br>
                                                             <li><b><span id="hipotesisPoker"></span></b></li>
                                                         </ul>
                                                     </div>
@@ -496,7 +497,7 @@
                                                     </div>
                                                     <table class="table table-bordered">
                                                         <thead>
-                                                            <tr class="h5 text-center">
+                                                            <tr class="h5 text-center table-secondary">
                                                                 <th scope="col">Categor&iacute;a</th>
                                                                 <th scope="col">O(i)</th>
                                                                 <th scope="col">Probabilidad</th>
@@ -533,13 +534,15 @@
                                                         </tbody>
                                                         <tbody>
                                                             <tr>
-                                                                <th class="h5 font-weight-bold" scope="row">&#931; -
+                                                                <th class="h5 font-weight-bold table-success"
+                                                                    scope="row">&#931; -
                                                                     Sumatoria</th>
-                                                                <td class="h5 text-right font-weight-bold" id="isoS"
-                                                                    scope="col"></td>
-                                                                <td colspan="2" scope="col"></td>
-                                                                <td class="h5 text-right font-weight-bold" id="isxS"
-                                                                    scope="col"></td>
+                                                                <td class="h5 text-right font-weight-bold table-success"
+                                                                    id="isoS" scope="col"></td>
+                                                                <td class="table-secondary" colspan="2" scope="col">
+                                                                </td>
+                                                                <td class="h5 text-right font-weight-bold table-danger"
+                                                                    id="isxS" scope="col"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -572,7 +575,9 @@
                                                                 es
                                                                 <span id="valorChiIS"></span>.
                                                             </li>
-                                                            <li><b><span id="hipotesisPokerIS"></span></b></li>
+                                                            <br>
+                                                            <li><b><span class="bg-light"
+                                                                        id="hipotesisPokerIS"></span></b></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -594,23 +599,218 @@
                             <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                 aria-expanded="false" aria-controls="collapseTwo">
-
                                 Test Chi Cuadrada
-
                             </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                             data-bs-parent="#accordionExample">
-                            dwdw
+                            <div>
+                                <!-- Page Heading -->
+                                <ul class="list-group">
+                                    <li class="list-group-item text-gray-900">
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Descripci&oacute;n</p>
+                                                </div>
+                                                <ul>
+                                                    <li>La prueba de Chi-cuadrado se usa para comparar los resultados
+                                                        observados de los resultados esperados por una hip&oacute;tesis
+                                                        y si la desviaci&oacute;n obtenida no es significativa y puede
+                                                        atribuirse al azar o es significativa y otras variables
+                                                        diferentes al azar est&aacute;n influyendo en nuestros
+                                                        resultados.
+                                                    </li>
+                                                    <li> Sea A un fen&oacute;meno aleatorio formado por los sucesos
+                                                        elementales (o casos posibles) A<sub>1</sub>; A<sub>2</sub>;
+                                                        ...; A<sub>k</sub>;
+                                                    </li>
+                                                    <ul style="list-style-type: none; padding: 0;">
+                                                        <li style="margin-right: 5px;">
+                                                            <span
+                                                                style="font-weight: bold; margin-right: 24px;">(I)</span>
+                                                            A = A<sub>1</sub> + A<sub>2</sub> + ... + A<sub>k</sub>;
+                                                        </li>
+                                                        <li style="margin-right: 5px;">
+                                                            <span
+                                                                style="font-weight: bold; margin-right: 18px;">(II)</span>
+                                                            P(A<sub>i</sub>) = p<sub>i</sub> &#8805; 0; &#8704;i = 1;
+                                                            2; ....; k,
+                                                        </li>
+                                                        <li style="margin-right: 5px;" class="mp-2 mt-2">
+                                                            <span
+                                                                style="font-weight: bold; margin-right: 20px;">(III)</span>
+                                                            <sum style="position: relative;">
+                                                                <span style="font-size: 25px;">&Sigma;</span>
+                                                                <sup
+                                                                    style="position: absolute; top: -10px; left: 3px;">k</sup>
+                                                                <sub
+                                                                    style="position: absolute; left: -2px; font-size: 10px;">i
+                                                                    = 1</sub>
+                                                            </sum>
+                                                            p<sub>i</sub> = 1
+                                                        </li>
+                                                    </ul>
+                                                    <li>
+                                                        El m&eacute;todo de control por <sup>2</sup> se expone mediante
+                                                        el siguiente teorema:
+                                                        <br>
+                                                        "La variable aleatoria:
+                                                    </li>
+                                                    <ul style="list-style-type: none; padding: 0;">
+                                                        <li style="margin-left: 200px;">
+                                                            <span style="margin-right: 24px;">
+                                                                <i>X</i><sup>2</sup> =
+                                                                <sum style="position: relative;">
+                                                                    <span style="font-size: 25px;">&Sigma;</span>
+                                                                    <sup
+                                                                        style="position: absolute; top: -10px; left: 3px;">k</sup>
+                                                                    <sub
+                                                                        style="position: absolute; left: -2px; font-size: 10px;">i
+                                                                        = 1</sub>
+                                                                </sum>
+                                                                (<span style="font-size: smaller;">f<sub>i</sub> - n
+                                                                    &#183;
+                                                                    p<sub>i</sub></span>)<sup>2</sup> / (n &#183;
+                                                                p<sub>i</sub>)
+                                                            </span> <b>(1)</b>
+                                                        </li>
+                                                    </ul>
+                                                    <li>
+                                                        Converge a la distribuci&oacute;n <sup>2</sup> con (k-1) grados
+                                                        de libertad, cuando el n&uacute;mero n de pruebas tiende a
+                                                        infinito".
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Hip&oacute;tesis</p>
+                                                </div>
+                                                <ul>
+                                                    <span>Se desea probar la hip&oacute;tesis:</span>
+                                                    <li class="pt-2">
+                                                        <b>H<sub>0</sub>:</b> las distintas probabilidades de los
+                                                        sucesos
+                                                        A<sub>i</sub> son, P(A<sub>i</sub>) = p<sub>i</sub> ; &#8704;i =
+                                                        1; 2; ....; k, donde cada p<sub>i</sub> es un valor
+                                                        num&eacute;rico conocido, en el intervalo (0,1).
+                                                    </li>
+                                                    <li>
+                                                        <b>H<sub>1</sub>:</b> P(A<sub>i</sub>) &#8800; p<sub>i</sub>
+                                                        para alg&uacute;n i = 1; 2;...; k
+                                                    </li>
+                                                    <br>
+                                                    <li>Si H<sub>0</sub> es verdadero, la variable aleatoria dada por la
+                                                        expresi&oacute;n (1) sigue, para n grande, una
+                                                        distribuci&oacute;n <i>X</i><sup>2</sup> con k-1 grados de
+                                                        libertad. Se aceptará H<sub>0</sub>, si <i>X</i><sup>2</sup>
+                                                        < <i>X</i><sup>2</sup><sub>E</sub>, donde el segundo miembro es
+                                                            el valor de <i>X</i><sup>2</sup> dado por la tablas para un
+                                                            nivel de significaci&oacute;n E y (k-1) grados de libertad.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div id="resolutionChi" style="display: none;">
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h3 font-weight-bold">
+                                                        <p>Generar el Test Chi Cuadrada</p>
+                                                    </div>
+                                                    <div class="text-center p-2">
+                                                        <button class="btn btn-primary btn-xl fw-bold p-2"
+                                                            onclick="generarDigitoChi()" type="submit"
+                                                            style="width: 25%;">Generar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tablaChi" style="display: none;">
+                                            <!--Tabla Chi cuadrado -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold">
+                                                        <p>Tabla Chi Cuadrado</p>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center font-weight-bold table-secondary">
+                                                                <th scope="col">D&iacute;gitos</th>
+                                                                <th scope="col">f<sub>i</sub></th>
+                                                                <th scope="col">n &#183; p<sub>i</sub></th>
+                                                                <th scope="col">f<sub>i</sub> - n &#183; p<sub>i</sub>
+                                                                </th>
+                                                                <th scope="col">(Q<sub>i</sub>)<sup>2</sup></th>
+                                                                <th scope="col">(Q<sub>i</sub>)<sup>2</sup>/n &#183;
+                                                                    p<sub>i</sub></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="testChi"></tbody>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="table-secondary" scope="col" colspan="4">
+                                                                </td>
+                                                                <td class="text-center table-success" scope="row"
+                                                                    style="font-size: 25px; font-weight: bold;">&Sigma;
+                                                                </td>
+                                                                <td class="text-right table-danger"
+                                                                    style="font-size: 25px; font-weight: bold;"
+                                                                    scope="col" id="sumatoriaChi">
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- Fin tabla chi cuadrado -->
+                                            <!-- Resultado Test Chi cuadrado -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-left font-weight-bold ">
+                                                        <p>Resultado del Test Chi Cuadrada</p>
+                                                    </div>
+                                                    <div>
+                                                        <ul>
+                                                            <li>La cantidad de n&uacute;mero aleatorio generado es
+                                                                <span id="nCant"></span>.
+                                                            </li>
+                                                            <li>Se tienen un total de 10 d&iacute;gitos. Por lo
+                                                                cu&aacute;l la frecuencia te&oacute;rica (n &#183;
+                                                                p<sub>i</sub>) es de <span id="npi"></span>.</li>
+                                                            <li>El Grado de Libertad es de 9.</li>
+                                                            <li>Al trabajar con 10 d&iacute;gito, se tendr&aacute; un
+                                                                porcentaje de error admitido de 10/100 es equivalente a
+                                                                0,1.</li>
+                                                            <li>El valor de referencia de la tabla chi cuadrada
+                                                                (<i>X</i><sup>2</sup>) es de 14,6837.</li>
+                                                            <li>El resultado del test de chi cuadrado es de: </li>
+                                                            <br>
+                                                            <li>
+                                                                <b>
+                                                                    <span class="bg-light" id="hipotesisChiCuadrado">
+                                                                    </span>
+                                                                </b>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Fin resultado chi cuadrado -->
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- Fin Page Heading -->
+                            </div>
                         </div>
                     </div>
                     <!-- Fin Test Chi Cuadrada -->
                 </div>
                 <!-- Fin Test Poker y Chi Cuadrada-->
-
             </div>
             <!-- End of Main Content -->
-
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -624,7 +824,6 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-
     <!-- Bootstrap core JavaScript -->
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -663,6 +862,7 @@
     <script src="js/tablachi.js"></script>
     <script src="js/probabilidad.js"></script>
     <script src="js/poker.js"></script>
+    <script src="js/digito.js"></script>
 
     <!--Script para implementar la generación de n cantindad de semilla para congruencia fundamental-->
     <script>
@@ -709,16 +909,16 @@
                 // Assuming you want to append groupInput to a specific element:
                 contenedorSemilla.appendChild(groupInput);
             }
+            return;
         }
     </script>
 
     <!--Asignando los parametro de las funciones de js al html -->
     <script>
         function generarCongruencia() {
+            displayResultado.style.display = "block";
             const semillas = [];
             const s = parseInt(document.getElementById('s').value);
-
-            resultate.style.display = block;
 
             /* recibi la cantidad de semillas a generar para crear los campos */
             if (isNaN(s)) {
@@ -797,16 +997,15 @@
                 const resultadoCongruencia = nCongruencia(semillas, k, a, c, m, i);
                 document.getElementById('congruenciaResultado').textContent = "[ " + resultadoCongruencia + " ]";
                 resolution.style.display = "block";
+                resolutionChi.style.display = "block";
                 return;
             }
-
+            return;
         }
 
         function generarDigito() {
             let congruencia = document.getElementById('congruenciaResultado').textContent;
-
             let seleccionPChi = document.getElementById('pChiCuadrado').value;
-
             let metodo = "congruencia";
 
             if (isNaN(congruencia) && seleccionPChi >= 0) {
@@ -881,6 +1080,7 @@
                     categoria.textContent = tipoCategoria;
                     tr.appendChild(categoria);
                     tbody.appendChild(tr);
+                    return;
                 }
 
                 let sumatoria = 0;
@@ -890,7 +1090,6 @@
                 document.getElementById('sumD').textContent = sumatoria;
 
                 // Tabla análisis de poker
-
                 // Para todos diferentes
                 document.getElementById('oTD').textContent = distinto;
                 document.getElementById('pTD').textContent = probaTD.toLocaleString(undefined, { minimumFractionDigits: 4 });
@@ -1007,7 +1206,81 @@
 
                 const hipotesisIS = hipotesisPoker(sumatoriaISChi, chiCuadradaIS, metodo);
                 document.getElementById('hipotesisPokerIS').textContent = hipotesisIS;
+            }
+            return;
+        }
 
+        function generarDigitoChi() {
+            let congruencia = document.getElementById('congruenciaResultado').textContent;
+
+            const numerosCongruencia = congruencia.slice(1, -1).trim();
+            let arrayDeDigitos = numerosCongruencia.split(',').map(Number);
+            let nCant = arrayDeDigitos.length;
+            let npiF = nCant / 10;
+            document.getElementById('nCant').textContent = nCant;
+            document.getElementById('npi').textContent = npiF;
+
+            if (isNaN(congruencia)) {
+                tablaChi.style.display = "block";
+
+                let sumatoriaChi = 0;
+
+                const tableTestChi = document.getElementById('testChi');
+
+                for (let i = 0; i < 10; i++) {
+
+                    const trChi = document.createElement('tr');
+                    let digito = i;
+                    const tdDigito = document.createElement('td');
+                    tdDigito.setAttribute("scope", "col");
+                    tdDigito.classList.add('text-center');
+                    tdDigito.textContent = digito;
+                    trChi.appendChild(tdDigito);
+
+                    let fi = contarDigitos(arrayDeDigitos, i);
+                    const tdFi = document.createElement('td');
+                    tdFi.setAttribute("scope", "col");
+                    tdFi.classList.add('text-center');
+                    tdFi.textContent = fi;
+                    trChi.appendChild(tdFi);
+
+                    let npi = (arrayDeDigitos.length) / 10; // k = 10 digitos
+                    const tdNPi = document.createElement('td');
+                    tdNPi.setAttribute("scope", "col");
+                    tdNPi.classList.add('text-right');
+                    tdNPi.textContent = npi.toLocaleString(undefined, { minimumFractionDigits: 2 });
+                    trChi.appendChild(tdNPi);
+
+                    let finpi = fi - npi;
+                    const tdFiNPi = document.createElement('td');
+                    tdFiNPi.setAttribute("scope", "col");
+                    tdFiNPi.classList.add('text-right');
+                    tdFiNPi.textContent = finpi.toLocaleString(undefined, { minimumFractionDigits: 1 });
+                    trChi.appendChild(tdFiNPi);
+
+                    let qi = finpi ** 2;
+                    const tdQi = document.createElement('td');
+                    tdQi.setAttribute("scope", "col");
+                    tdQi.classList.add('text-right');
+                    tdQi.textContent = qi.toLocaleString(undefined, { minimumFractionDigits: 2 });
+                    trChi.appendChild(tdQi);
+
+                    let qinpi = qi / npi;
+                    const tdQiNPi = document.createElement('td');
+                    tdQiNPi.setAttribute("scope", "col");
+                    tdQiNPi.classList.add('text-right');
+                    tdQiNPi.textContent = qinpi.toLocaleString(undefined, { minimumFractionDigits: 5 });
+                    trChi.appendChild(tdQiNPi);
+
+                    sumatoriaChi = sumatoriaChi + qinpi;
+                    tableTestChi.appendChild(trChi);
+                }
+
+                document.getElementById('sumatoriaChi').textContent = sumatoriaChi.toLocaleString(undefined, { minimumFractionDigits: 5 });
+                let hipotesisChi = (sumatoriaChi > 14.6837) ? ['No Pasa la prueba de aleatoriedad.'] : ['Si pasa la prueba de aleatoriedad.'];
+
+                document.getElementById('hipotesisChiCuadrado').textContent = hipotesisChi;
+                return;
             }
             return;
         }

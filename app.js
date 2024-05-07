@@ -18,6 +18,7 @@ const staticFiles = {
     '/js/congruencia.js': 'js/congruencia.js',
     '/js/tablachi.js': 'js/tablachi.js',
     '/js/probabilidad.js': 'js/probabilidad.js',
+    '/js/digito.js': 'js/digito.js',
     '/js/poker.js': 'js/poker.js'
 
 }

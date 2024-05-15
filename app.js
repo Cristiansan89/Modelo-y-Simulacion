@@ -14,13 +14,9 @@ const staticFiles = {
     '/vendor/css/sb-admin-2.min.css': 'vendor/css/sb-admin-2.min.css',
     '/vendor/js/sb-admin-2.min.js': 'vendor/js/sb-admin-2.min.js',
     '/js/fibonacci.js': 'js/fibonacci.js',
-    '/js/categoria.js': 'js/categoria.js',
     '/js/congruencia.js': 'js/congruencia.js',
-    '/js/tablachi.js': 'js/tablachi.js',
-    '/js/probabilidad.js': 'js/probabilidad.js',
-    '/js/digito.js': 'js/digito.js',
-    '/js/poker.js': 'js/poker.js'
-
+    '/js/poker.js': 'js/poker.js',
+    '/js/chiCuadrado.js': 'js/chiCuadrado.js'
 }
 
 for (const [route, filePath] of Object.entries(staticFiles)) {

@@ -9,12 +9,12 @@
  * @param {Number} n cantidad de numeros a generar.
  */
 function aleatoriosCongruencia(semillas, K, A, C, M, n) {
-    
+
     const pseudoaleatorios = [...semillas];
     let i = semillas.length - 1;
 
     // si K = 2, necesito hallar una tercer semilla.
-    if(K === 2) {
+    if (K === 2) {
         let v = ((pseudoaleatorios[1] * A + pseudoaleatorios[0] * C) % M);
         pseudoaleatorios.push(v);
         i++;
@@ -22,7 +22,7 @@ function aleatoriosCongruencia(semillas, K, A, C, M, n) {
 
     // si K > 2, itero normalmente.
     while (i <= n) {
-        let v = ((pseudoaleatorios[i] * A + pseudoaleatorios[Math.abs(i-K)] * C) % M);
+        let v = ((pseudoaleatorios[i] * A + pseudoaleatorios[Math.abs(i - K)] * C) % M);
         pseudoaleatorios.push(v);
         i++;
     }

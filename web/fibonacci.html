@@ -176,22 +176,22 @@
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Primera Semilla
                                             'V<sub>1</sub>'</span>
-                                        <input type="number" class="form-control" id="v1">
+                                        <input required type="number" min="1" class="form-control" id="v1">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Segunda Semilla
                                             'V<sub>2</sub>'</span>
-                                        <input type="number" class="form-control" id="v2">
+                                        <input required type="number" min="1" class="form-control" id="v2">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Constante de
                                             Control 'A'</span>
-                                        <input type="number" class="form-control" id="A">
+                                        <input required type="number" min="1" class="form-control" id="A">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Cantidad de
                                             Iteraciones 'n'</span>
-                                        <input type="number" class="form-control" id="n">
+                                        <input required type="number" min="100" class="form-control" id="n">
                                     </div>
                                     <div class="text-center p-2">
                                         <button class="btn btn-primary btn-xl fw-bold p-2" onclick="generarFibonacci()"
@@ -732,6 +732,12 @@
             // A debe ser mayor que v1 y v2
             if (!(A > v1 && A > v2)) {
                 resultado.textContent = 'La constante de control debe ser mayor que las semillas para iniciar.';
+                return;
+            }
+
+            // n debe ser >= 100
+            if (n < 100) {
+                resultado.textContent = 'La cantidad de iteraciones debe ser mayor que 100 para iniciar.';
                 return;
             }
 

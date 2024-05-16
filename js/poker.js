@@ -98,10 +98,14 @@ function obtenerPoker(pseudoAleatorios) {
         }
     }
 
+    // sumatoria de fo
+    let fo_sum_base = fo.reduce((suma, valor) => suma += valor);
+    fo_sum_base
+
     // frecuencia esperada fe
     let fe = [];
     for (let i = 0; i < 7; i++) {
-        fe.push(probabilidadCategorias[i] * recorridoMaximo);
+        fe.push(probabilidadCategorias[i] * fo_sum_base);
     }
 
     // filas con frecuencias observadas en 0 deben descartarse,
@@ -109,17 +113,21 @@ function obtenerPoker(pseudoAleatorios) {
     let fo_base = [];
     let fe_base = [];
     let categorias_base = [];
+    let probabilidad_categorias_base = [];
     for (let i = 0; i < 7; i++) {
         if (fo[i] !== 0) {
             fo_base.push(fo[i]);
             fe_base.push(fe[i]);
             categorias_base.push(categorias[i]);
+            probabilidad_categorias_base.push(probabilidadCategorias[i]);
         }
     }
 
     fo_base
+    fo_sum_base
     fe_base
     categorias_base
+    probabilidad_categorias_base
 
     // obtener (fe-fo)²/fe sobre los array, y sumatoria final
     const x2_base = [];
@@ -133,12 +141,13 @@ function obtenerPoker(pseudoAleatorios) {
     grados_libertad_base
 
     // filas con frecuencias esperadas menores a 5 deben sumarse juntas
-    // la categoria se elimina, las observadas se suman juntas
+    // la categoria se elimina, la probabilidad de categoria se elimina, las observadas se suman juntas
     // de quintilla para atras, solapar
     let fo_aux = 0, fe_aux = 0; //auxiliares de suma
     let fo_solapada = [...fo_base];
     let fe_solapada = [...fe_base];
     let categorias_solapada = [...categorias_base];
+    let probabilidad_categorias_solapada = [...probabilidad_categorias_base]
     for (let i = fe_base.length - 1; i >= 0; i--) {
         i
         if (fe_base[i] < 5) {
@@ -147,6 +156,7 @@ function obtenerPoker(pseudoAleatorios) {
             fo_solapada.pop();
             fe_solapada.pop();
             categorias_solapada.pop();
+            probabilidad_categorias_solapada.pop();
         }
     }
     // sumo al final
@@ -158,6 +168,7 @@ function obtenerPoker(pseudoAleatorios) {
     fo_solapada
     fe_solapada
     categorias_solapada
+    probabilidad_categorias_solapada
 
     // obtener (fe-fo)²/fe sobre los array solapados, y sumatoria final
     const x2_solapada = [];
@@ -173,12 +184,15 @@ function obtenerPoker(pseudoAleatorios) {
     const resultado = {
         categorias_base: categorias_base,
         fo_base: fo_base,
+        fo_sum_base: fo_sum_base,
+        probabilidad_categorias_base: probabilidad_categorias_base,
         fe_base: fe_base,
         x2_base: x2_base,
         sumatoria_base: sumatoria_base,
         grados_libertad_base: grados_libertad_base,
         categorias_solapada: categorias_solapada,
         fo_solapada: fo_solapada,
+        probabilidad_categorias_solapada: probabilidad_categorias_solapada,
         fe_solapada: fe_solapada,
         x2_solapada: x2_solapada,
         sumatoria_solapada: sumatoria_solapada,
@@ -219,10 +233,10 @@ function testPoker(pseudoAleatorios, p = '0.001') {
 
     // conclusion del test, usando valores de arrays solapados
     let conclusion = (resultado.sumatoria_solapada <= valoresTablaChiCuadrado[p][resultado.grados_libertad_solapada])
-        ? ['Se tiene', '<=']
+        ? ['PASA', '<=']
         : ['NO PASA', '>='];
 
-    let mensaje_conclusion = `La secuencia pseudoaleatoria ${conclusion[0]} el test siendo x² calculada: ${resultado.sumatoria_solapada} ${conclusion[1]} a x² de la tabla chi cuadrda: ${valoresTablaChiCuadrado[p][resultado.grados_libertad_solapada]}, con ${resultado.grados_libertad_solapada} grados de libertad y alfa ${p}`;
+    let mensaje_conclusion = `La secuencia pseudoaleatoria ${conclusion[0]} el test siendo x² calculada: ${resultado.sumatoria_solapada.toFixed(4)} ${conclusion[1]} a x² de la tabla chi cuadrda: ${valoresTablaChiCuadrado[p][resultado.grados_libertad_solapada]}, con ${resultado.grados_libertad_solapada} grados de libertad y alfa ${p}`;
 
     //agrego mensaje de conclusion como propiedad
     resultado.mensaje_conclusion = mensaje_conclusion;

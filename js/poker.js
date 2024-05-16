@@ -49,48 +49,48 @@ function compararSegmento(numeros) {
  */
 function obtenerPoker(pseudoAleatorios) {
 
-    const probabilidadCategorias = [0.30240, 0.50400, 0.10800, 0.07200, 0.00900, 0.00045, 0.00010];
-    let categorias = ["TD", "1P", "2P", "T", "F", "P", "Q"];
+    const probabilidad_categorias_base = [0.30240, 0.50400, 0.10800, 0.07200, 0.00900, 0.00045, 0.00010];
+    let categorias_base = ["TD", "1P", "2P", "T", "F", "P", "Q"];
 
     // preparar array de digitos pseudoaleatorios para poder recorrer de a 5
     const redondeoCantidad = Math.floor(pseudoAleatorios.length / 5);
     const recorridoMaximo = 5 * redondeoCantidad;
 
     // frecuencia observada fo
-    let fo = [0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i <= recorridoMaximo; i += 5) {
+    let fo_base = [0, 0, 0, 0, 0, 0, 0];
+    for (let i = 5; i <= recorridoMaximo; i += 5) {
         let segmento = pseudoAleatorios.slice(i - 5, i);
         switch (compararSegmento(segmento)) {
-            case categorias[0]:
-                fo[0]++;
+            case categorias_base[0]:
+                fo_base[0]++;
                 break;
 
-            case categorias[1]:
-                fo[1]++;
+            case categorias_base[1]:
+                fo_base[1]++;
                 break;
 
-            case categorias[2]:
-                fo[2]++;
+            case categorias_base[2]:
+                fo_base[2]++;
                 break;
 
-            case categorias[3]:
-                fo[3]++;
+            case categorias_base[3]:
+                fo_base[3]++;
                 break;
 
-            case categorias[4]:
-                fo[4]++;
+            case categorias_base[4]:
+                fo_base[4]++;
                 break;
 
-            case categorias[5]:
-                fo[5]++;
+            case categorias_base[5]:
+                fo_base[5]++;
                 break;
 
-            case categorias[6]:
-                fo[6]++;
+            case categorias_base[6]:
+                fo_base[6]++;
                 break;
 
-            case categorias[7]:
-                fo[7]++;
+            case categorias_base[7]:
+                fo_base[7]++;
                 break;
 
             default:
@@ -99,35 +99,13 @@ function obtenerPoker(pseudoAleatorios) {
     }
 
     // sumatoria de fo
-    let fo_sum_base = fo.reduce((suma, valor) => suma += valor);
-    fo_sum_base
+    let fo_sum_base = fo_base.reduce((suma, valor) => suma += valor);
 
     // frecuencia esperada fe
-    let fe = [];
-    for (let i = 0; i < 7; i++) {
-        fe.push(probabilidadCategorias[i] * fo_sum_base);
-    }
-
-    // filas con frecuencias observadas en 0 deben descartarse,
-    // junto a la categoria y frecuencia esperada.
-    let fo_base = [];
     let fe_base = [];
-    let categorias_base = [];
-    let probabilidad_categorias_base = [];
     for (let i = 0; i < 7; i++) {
-        if (fo[i] !== 0) {
-            fo_base.push(fo[i]);
-            fe_base.push(fe[i]);
-            categorias_base.push(categorias[i]);
-            probabilidad_categorias_base.push(probabilidadCategorias[i]);
-        }
+        fe_base.push(probabilidad_categorias_base[i] * fo_sum_base);
     }
-
-    fo_base
-    fo_sum_base
-    fe_base
-    categorias_base
-    probabilidad_categorias_base
 
     // obtener (fe-fo)²/fe sobre los array, y sumatoria final
     const x2_base = [];
@@ -137,8 +115,6 @@ function obtenerPoker(pseudoAleatorios) {
 
     const sumatoria_base = x2_base.reduce((suma, x2iesimo) => suma += x2iesimo, 0);
     let grados_libertad_base = categorias_base.length - 1;
-    sumatoria_base
-    grados_libertad_base
 
     // filas con frecuencias esperadas menores a 5 deben sumarse juntas
     // la categoria se elimina, la probabilidad de categoria se elimina, las observadas se suman juntas
@@ -149,7 +125,6 @@ function obtenerPoker(pseudoAleatorios) {
     let categorias_solapada = [...categorias_base];
     let probabilidad_categorias_solapada = [...probabilidad_categorias_base]
     for (let i = fe_base.length - 1; i >= 0; i--) {
-        i
         if (fe_base[i] < 5) {
             fo_aux += fo_base[i];
             fe_aux += fe_base[i];
@@ -163,13 +138,6 @@ function obtenerPoker(pseudoAleatorios) {
     fo_solapada[fo_solapada.length - 1] += fo_aux;
     fe_solapada[fe_solapada.length - 1] += fe_aux;
 
-    fo_aux
-    fe_aux
-    fo_solapada
-    fe_solapada
-    categorias_solapada
-    probabilidad_categorias_solapada
-
     // obtener (fe-fo)²/fe sobre los array solapados, y sumatoria final
     const x2_solapada = [];
     for (let i = 0; i < fe_solapada.length; i++) {
@@ -178,8 +146,6 @@ function obtenerPoker(pseudoAleatorios) {
 
     const sumatoria_solapada = x2_solapada.reduce((suma, x2iesimo) => suma += x2iesimo, 0);
     let grados_libertad_solapada = categorias_solapada.length - 1;
-    sumatoria_solapada
-    grados_libertad_solapada
 
     const resultado = {
         categorias_base: categorias_base,

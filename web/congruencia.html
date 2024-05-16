@@ -176,27 +176,27 @@
                                     <div id="contenedorSemilla"></div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Semilla 'k'</span>
-                                        <input type="number" class="form-control" id="k">
+                                        <input type="number" required min="2" class="form-control" id="k">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">M&oacute;dulo
                                             'm'</span>
-                                        <input type="number" class="form-control" id="m">
+                                        <input type="number" required min="1" class="form-control" id="m">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Constante
                                             'a'</span>
-                                        <input type="number" class="form-control" id="a">
+                                        <input type="number" required min="1" class="form-control" id="a">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Constante
                                             'c'</span>
-                                        <input type="number" class="form-control" id="c">
+                                        <input type="number" required min="1" class="form-control" id="c">
                                     </div>
                                     <div class="input-group p-2" style="width: 95%;">
                                         <span class="input-group-text font-weight-bold text-gray-900">Cantidad de
                                             Iteraciones 'i'</span>
-                                        <input type="number" class="form-control" id="i">
+                                        <input type="number" required min="100" class="form-control" id="i">
                                     </div>
                                     <div class="text-center">
                                         <button class="btn btn-primary btn-xl fw-bold p-2"
@@ -730,6 +730,8 @@
                 nuevoInput.type = 'number';
                 nuevoInput.id = `semilla${i}`;
                 nuevoInput.classList.add('form-control');
+                nuevoInput.setAttribute('required', true);
+                nuevoInput.setAttribute('min',1);
 
                 const seedLabelText = document.createElement('span');
                 seedLabelText.textContent = 'Ingrese la semilla V';
@@ -849,6 +851,13 @@
             // no deben haber valores nulos
             if (isNaN(k) || isNaN(m) || isNaN(a) || isNaN(c) || isNaN(i)) {
                 resultadoCongruencia.textContent = 'Datos Incompletos, revisa para completar los parámetros';
+                return;
+            }
+
+            // i debe ser >= 100
+            if (i < 100) {
+                resultadoCongruencia.textContent = 'La cantidad de iteraciones debe ser mayor que 100 para iniciar.';
+                return;
             }
 
             let secuencia = nCongruencia(semillas, k, a, c, m, i);

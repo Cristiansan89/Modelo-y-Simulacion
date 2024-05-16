@@ -23,26 +23,28 @@ function obtenerChiCuadrado(pseudoAleatorios) {
         }
     }
 
-    // obtener (qi)²/npi = (fi-npi)²/npi
-    const x2 = [];
-    for (let i = 0; i < k; i++) {
-        x2.push(Math.pow(fi[i] - npi, 2) / npi);
-    }
     // obtener fi-npi
     const finpi = [];
     for (let i = 0; i < k; i++) {
         finpi.push((fi[i] - npi).toFixed(2));
     }
+
     // obtener (qi)²
     const qi = [];
     for (let i = 0; i < k; i++) {
         qi.push(Math.pow(fi[i] - npi, 2));
     }
 
+     // obtener (qi)²/npi = (fi-npi)²/npi
+     const x2 = [];
+     for (let i = 0; i < k; i++) {
+         x2.push(Math.pow(fi[i] - npi, 2) / npi);
+     }
+
     // obtener chi-cuadrada calculada: sumatoria de los x2[i]
     const sumatoria = x2.reduce((suma, x2iesimo) => suma += x2iesimo, 0);
 
-    // [[0-9],[fi, ...], npi, [x2, ...], sumatoria]
+    // [[0-9],[fi, ...], npi, [finpi], [qi], [x2, ...], sumatoria]
     return [digitosNaturales, fi, npi, finpi, qi, x2, sumatoria];
 }
 
@@ -86,6 +88,7 @@ function testChiCuadrado(pseudoAleatorios, p = '0.001') {
 
     resultado.push(mensajeConclusion);
 
-    // resultado = [[0-9],[fi, ...], [npi, ...], [x2, ...], sumatoria, mensajeConclusion]
+    // resultado = [[0-9],[fi, ...], npi, [finpi], [qi], [x2, ...], sumatoria, mensajeConclusion]
+    resultado
     return resultado;
 }

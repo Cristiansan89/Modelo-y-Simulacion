@@ -761,26 +761,32 @@
                 const conclusionPoker = ELEM_ID('hipotesisPokerIS');
 
                 let resultadoTest = testPoker(calculoFibonacci, seleccionPChi);
+                //console.log(resultadoTest);
+                //console.log(conclusionPoker);
 
+                // tabla base
                 const tablaPoker = ELEM_ID('tbodyPoker');
                 tablaPoker.innerHTML = '';
                 for (let i = 0; i < resultadoTest.categorias_base.length; i++) {
-                    tablaPoker.innerHTML += `<tr>
+                    tablaPoker.innerHTML += 
+                    `<tr>
                         <th scope="row">${resultadoTest.categorias_base[i]}</th>
                         <td class="text-center" scope="col">${resultadoTest.fo_base[i]}</td>
-                        <td class="text-right" scope="col"></td>
+                        <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_base[i]}</td>
                         <td class="text-right" scope="col">${resultadoTest.fe_base[i].toFixed(4)}</td>
                         <td class="text-right" scope="col">${resultadoTest.x2_base[i].toFixed(4)}</td>
                     </tr>`;
                 }
-                tablaPoker.innerHTML += `<tr>
+                tablaPoker.innerHTML += 
+                `<tr>
                     <th class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
-                    <td class="h5 text-center font-weight-bold table-warning" scope="col"></td>
+                    <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
                     <td class="table-secondary" colspan="2" scope="col"></td>
                     <td class="h5 text-right font-weight-bold table-danger" scope="col">${resultadoTest.sumatoria_base.toFixed(4)}</td>
                 </tr>`;
 
 
+                // tabla solapada
                 const tablaPokerIS = ELEM_ID('tbodyPokerIS');
                 tablaPokerIS.innerHTML = '';
 
@@ -788,14 +794,14 @@
                     tablaPokerIS.innerHTML += `<tr>
                         <td scope="row">${resultadoTest.categorias_solapada[i]}</th>
                         <td class="text-center" scope="col">${resultadoTest.fo_solapada[i]}</td>
-                        <td class="text-right" scope="col"></td>
+                        <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_solapada[i]}</td>
                         <td class="text-right" scope="col">${resultadoTest.fe_solapada[i].toFixed(4)}</td>
                         <td class="text-right" scope="col">${resultadoTest.x2_solapada[i].toFixed(4)}</td>
                     </tr>`;
                 }
                 tablaPokerIS.innerHTML += `<tr>
                     <td class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
-                    <td class="h5 text-center font-weight-bold table-warning" scope="col"></td>
+                    <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
                     <td class="table-secondary" colspan="2" scope="col"></td>
                     <td class="h5 text-right font-weight-bold table-danger" scope="col">${resultadoTest.sumatoria_solapada.toFixed(4)}</td>
                 </tr>`;
@@ -819,17 +825,12 @@
                 const conclusionTestChi = ELEM_ID('hipotesisChiCuadrado');
                 let resultadoTestChi = testChiCuadrado(calculoFibonacci, probabilidadChi);
 
+                //console.log(resultadoTestChi);
+
                 const tablaChi = ELEM_ID('tbodyChi');
                 tablaChi.innerHTML = '';
 
                 for (let i = 0; i < 10; i++) {
-                    console.log(resultadoTestChi[0][i]);
-                    console.log(resultadoTestChi[1][i]);
-                    console.log(resultadoTestChi[2]);
-                    console.log(resultadoTestChi[3]);
-                    console.log(resultadoTestChi[4]);
-                    console.log(resultadoTestChi[5][i]);
-
                     tablaChi.innerHTML += `
                     <tr">
                         <td scope="col" class="text-center">${resultadoTestChi[0][i]}</td>

@@ -70,7 +70,7 @@ function obtenerMarcas(pseudoAleatorios) {
         sumatoriaPorcentaje = Math.round(sumatoriaPorcentaje + porcien);
     }
 
-    return [digitosNaturales, fa, px, fx, cantMarca, intervalA, intervalB, fr, porcentaje, sumatoriaPorcentaje, min, max, n];
+    return [digitosNaturales, px, fx, fa, intervalA, intervalB, cantMarca, fr, porcentaje, sumatoriaPorcentaje, min, max, n];
 }
 
 function marcas(pseudoAleatorios) {

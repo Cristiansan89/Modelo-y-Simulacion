@@ -666,7 +666,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="mostrarMarca"> <!--style="display: none;"-->
+                                        <div id="mostrarMarca" style="display: none;">
                                             <!--Tabla Chi cuadrado -->
                                             <div class="p-2" style="min-height: 120px;">
                                                 <div class="card card-body mx-auto" style="width: 60%;">
@@ -680,18 +680,17 @@
                                                                 <th scope="col">P(x)</th>
                                                                 <th scope="col">F(x)</th>
                                                                 <th scope="col">F<sub>a</sub></th>
-                                                                <th scope="col">Intervalos</th>
+                                                                <th scope="col" colspan="2">Intervalos</th>
                                                                 <th scope="col">Cant. elem. x clase</th>
                                                                 <th scope="col">F<sub>r</sub></th>
-                                                                <th scope="col">Probabilidad</th>
                                                                 <th scope="col">Porcentaje</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody id="tbodyChi"></tbody>
+                                                        <tbody id="tbodyMarcas"></tbody>
                                                     </table>
                                                     <div class="h6 font-weight-bold text-black">
-                                                        <p>M&aacute;ximo: <span id="max">21</span></p>
                                                         <p>M&iacute;nimo: <span id="min">22</span></p>
+                                                        <p>M&aacute;ximo: <span id="max">21</span></p>
                                                         <p>Probabilidad de muestra (N): <span id="nMuestra"></span>
                                                         </p>
                                                     </div>
@@ -701,6 +700,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -762,8 +762,10 @@
     <script src="js/fibonacci.js"></script>
     <script src="js/poker.js"></script>
     <script src="js/chiCuadrado.js"></script>
+    <script src="js/marcas.js"></script>
 
     <!--Asignando los parametro de las funciones de js al html -->
+    <!--Fibonacci-->
     <script>
         /* Función obtener elemento por ID */
         const ELEM_ID = (id) => document.getElementById(id);
@@ -774,6 +776,7 @@
 
         let calculoFibonacci = [];
 
+        /* Función Fibonacci */
         function generarFibonacci() {
 
             // Reinicio la secuencia
@@ -782,6 +785,7 @@
             resultate.style.display = "block";
             resolution.style.display = "block";
             resolutionChi.style.display = "block";
+            btnMarca.disabled = false;
 
             const v1 = parseInt(ELEM_ID('v1').value);
             const v2 = parseInt(ELEM_ID('v2').value);
@@ -820,6 +824,7 @@
             return;
         }
 
+        /* Función Poker */
         function generarPoker() {
             const seleccionPChi = ELEM_ID('pChiCuadrado').value;
 
@@ -885,6 +890,7 @@
             }
         }
 
+        /* Función Chi Cuadrado */
         function generarChi() {
             const probabilidadChi = ELEM_ID('chiCuadrado').value;
 
@@ -928,6 +934,44 @@
                 return;
             }
         }
+
+        /* Función Marcas de clases*/
+        function generarMarca() {
+            let resultadoMarcas = marcas(calculoFibonacci);
+            const tablaMarcas = ELEM_ID('tbodyMarcas');
+            mostrarMarca.style.display = "block";
+
+            tablaMarcas.innerHTML = '';
+
+            for (let i = 0; i < 10; i++) {
+                tablaMarcas.innerHTML += `
+                    <tr">
+                        <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
+                        <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
+                    </tr>`;
+            }
+
+            tablaMarcas.innerHTML += `
+                    <tr">
+                        <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
+                        <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
+                    </tr>`;
+            const minimo = ELEM_ID("min");
+            const maximo = ELEM_ID("max");
+            const muestra = ELEM_ID("nMuestra");
+
+            minimo.textContent = resultadoMarcas[10];
+            maximo.textContent = resultadoMarcas[11];
+            muestra.textContent = resultadoMarcas[12];
+        }
+
     </script>
 </body>
 

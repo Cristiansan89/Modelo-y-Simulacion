@@ -70,7 +70,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseItem"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-sort-numeric-down" viewBox="0 0 16 16">
@@ -82,7 +82,7 @@
                     </svg>
                     <span>N&uacute;meros Aleatorios</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseItem" class="collapse" aria-labelledby="headingItem" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="fibonacci.html">Fibonacci</a>
                         <a class="collapse-item" href="congruencia.html">Congruencia</a>
@@ -731,7 +731,7 @@
                 nuevoInput.id = `semilla${i}`;
                 nuevoInput.classList.add('form-control');
                 nuevoInput.setAttribute('required', true);
-                nuevoInput.setAttribute('min',1);
+                nuevoInput.setAttribute('min', 1);
 
                 const seedLabelText = document.createElement('span');
                 seedLabelText.textContent = 'Ingrese la semilla V';
@@ -779,7 +779,7 @@
             const cantidad = ELEM_ID('cantidad');
 
             /* recibi la cantidad de semillas a generar para crear los campos */
-            if (isNaN(s)) {
+            if (Number.isNaN(s)) {
                 resultadoCongruencia.textContent = 'Falta ingresar la cantidad de semillas a generar.';
                 return;
             }
@@ -794,7 +794,7 @@
             /* capturar las semillas de los input generados */
             for (let j = 1; j <= s; j++) {
                 const semilla = parseInt(ELEM_ID(`semilla${j}`).value);
-                if (isNaN(semilla)) {
+                if (Number.isNaN(semilla)) {
                     resultadoCongruencia.textContent = 'Datos Incompletos, faltan semilla iniciales';
                     return;
                 } else {
@@ -849,7 +849,7 @@
             console.log(`k:${k}, m:${m}, a:${a}, c:${c}, i:${i}`);
 
             // no deben haber valores nulos
-            if (isNaN(k) || isNaN(m) || isNaN(a) || isNaN(c) || isNaN(i)) {
+            if (Number.isNaN(k) || Number.isNaN(m) || Number.isNaN(a) || Number.isNaN(c) || Number.isNaN(i)) {
                 resultadoCongruencia.textContent = 'Datos Incompletos, revisa para completar los parámetros';
                 return;
             }
@@ -892,8 +892,8 @@
                 const tablaPoker = ELEM_ID('tbodyPoker');
                 tablaPoker.innerHTML = '';
                 for (let i = 0; i < resultadoTest.categorias_base.length; i++) {
-                    tablaPoker.innerHTML += 
-                    `<tr>
+                    tablaPoker.innerHTML +=
+                        `<tr>
                         <th scope="row">${resultadoTest.categorias_base[i]}</th>
                         <td class="text-center" scope="col">${resultadoTest.fo_base[i]}</td>
                         <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_base[i]}</td>
@@ -901,8 +901,8 @@
                         <td class="text-right" scope="col">${resultadoTest.x2_base[i].toFixed(4)}</td>
                     </tr>`;
                 }
-                tablaPoker.innerHTML += 
-                `<tr>
+                tablaPoker.innerHTML +=
+                    `<tr>
                     <th class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
                     <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
                     <td class="table-secondary" colspan="2" scope="col"></td>
@@ -915,8 +915,8 @@
                 tablaPokerIS.innerHTML = '';
 
                 for (let i = 0; i < resultadoTest.categorias_solapada.length; i++) {
-                    tablaPokerIS.innerHTML += 
-                    `<tr>
+                    tablaPokerIS.innerHTML +=
+                        `<tr>
                         <td scope="row">${resultadoTest.categorias_solapada[i]}</th>
                         <td class="text-center" scope="col">${resultadoTest.fo_solapada[i]}</td>
                         <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_solapada[i]}</td>
@@ -924,8 +924,8 @@
                         <td class="text-right" scope="col">${resultadoTest.x2_solapada[i].toFixed(4)}</td>
                     </tr>`;
                 }
-                tablaPokerIS.innerHTML += 
-                `<tr>
+                tablaPokerIS.innerHTML +=
+                    `<tr>
                     <td class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
                     <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
                     <td class="table-secondary" colspan="2" scope="col"></td>

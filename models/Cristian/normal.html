@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Normal Distribution Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <canvas id="normalDistributionChart"></canvas>
+    <script>
+        const mu = 50; // Media
+        const sigma = 10; // Desviación estándar
+        const numPoints = 1000; // Cantidad de puntos
+
+        // Generar datos aleatorios
+        const data = [];
+        for (let i = 0; i < numPoints; i++) {
+            const x = mu + sigma * Math.random() * Math.sqrt(-2 * Math.log(Math.random()));
+            const density = (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-((x - mu) ** 2) / (2 * sigma ** 2));
+            data.push({ x, density });
+        }
+
+        // Preparar el gráfico
+        const ctx = document.getElementById('normalDistributionChart').getContext('2d');
+        const normalDistributionChart = new Chart(ctx, {
+            type: 'line', // Tipo de gráfico (línea, área, etc.)
+            data: {
+                labels: data.map(d => d.x), // Etiquetas para el eje X
+                datasets: [{
+                    label: 'Distribución normal',
+                    data: data.map(d => d.density), // Valores para el eje Y
+                    backgroundColor: 'rgba(0, 102, 255, 0.2)', // Color de fondo
+                    borderColor: 'rgba(0, 102, 255, 1)', // Color del borde
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true // Iniciar el eje Y en 0
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

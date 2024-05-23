@@ -71,7 +71,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseItem"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-sort-numeric-down" viewBox="0 0 16 16">
@@ -83,14 +83,13 @@
                     </svg>
                     <span>N&uacute;meros Aleatorios</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseItem" class="collapse" aria-labelledby="headingItem" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="fibonacci.html">Fibonacci</a>
                         <a class="collapse-item" href="congruencia.html">Congruencia</a>
                     </div>
                 </div>
             </li>
-
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -218,8 +217,7 @@
                     <!-- Test Poker -->
                     <div class="accordion-item">
                         <h2 class="accordion-header " id="headingOne">
-                            <button
-                                class="accordion-button collapsed text-gray-900 text-center font-weight-bold collapsed"
+                            <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                 aria-expanded="false" aria-controls="collapseOne">
                                 Test Poker
@@ -640,8 +638,77 @@
                         </div>
                     </div>
                     <!-- Fin Test Chi Cuadrada -->
+                    <!-- Test Marcas de Clases -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                Marcas de Clases
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
+                            aria-labelledby="headingThree">
+                            <div>
+                                <ul class="list-group">
+                                    <li class="list-group-item text-gray-900">
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Generar Tabla con Marcas de Clases</p>
+                                                </div>
+                                                <div class="text-center p-2">
+                                                    <button id="btnMarca" class="btn btn-primary btn-xl fw-bold p-2"
+                                                        onclick="generarMarca()" type="submit" style="width: 25%;"
+                                                        disabled>
+                                                        Generar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="mostrarMarca"> <!--style="display: none;"-->
+                                            <!--Tabla Chi cuadrado -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold">
+                                                        <p>Tabla</p>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center font-weight-bold table-secondary">
+                                                                <th scope="col">x</th>
+                                                                <th scope="col">P(x)</th>
+                                                                <th scope="col">F(x)</th>
+                                                                <th scope="col">F<sub>a</sub></th>
+                                                                <th scope="col">Intervalos</th>
+                                                                <th scope="col">Cant. elem. x clase</th>
+                                                                <th scope="col">F<sub>r</sub></th>
+                                                                <th scope="col">Probabilidad</th>
+                                                                <th scope="col">Porcentaje</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbodyChi"></tbody>
+                                                    </table>
+                                                    <div class="h6 font-weight-bold text-black">
+                                                        <p>M&aacute;ximo: <span id="max">21</span></p>
+                                                        <p>M&iacute;nimo: <span id="min">22</span></p>
+                                                        <p>Probabilidad de muestra (N): <span id="nMuestra"></span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="h6 font-weight-bold">
+                                                        <p>*F<sub>a</sub>: Frecuencia Acumulada</p>
+                                                        <p>*F<sub>r</sub>: Frecuencia Relativa</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fin Marcas de clases-->
                 </div>
-                <!-- Fin Test Poker y Chi Cuadrada-->
+                <!-- Fin Test Poker, Chi Cuadrada y Marcas de clases-->
             </div>
             <!-- End of Main Content -->
 
@@ -680,13 +747,13 @@
                 toggleIcon.removeClass("bi-chevron-left").addClass("bi-chevron-right");
                 toggleIcon.html(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16" style="color: white; vertical-align: middle;">
                 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-        </svg>`);
+                </svg>`);
             } else {
                 // Cambiar a icono de izquierda
                 toggleIcon.removeClass("bi-chevron-right").addClass("bi-chevron-left");
                 toggleIcon.html(`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16" style="color: white; vertical-align: middle;">
-        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
-    </svg>`);
+                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/>
+                </svg>`);
             }
         }
     </script>
@@ -724,7 +791,7 @@
             const resultado = ELEM_ID("fibonacciResultado");
             const cantidad = ELEM_ID("cantidad");
 
-            if (isNaN(v1) || isNaN(v2) || isNaN(A) || isNaN(n)) {
+            if (Number.isNaN(v1) || Number.isNaN(v2) || Number.isNaN(A) || Number.isNaN(n)) {
                 resultado.textContent = 'Datos Incompletos, revisa completar los parámetros';
                 return;
             }
@@ -774,8 +841,8 @@
                 const tablaPoker = ELEM_ID('tbodyPoker');
                 tablaPoker.innerHTML = '';
                 for (let i = 0; i < resultadoTest.categorias_base.length; i++) {
-                    tablaPoker.innerHTML += 
-                    `<tr>
+                    tablaPoker.innerHTML +=
+                        `<tr>
                         <th scope="row">${resultadoTest.categorias_base[i]}</th>
                         <td class="text-center" scope="col">${resultadoTest.fo_base[i]}</td>
                         <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_base[i]}</td>
@@ -783,8 +850,8 @@
                         <td class="text-right" scope="col">${resultadoTest.x2_base[i].toFixed(4)}</td>
                     </tr>`;
                 }
-                tablaPoker.innerHTML += 
-                `<tr>
+                tablaPoker.innerHTML +=
+                    `<tr>
                     <th class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
                     <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
                     <td class="table-secondary" colspan="2" scope="col"></td>

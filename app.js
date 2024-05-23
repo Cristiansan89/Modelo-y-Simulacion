@@ -16,7 +16,8 @@ const staticFiles = {
     '/js/fibonacci.js': 'js/fibonacci.js',
     '/js/congruencia.js': 'js/congruencia.js',
     '/js/poker.js': 'js/poker.js',
-    '/js/chiCuadrado.js': 'js/chiCuadrado.js'
+    '/js/chiCuadrado.js': 'js/chiCuadrado.js',
+    '/js/marcas.js': 'js/marcas.js'
 }
 
 for (const [route, filePath] of Object.entries(staticFiles)) {

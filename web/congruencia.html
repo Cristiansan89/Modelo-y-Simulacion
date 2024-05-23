@@ -219,7 +219,7 @@
                 </div>
                 <!-- /.container-fluid -->
 
-                <!-- Test Poker y Chi Cuadrada -->
+                <!-- Test Poker, Chi Cuadrada y Marcas de Clases -->
                 <div class="accordion container-fluid pt-4" id="accordionExample">
                     <!-- Test Poker -->
                     <div class="accordion-item">
@@ -428,7 +428,7 @@
                                             </div>
                                             <!-- Fin Resultado Test Inmediatas Superiores -->
                                         </div>
-                                        <!-- Fin oculto -->
+                                        <!-- Fin tabla poker -->
                                     </li>
                                 </ul>
                                 <!-- Fin Page Heading -->
@@ -646,9 +646,78 @@
                         </div>
                     </div>
                     <!-- Fin Test Chi Cuadrada -->
-                </div>
-                <!-- Fin Test Poker y Chi Cuadrada-->
+                    <!-- Marcas de Clases -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
+                                type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                aria-expanded="false" aria-controls="collapseThree">
+                                Marcas de Clases
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
+                            aria-labelledby="headingThree">
+                            <div>
+                                <ul class="list-group">
+                                    <li class="list-group-item text-gray-900">
+                                        <div class="p-2" style="min-height: 120px;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="h3 font-weight-bold">
+                                                    <p>Generar Tabla con Marcas de Clases</p>
+                                                </div>
+                                                <div class="text-center p-2">
+                                                    <button id="btnMarca" class="btn btn-primary btn-xl fw-bold p-2"
+                                                        onclick="generarMarca()" type="submit" style="width: 25%;"
+                                                        disabled>
+                                                        Generar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="mostrarMarca" style="display: none;">
+                                            <!--Tabla Chi cuadrado -->
+                                            <div class="p-2" style="min-height: 120px;">
+                                                <div class="card card-body mx-auto" style="width: 60%;">
+                                                    <div class="h4 text-center font-weight-bold">
+                                                        <p>Tabla</p>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                            <tr class="h5 text-center font-weight-bold table-secondary">
+                                                                <th scope="col">x</th>
+                                                                <th scope="col">P(x)</th>
+                                                                <th scope="col">F(x)</th>
+                                                                <th scope="col">F<sub>a</sub></th>
+                                                                <th scope="col" colspan="2">Intervalos</th>
+                                                                <th scope="col">Cant. elem. x clase</th>
+                                                                <th scope="col">F<sub>r</sub></th>
+                                                                <th scope="col">Porcentaje</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbodyMarcas"></tbody>
+                                                    </table>
+                                                    <div class="h6 font-weight-bold text-black">
+                                                        <p>M&iacute;nimo: <span id="min">22</span></p>
+                                                        <p>M&aacute;ximo: <span id="max">21</span></p>
+                                                        <p>Probabilidad de muestra (N): <span id="nMuestra"></span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="h6 font-weight-bold">
+                                                        <p>*F<sub>a</sub>: Frecuencia Acumulada</p>
+                                                        <p>*F<sub>r</sub>: Frecuencia Relativa</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fin Marcas de clases-->
 
+                </div>
+                <!-- Fin Test Poker, Chi Cuadrada y Marcas de clases-->
             </div>
             <!-- End of Main Content -->
             <!-- Footer -->
@@ -700,6 +769,7 @@
     <script src="js/congruencia.js"></script>
     <script src="js/poker.js"></script>
     <script src="js/chiCuadrado.js"></script>
+    <script src="js/marcas.js"></script>
 
     <!--Script para implementar la generación de n cantindad de semilla para congruencia fundamental-->
     <script>
@@ -763,6 +833,7 @@
 
         let calculoCongruencia = [];
 
+        /* Función Congruencia */
         function generarCongruencia() {
 
             // Reinicio la secuencia
@@ -771,6 +842,7 @@
             displayResultado.style.display = "block";
             resolution.style.display = "block";
             resolutionChi.style.display = "block";
+            btnMarca.disabled = false;
 
             const semillas = [];
             const s = parseInt(ELEM_ID('s').value);
@@ -872,6 +944,7 @@
             return;
         }
 
+        /* Función Poker */
         function generarPoker() {
             const seleccionPChi = ELEM_ID('pChiCuadrado').value;
 
@@ -938,6 +1011,7 @@
             }
         }
 
+        /* Función Chi Cuadrado */
         function generarChi() {
             const probabilidadChi = ELEM_ID('chiCuadrado').value;
 
@@ -979,6 +1053,44 @@
 
                 return;
             }
+        }
+
+        /* Función Marcas de clases*/
+        function generarMarca() {
+            console.log(calculoCongruencia);
+            let resultadoMarcas = marcas(calculoCongruencia);
+            const tablaMarcas = ELEM_ID('tbodyMarcas');
+            mostrarMarca.style.display = "block";
+
+            tablaMarcas.innerHTML = '';
+
+            for (let i = 0; i < 10; i++) {
+                tablaMarcas.innerHTML += `
+                    <tr">
+                        <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
+                        <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
+                    </tr>`;
+            }
+
+            tablaMarcas.innerHTML += `
+                    <tr">
+                        <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
+                        <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
+                    </tr>`;
+            const minimo = ELEM_ID("min");
+            const maximo = ELEM_ID("max");
+            const muestra = ELEM_ID("nMuestra");
+
+            minimo.textContent = resultadoMarcas[10];
+            maximo.textContent = resultadoMarcas[11];
+            muestra.textContent = resultadoMarcas[12];
         }
 
     </script>

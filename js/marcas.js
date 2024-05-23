@@ -63,13 +63,13 @@ function obtenerMarcas(pseudoAleatorios) {
     // obtener la frecuencia relativa
     const porcentaje = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let factorPorcien = Math.pow(10, 2);
-    let sumatoriaPorcentaje = 0;
+    let sumatoria = 0;
     for (let i = 0; i < fr.length; i++) {
         let porcien = fr[i] * 100;
         porcentaje[i] = Math.round(porcien * factorPorcien) / factorPorcien + "%";
-        sumatoriaPorcentaje = Math.round(sumatoriaPorcentaje + porcien);
+        sumatoria = sumatoria + porcien;
     }
-
+    let sumatoriaPorcentaje = Math.round(sumatoria);
     return [digitosNaturales, px, fx, fa, intervalA, intervalB, cantMarca, fr, porcentaje, sumatoriaPorcentaje, min, max, n];
 }
 

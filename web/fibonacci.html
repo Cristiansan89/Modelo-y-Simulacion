@@ -71,6 +71,26 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseIntegrador"
+                    aria-expanded="true" aria-controls="collapseFour">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-sort-numeric-down" viewBox="0 0 16 16">
+                        <path d="M12.438 1.668V7H11.39V2.684h-.051l-1.211.859v-.969l1.262-.906h1.046z" />
+                        <path fill-rule="evenodd"
+                            d="M11.36 14.098c-1.137 0-1.708-.657-1.762-1.278h1.004c.058.223.343.45.773.45.824 0 1.164-.829 1.133-1.856h-.059c-.148.39-.57.742-1.261.742-.91 0-1.72-.613-1.72-1.758 0-1.148.848-1.835 1.973-1.835 1.09 0 2.063.636 2.063 2.687 0 1.867-.723 2.848-2.145 2.848zm.062-2.735c.504 0 .933-.336.933-.972 0-.633-.398-1.008-.94-1.008-.52 0-.927.375-.927 1 0 .64.418.98.934.98" />
+                        <path
+                            d="M4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293z" />
+                    </svg>
+                    <span>Integrador</span>
+                </a>
+                <div id="collapseIntegrador" class="collapse" aria-labelledby="headingItem"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="integrador.html">Descripci&oacute;n</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseItem"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -650,175 +670,6 @@
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
                             aria-labelledby="headingThree">
                             <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
-                                            <p>Modelo Fibonnacci</p>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item text-gray-900">
-                                        <div class="p-2" style="min-height: 120px;">
-                                            <div class="card card-body mx-auto" style="width: 60%;">
-                                                <div class="h3 font-weight-bold">
-                                                    <p>Descripci&oacute;n</p>
-                                                </div>
-                                                <ul>
-                                                    <p class="text-black-100 font-weight-bold">Modelo de existencias</p>
-                                                    <li> Las empresas mantienen inventarios de materias primas y de
-                                                        productos terminados. Puesto que estos inventarios representan
-                                                        frecuentemente una considerable inversi&oacute;n, las decisiones
-                                                        con respecto a las cantidades de inventario son importantes. Los
-                                                        modelos de inventario y la descripci&oacute;n matem&aacute;tica
-                                                        de los sistemas de inventario constituyen una base para estas
-                                                        decisiones.
-                                                    </li>
-                                                    <hr>
-                                                    <li> cuando es necesario tener almacenado un conjunto de recursos
-                                                        &uacute;tiles, en alg&Uacute;n per&iacute;odo de tiempo, con el
-                                                        prop&oacute;sito de satisfacer unas determinadas necesidades.
-                                                        Estas necesidades se pueden tener cubiertas acumulando una gran
-                                                        cantidad de existencias, lo que conduce a tener inmovilizado un
-                                                        gran capital. Los factores a controlar en un modelo de
-                                                        inventario son:
-                                                    </li>
-                                                    <p>
-                                                        <b>a.</b> Momento en el que se decide realizar un nuevo pedido
-                                                        (punto de pedido).
-                                                    </p>
-                                                    <p>
-                                                        <b>b.</b> Cantidad a pedir en cada reabastecimiento.
-                                                    </p>
-
-                                                    <p>
-                                                        Se supone que tanto la demanda diaria del art&iacute;culo en
-                                                        cuesti&oacute;n como el tiempo de reaprovisionamiento (tiempo
-                                                        que transcurre desde que se hace la petici&oacute;n por parte de
-                                                        la empresa hasta que el pedido llega) son aleatorios.
-                                                    </p>
-
-                                                    <li>
-                                                        Por tanto, el procedimiento de simulaci&oacute;bastecimiento”,
-                                                        simular el modelo para un per&iacute;odo deter&iacute;odo, la
-                                                        cantidad de d&iacute;as con demanda insatisfecha, los costos
-                                                        totales, etc.
-                                                    </li>
-
-                                                    <li>
-                                                        Posteriormente, es posible hacer variar el “punto de
-                                                        pedido” y la “cantidad pedida en cada reabastecimiento”, y de
-                                                        esta forma calcular y analizar diferentes medidas en
-                                                        funci&oacute;n de ambas variables.
-                                                    </li>
-
-                                                    <li>
-                                                        As&iacute; pues, mediante la simulaci&oacute;n es posible
-                                                        realizar una aproximaci&oacute;n emp&iacute;rica a un modelo de
-                                                        inventario.
-                                                    </li>
-                                                    <p>
-                                                        <b>Ejercicio:</b> Simular la evoluci&oacute;n de las existencias
-                                                        de un almac&eacute;n durante un año, si se compra
-                                                        &uacute;nicamente la demanda de los 5 (cinco) &uacute;ltimos
-                                                        d&iacute;as cuando las existencias se encuentran por debajo de
-                                                        las 300 unidades. La demora en la entrega sigue la
-                                                        siguiente distribuci&oacute;n de probabilidades:
-
-                                                    </p>
-                                                    <li><b>P(x1)</b> = 0.4</li>
-                                                    <li><b>P(x2)</b> = 0.5</li>
-                                                    <li><b>P(x3)</b> = 0.1</li>
-
-                                                    <p>
-                                                        La demanda fluct&uacutea seg&uacuten una distribuci&oacute;n
-                                                        normal con una media de 150 unidades por d&iacute;a y una
-                                                        desviaci&oacute;n t&iacute;pica de 25.
-
-                                                    </p>
-                                                    <p class="text-black-100 font-weight-bold"> Determinar e informar:
-                                                    </p>
-
-                                                    <li>
-                                                        <b>a.</b> Por cada d&iacute;a: la existencia al principio del
-                                                        d&iacute;a, la demanda, la venta, la demanda insatisfecha, la
-                                                        existencia al final del d&iacute;a.
-                                                    </li>
-
-                                                    <li>
-                                                        <b>b.</b> Cada vez que se hace un pedido o se recibe una
-                                                        reposici&oacute;n: una leyenda y la cantidad que se pide o se
-                                                        recibe.
-                                                    </li>
-                                                    <li>
-                                                        <b>c.</b> Por fin de la simulaci&oacute;n: cu&aacute;ntas veces
-                                                        no se pudo satisfacer la demanda. Se debe emplear una existencia
-                                                        inicial de 2000 unidades.
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="p-2" style="min-height: 120px;">
-                                            <div class="card card-body mx-auto" style="width: 60%;">
-                                                <div class="h3 font-weight-bold">
-                                                    <p>Ingresar Parametros</p>
-                                                </div>
-                                                <div class="input-group p-2" style="width: 95%;">
-                                                    <span
-                                                        class="input-group-text font-weight-bold text-gray-900">Primera
-                                                        Semilla
-                                                        'V<sub>1</sub>'<b>1.</b> Elegir tres par&aacute;metros (enteros
-                                                        no negativos de
-                                                        3 a 7
-                                                        d&iacute;gitos): V<sub>1</sub>, V<sub>2</sub> y A.</p>
-                                                        <p><b>2.</b> V<sub>3</sub> = V<sub>2</sub> + V<sub>1</sub> + k *
-                                                            A,
-                                                            donde k
-                                                            es un par&aacute;metro real y
-                                                            entero que se define como:
-                                                            <br> 0 si V<sub>2</sub> + V<sub>1</sub>
-                                                            <= A <br> -1 en otro caso
-                                                        </p>
-                                                        <p><b>3.</b> Asignar V<sub>3</sub> a V<sub>2</sub>, a
-                                                            V<sub>1</sub>.
-                                                        </p>
-                                                        <p><b>4.</b> Repetir los pasos del 2 al 3 n veces, siendo n la
-                                                            cantidad de
-                                                            n&uacute;meros pseudoaleatorios a generar.
-                                                    </span>
-                                                    <input required type="number" min="1" class="form-control" id="v1">
-                                                </div>
-                                                <div class="input-group p-2" style="width: 95%;">
-                                                    <span
-                                                        class="input-group-text font-weight-bold text-gray-900">Segunda
-                                                        Semilla
-                                                        'V<sub>2</sub>'</span>
-                                                    <input required type="number" min="1" class="form-control" id="v2">
-                                                </div>
-                                                <div class="input-group p-2" style="width: 95%;">
-                                                    <span
-                                                        class="input-group-text font-weight-bold text-gray-900">Constante
-                                                        de
-                                                        Control 'A'</span>
-                                                    <input required type="number" min="1" class="form-control" id="A">
-                                                </div>
-                                                <div class="input-group p-2" style="width: 95%;">
-                                                    <span
-                                                        class="input-group-text font-weight-bold text-gray-900">Cantidad
-                                                        de
-                                                        Iteraciones 'n'</span>
-                                                    <input required type="number" min="100" class="form-control" id="n">
-                                                </div>
-                                                <div class="text-center p-2">
-                                                    <button class="btn btn-primary btn-xl fw-bold p-2"
-                                                        onclick="generarFibonacci()" type="submit"
-                                                        style="width: 25%;">Resolver</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
-
-
                                 <ul class="list-group">
                                     <li class="list-group-item text-gray-900">
                                         <div class="p-2" style="min-height: 120px;">

@@ -130,7 +130,7 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
+            <!-- Begin Main Content -->
             <div id="content">
 
                 <!-- Topbar -->
@@ -143,8 +143,8 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <!-- Descripción Integrador -->
+                <div class="container-fluid mb-4">
                     <!-- Page Heading -->
                     <ul class="list-group">
                         <li class="list-group-item">
@@ -155,11 +155,10 @@
                         <li class="list-group-item text-gray-900">
                             <div class="p-2" style="min-height: 120px;">
                                 <div class="card card-body mx-auto" style="width: 60%;">
-                                    <div class="h3 font-weight-bold">
-                                        <p>Descripci&oacute;n</p>
+                                    <div>
+                                        <p class="h3 font-weight-bold">Modelo de Existencia</p>
                                     </div>
                                     <ul>
-                                        <p class="text-black-100 font-weight-bold">Modelo de existencias</p>
                                         <p>
                                             <li> Las empresas mantienen inventarios de materias primas y de
                                                 productos terminados. Puesto que estos inventarios representan
@@ -258,9 +257,680 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.container-fluid -->
+                <!-- Fin descripción integrador -->
+
+                <!-- Begin Opciones Números Aleatorio -->
+                <div class="container-fluid mb-4">
+                    <!-- Page Heading -->
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                <p>N&uacute;meros Aleatorios</p>
+                            </div>
+                        </li>
+                        <li class="list-group-item text-gray-900">
+                            <div class="p-2" style="min-height: 120px;">
+                                <div class="card card-body mx-auto" style="width: 60%;">
+                                    <div>
+                                        <p class="h5 font-weight-bold">Seleccione un modelo de n&uacute;mero aleatorio
+                                        </p>
+                                    </div>
+                                    <div class="d-flex justify-content-center p-2">
+                                        <button type="button" id="btnFibonacci"
+                                            class="btn btn-outline-success font-weight-bold me-md-2">Fibonacci</button>
+                                        <button type="button" id="btnCongruencia"
+                                            class="btn btn-outline-success font-weight-bold">Congruencia</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End opciones Números Aleatorio -->
+
+                <!-- Begin Modelo Fibonacci -->
+                <div id="modFibonacci" style="display: none;">
+                    <div class="container-fluid mb-4">
+                        <!-- Page Heading -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                    <p>Modelo Fibonnacci</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-gray-900">
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Parametros</p>
+                                        </div>
+                                        <ul>
+                                            <li><b>V<sub>1</sub></b> Primer t&eacute;rmino de la semilla.
+                                            <li><b>V<sub>2</sub></b> Segundo t&eacute;rmino de la semilla.</li>
+                                            <li><b>A</b> Constante de control.</li>
+                                            <li><b>n</b> Cantidad de n&uacute;meros aleatorios que se generan.</li>
+                                            <li><b>*Array con n n&uacute;meros pseudoaleatorios.</b></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Descripci&oacute;n</p>
+                                        </div>
+                                        <ul>
+                                            <p><b>1.</b> Elegir tres par&aacute;metros (enteros no negativos de 3 a 7
+                                                d&iacute;gitos): V<sub>1</sub>, V<sub>2</sub> y A.</p>
+                                            <p><b>2.</b> V<sub>3</sub> = V<sub>2</sub> + V<sub>1</sub> + k * A, donde k
+                                                es un par&aacute;metro real y
+                                                entero que se define como:
+                                                <br> 0 si V<sub>2</sub> + V<sub>1</sub>
+                                                <= A <br> -1 en otro caso
+                                            </p>
+                                            <p><b>3.</b> Asignar V<sub>3</sub> a V<sub>2</sub>, a V<sub>1</sub>.</p>
+                                            <p><b>4.</b> Repetir los pasos del 2 al 3 n veces, siendo n la cantidad de
+                                                n&uacute;meros pseudoaleatorios a generar.</p>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Ingresar Parametros</p>
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Primera
+                                                Semilla
+                                                'V<sub>1</sub>'</span>
+                                            <input required type="number" min="1" class="form-control" id="v1">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Segunda
+                                                Semilla
+                                                'V<sub>2</sub>'</span>
+                                            <input required type="number" min="1" class="form-control" id="v2">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Constante de
+                                                Control 'A'</span>
+                                            <input required type="number" min="1" class="form-control" id="A">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Cantidad de
+                                                Iteraciones 'n'</span>
+                                            <input required type="number" min="100" class="form-control" id="n">
+                                        </div>
+                                        <div class="text-center p-2">
+                                            <button id="btnGenerarFibonacci" class="btn btn-primary btn-xl fw-bold p-2"
+                                                onclick="generarFibonacci()" type="submit"
+                                                style="width: 25%;">Resolver</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2" id="resultate" style="min-height: 120px; display: none;">
+                                    <div class="card card-body mx-auto text-gray-900"
+                                        style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Resultado (<span id="cantidad"></span> elementos)</p>
+                                        </div>
+                                        <p class="h5 font-weight-bold" id="fibonacciResultado"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Modelo Fibonacci -->
+
+                <!-- Begin Modelo Congruencia Fundamental -->
+                <div id="modCongruencia" style="display: none;">
+                    <div class="container-fluid mb-4">
+                        <!-- Page Heading -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                    <p>Modelo Congruencia Fundamental</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-gray-900">
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="text-black">
+                                            <h3>Parametros</h3>
+                                        </div>
+                                        <ul>
+                                            <li><b>V<sub>s</sub></b> Semilla iniciales.</li>
+                                            <li><b>*s Cantidad de semilla a cargar.</b></li>
+                                            <li><b>k</b> Semilla.</li>
+                                            <li><b>m</b> M&oacute;dulo.</li>
+                                            <li><b>a</b> Constante a.</li>
+                                            <li><b>c</b> Constante c.</li>
+                                            <li><b>i</b> Cantidad de Iteraci&oacute;n.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <h3>Descripci&oacute;n</h3>
+                                        <ul>
+                                            <p>Se basan en: V<sub>i+1</sub> = (a V<sub>i</sub> + c V<sub>i-k</sub>) mod
+                                                m</p>
+                                            <p>Donde V<sub>i</sub>, V<sub>i-k</sub>, a, c, k, m son enteros no negativos
+                                                y arbitrarios que cumplen las siguientes condiciones: V<sub>i</sub> >=
+                                                0, a >= 0, c >= 0, m > V<sub>i</sub>, m > a, m > 0.
+                                            </p>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <h4>Ingresar Parametros</h4>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Ingrese
+                                                Cantidad
+                                                de Semilla</span>
+                                            <input type="number" class="form-control" id="s" min="2" autocomplete="off"
+                                                required>
+                                        </div>
+                                        <div class="text-center p-2">
+                                            <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
+                                                style="width: 25%;" onclick="generarSemilla()">Generar</button>
+                                        </div>
+                                        <div id="contenedorSemilla"></div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Semilla
+                                                'k'</span>
+                                            <input type="number" required min="2" class="form-control" id="k">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">M&oacute;dulo
+                                                'm'</span>
+                                            <input type="number" required min="1" class="form-control" id="m">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Constante
+                                                'a'</span>
+                                            <input type="number" required min="1" class="form-control" id="a">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Constante
+                                                'c'</span>
+                                            <input type="number" required min="1" class="form-control" id="c">
+                                        </div>
+                                        <div class="input-group p-2" style="width: 95%;">
+                                            <span class="input-group-text font-weight-bold text-gray-900">Cantidad de
+                                                Iteraciones 'i'</span>
+                                            <input type="number" required min="100" class="form-control" id="i">
+                                        </div>
+                                        <div class="text-center">
+                                            <button id="btnGenerarChi" class="btn btn-primary btn-xl fw-bold p-2"
+                                                onclick="generarCongruencia()" type="submit"
+                                                style="width: 25%;">Resolver</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2" id="displayResultado" style="min-height: 120px; display: none;">
+                                    <div class="card card-body mx-auto text-gray-900"
+                                        style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Resultado (<span id="lenghtCongruencia"></span> elementos)</p>
+                                        </div>
+                                        <p class="h5 font-weight-bold" id="congruenciaResultado"></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Modelo Congruencia Fundamental -->
+
+                <!-- Begin Opciones de Test -->
+                <div id="opcTest" style="display: none;">
+                    <div class="container-fluid mb-4">
+                        <!-- Page Heading -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                    <p>Test</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-gray-900">
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div>
+                                            <p class="h5 font-weight-bold">Seleccione un m&eacute;todo de test
+                                            </p>
+                                        </div>
+                                        <div class="d-flex justify-content-center p-2">
+                                            <button type="button" id="btnPoker"
+                                                class="btn btn-outline-danger font-weight-bold me-md-2">Test
+                                                Poker</button>
+                                            <button type="button" id="btnChi"
+                                                class="btn btn-outline-danger font-weight-bold">Chi Cuadrada</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Opciones de Test -->
+
+                <!-- Begin Test Poker -->
+                <div id="opcPoker" style="display: none;">
+                    <div class="container-fluid mb-4">
+                        <!-- Page Heading -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                    <p>Test Poker</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-gray-900">
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Descripci&oacute;n</p>
+                                        </div>
+                                        <ul>
+                                            <li>Para aplicar la prueba del p&oacute;quer:</li>
+                                            <li><b>a.</b>Escogemos primeramente un nivel de significancia,
+                                                &#945;, y
+                                                enumeramos el grado de repetici&oacute;n de los
+                                                d&iacute;gitos.
+                                            </li>
+                                            <li><b>b. </b>A continuaci&oacute;n, calculamos la probabilidad
+                                                de
+                                                aparici&oacute;n de cada una de esas combinaciones.</li>
+                                            <li><b>c. </b>Luego, se examina la frecuencia con que se
+                                                presenta
+                                                cada
+                                                combinaci&oacute;n en la secuencia de n&uacute;meros
+                                                estudiados.
+                                            </li>
+                                            <li><b>d. </b>Posteriormente, se puede comparar la frecuencia
+                                                observada con que
+                                                aparece cada combinaci&oacute;n con la frecuencia esperada,
+                                                mediante la
+                                                prueba ji cuadrada. Para comprobar que los datos perencen a
+                                                una
+                                                distribuci&oacute;n uniforme, se debe cumplir la
+                                                condici&oacute;n de que
+                                                X<sup>2</sup> calculada < x<sup>2</sup> * &#945;/2, g.l.
+                                                    &#8594;
+                                                    se obtiene
+                                                    de la
+                                                    tabla de la distribuci&oacute;n Chi-Cuadrada, con un
+                                                    nivel
+                                                    de
+                                                    significancia &#945; y los grados de libertad g.l. = N°
+                                                    de
+                                                    par&acute;metros
+                                                    de la distribuci&oacute;n de probabilidad a probar menos
+                                                    l.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Hip&oacute;tesis</p>
+                                        </div>
+                                        <ul>
+                                            <li>H<sub>0</sub> si X<sup>2</sup> confiabilidad > &#931;
+                                                (O<sub>i</sub> -
+                                                E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se aprueba que
+                                                los
+                                                d&iacute;gitos est&aacute;n ordenados al azar.
+                                            </li>
+                                            <li>H<sub>1</sub> si X<sup>2</sup> confiabilidad < &#931; (O<sub>
+                                                    i</sub> -
+                                                    E<sub>i</sub>)<sup>2</sup> / E<sub>i</sub>; se rechaza
+                                                    que
+                                                    los
+                                                    d&iacute;gitos est&aacute;n ordenados al azar.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h3 font-weight-bold">
+                                                <p>Generar el Test Poker</p>
+                                            </div>
+                                            <div>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    id="pChiCuadrado">
+                                                    <option value="-1" selected>Seleccione la probabilidad
+                                                    </option>
+                                                    <option value="0.001">0,001</option>
+                                                    <option value="0.0025">0,0025</option>
+                                                    <option value="0.0005">0,0005</option>
+                                                    <option value="0.01">0,01</option>
+                                                    <option value="0.025">0,025</option>
+                                                    <option value="0.05">0,05</option>
+                                                    <option value="0.1">0,1</option>
+                                                    <option value="0.15">0,15</option>
+                                                    <option value="0.2">0,2</option>
+                                                    <option value="0.25">0,25</option>
+                                                    <option value="0.3">0,3</option>
+                                                    <option value="0.35">0,35</option>
+                                                    <option value="0.4">0,4</option>
+                                                    <option value="0.45">0,45</option>
+                                                    <option value="0.5">0,5</option>
+                                                </select>
+                                            </div>
+                                            <div class="text-center p-2 mt-2">
+                                                <button class="btn btn-primary btn-xl fw-bold p-2"
+                                                    onclick="generarPoker()" type="submit" style="width: 25%;">
+                                                    Generar Poker
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Oculto -->
+                                <!--Tabla Poker-->
+                                <div id="mostrarTablaPoker" style="display: none;">
+                                    <!--Tabla del Analisis Poker -->
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h4 text-center font-weight-bold">
+                                                <p>Tabla del An&aacute;lisis del Poker</p>
+                                            </div>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="h5 text-center table-secondary">
+                                                        <th scope="col">Categor&iacute;a</th>
+                                                        <th scope="col">O(i)</th>
+                                                        <th scope="col">Probabilidad</th>
+                                                        <th scope="col">E(i)</th>
+                                                        <th scope="col">X<sup>2</sup></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyPoker">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!--Fin Tabla de Analisis Poker -->
+                                    <!--Resultado Test Poker -->
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h4 text-left font-weight-bold ">
+                                                <p>Resultado del Test</p>
+                                            </div>
+                                            <div>
+                                                <ul>
+                                                    <li>Las categorias con frecuencia esperada menor a 5 se
+                                                        suman a las categorias inmediatas superiores, a su
+                                                        vez se suman sus frecuencias observadas.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fin Resultado Test Poker -->
+                                    <!--Tabla Inmediatas Superiores -->
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h4 text-center font-weight-bold ">
+                                                <p>Tabla Inmediatas Superiores</p>
+                                            </div>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="h5 text-center table-secondary">
+                                                        <th scope="col">Categor&iacute;a</th>
+                                                        <th scope="col">O(i)</th>
+                                                        <th scope="col">Probabilidad</th>
+                                                        <th scope="col">E(i)</th>
+                                                        <th scope="col">X<sup>2</sup></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyPokerIS">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- Fin Tabla Inmediatas Superiores -->
+                                    <!-- Resultado Test Inmediatas Superiores -->
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h4 text-left font-weight-bold ">
+                                                <p>Resultado del Test en Inmediatas Superiores</p>
+                                            </div>
+                                            <div>
+                                                <ul>
+                                                    <li>Para el test de poker se redujeron las categor&iacute;as
+                                                        a inmediatas superior.
+                                                    </li>
+                                                    <li>
+                                                        <b>
+                                                            <span class="bg-light" id="hipotesisPokerIS"></span>
+                                                        </b>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fin Resultado Test Inmediatas Superiores -->
+                                </div>
+                                <!-- Fin oculto -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Test Poker -->
+
+                <!-- Begin Chi Cuadrada -->
+                <div id="opcChi" style="display: none;">
+                    <div class="container-fluid mb-4">
+                        <!-- Page Heading -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                    <p>Test Chi Cuadrada</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-gray-900">
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Descripci&oacute;n</p>
+                                        </div>
+                                        <ul>
+                                            <li>La prueba de Chi-cuadrado se usa para comparar los resultados
+                                                observados de los resultados esperados por una hip&oacute;tesis
+                                                y si la desviaci&oacute;n obtenida no es significativa y puede
+                                                atribuirse al azar o es significativa y otras variables
+                                                diferentes al azar est&aacute;n influyendo en nuestros
+                                                resultados.
+                                            </li>
+                                            <li> Sea A un fen&oacute;meno aleatorio formado por los sucesos
+                                                elementales (o casos posibles) A<sub>1</sub>; A<sub>2</sub>;
+                                                ...; A<sub>k</sub>;
+                                            </li>
+                                            <ul style="list-style-type: none; padding: 0;">
+                                                <li style="margin-right: 5px;">
+                                                    <span style="font-weight: bold; margin-right: 24px;">(I)</span>
+                                                    A = A<sub>1</sub> + A<sub>2</sub> + ... + A<sub>k</sub>;
+                                                </li>
+                                                <li style="margin-right: 5px;">
+                                                    <span style="font-weight: bold; margin-right: 18px;">(II)</span>
+                                                    P(A<sub>i</sub>) = p<sub>i</sub> &#8805; 0; &#8704;i = 1;
+                                                    2; ....; k,
+                                                </li>
+                                                <li style="margin-right: 5px;" class="mp-2 mt-2">
+                                                    <span style="font-weight: bold; margin-right: 20px;">(III)</span>
+                                                    <sum style="position: relative;">
+                                                        <span style="font-size: 25px;">&Sigma;</span>
+                                                        <sup style="position: absolute; top: -10px; left: 3px;">k</sup>
+                                                        <sub style="position: absolute; left: -2px; font-size: 10px;">i
+                                                            = 1</sub>
+                                                    </sum>
+                                                    p<sub>i</sub> = 1
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                El m&eacute;todo de control por <sup>2</sup> se expone mediante
+                                                el siguiente teorema:
+                                                <br>
+                                                "La variable aleatoria:
+                                            </li>
+                                            <ul style="list-style-type: none; padding: 0;">
+                                                <li style="margin-left: 200px;">
+                                                    <span style="margin-right: 24px;">
+                                                        <i>X</i><sup>2</sup> =
+                                                        <sum style="position: relative;">
+                                                            <span style="font-size: 25px;">&Sigma;</span>
+                                                            <sup
+                                                                style="position: absolute; top: -10px; left: 3px;">k</sup>
+                                                            <sub
+                                                                style="position: absolute; left: -2px; font-size: 10px;">i
+                                                                = 1</sub>
+                                                        </sum>
+                                                        (<span style="font-size: smaller;">f<sub>i</sub> - n
+                                                            &#183;
+                                                            p<sub>i</sub></span>)<sup>2</sup> / (n &#183;
+                                                        p<sub>i</sub>)
+                                                    </span> <b>(1)</b>
+                                                </li>
+                                            </ul>
+                                            <li>
+                                                Converge a la distribuci&oacute;n <sup>2</sup> con (k-1) grados
+                                                de libertad, cuando el n&uacute;mero n de pruebas tiende a
+                                                infinito".
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div class="h3 font-weight-bold">
+                                            <p>Hip&oacute;tesis</p>
+                                        </div>
+                                        <ul>
+                                            <span>Se desea probar la hip&oacute;tesis:</span>
+                                            <li class="pt-2">
+                                                <b>H<sub>0</sub>:</b> las distintas probabilidades de los
+                                                sucesos
+                                                A<sub>i</sub> son, P(A<sub>i</sub>) = p<sub>i</sub> ; &#8704;i =
+                                                1; 2; ....; k, donde cada p<sub>i</sub> es un valor
+                                                num&eacute;rico conocido, en el intervalo (0,1).
+                                            </li>
+                                            <li>
+                                                <b>H<sub>1</sub>:</b> P(A<sub>i</sub>) &#8800; p<sub>i</sub>
+                                                para alg&uacute;n i = 1; 2;...; k
+                                            </li>
+                                            <br>
+                                            <li>Si H<sub>0</sub> es verdadero, la variable aleatoria dada por la
+                                                expresi&oacute;n (1) sigue, para n grande, una
+                                                distribuci&oacute;n <i>X</i><sup>2</sup> con k-1 grados de
+                                                libertad. Se aceptará H<sub>0</sub>, si <i>X</i><sup>2</sup>
+                                                < <i>X</i><sup>2</sup><sub>E</sub>, donde el segundo miembro es
+                                                    el valor de <i>X</i><sup>2</sup> dado por la tablas para un
+                                                    nivel de significaci&oacute;n E y (k-1) grados de libertad.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h3 font-weight-bold">
+                                                <p>Generar el Test Chi Cuadrada</p>
+                                            </div>
+                                            <div>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    id="chiCuadrado">
+                                                    <option value="-1" selected>Seleccione la probabilidad
+                                                    </option>
+                                                    <option value="0.001">0,001</option>
+                                                    <option value="0.0025">0,0025</option>
+                                                    <option value="0.0005">0,0005</option>
+                                                    <option value="0.01">0,01</option>
+                                                    <option value="0.025">0,025</option>
+                                                    <option value="0.05">0,05</option>
+                                                    <option value="0.1">0,1</option>
+                                                    <option value="0.15">0,15</option>
+                                                    <option value="0.2">0,2</option>
+                                                    <option value="0.25">0,25</option>
+                                                    <option value="0.3">0,3</option>
+                                                    <option value="0.35">0,35</option>
+                                                    <option value="0.4">0,4</option>
+                                                    <option value="0.45">0,45</option>
+                                                    <option value="0.5">0,5</option>
+                                                </select>
+                                            </div>
+                                            <div class="text-center p-2 mt-2">
+                                                <button class="btn btn-primary btn-xl fw-bold p-2"
+                                                    onclick="generarChi()" type="submit"
+                                                    style="width: 25%;">Generar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="mostrarChi" style="display: none;">
+                                    <!--Tabla Chi cuadrado -->
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h4 text-center font-weight-bold">
+                                                <p>Tabla Chi Cuadrado</p>
+                                            </div>
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="h5 text-center font-weight-bold table-secondary">
+                                                        <th scope="col">D&iacute;gitos</th>
+                                                        <th scope="col">f<sub>i</sub></th>
+                                                        <th scope="col">n &#183; p<sub>i</sub></th>
+                                                        <th scope="col">f<sub>i</sub> - n &#183; p<sub>i</sub>
+                                                        </th>
+                                                        <th scope="col">(Q<sub>i</sub>)<sup>2</sup></th>
+                                                        <th scope="col">(Q<sub>i</sub>)<sup>2</sup>/n &#183;
+                                                            p<sub>i</sub></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbodyChi"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <!-- Fin tabla chi cuadrado -->
+                                    <!-- Resultado Test Chi cuadrado -->
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div class="h4 text-left font-weight-bold ">
+                                                <p>Resultado del Test Chi Cuadrada</p>
+                                            </div>
+                                            <div>
+                                                <ul>
+                                                    <li>
+                                                        <b>
+                                                            <span class="bg-light" id="hipotesisChiCuadrado">
+                                                            </span>
+                                                        </b>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fin resultado chi cuadrado -->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End Chi Cuadrada -->
+
+                <!-- Begin Marca de Clases -->
+                <div id="marcaClases" style="display: none;">
+
+                </div>
+                <!-- End Marca de Clases -->
+
             </div>
-            <!-- End of Main Content -->
+            <!-- End Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
@@ -307,6 +977,457 @@
             }
         }
     </script>
+
+    <!--Path de las Funciones -->
+    <script src="js/fibonacci.js"></script>
+    <script src="js/congruencia.js"></script>
+    <script src="js/poker.js"></script>
+    <script src="js/chiCuadrado.js"></script>
+
+    <!--Asignando los parametro de las funciones de js al html -->
+
+    <script>
+        /* Función obtener elemento por ID */
+        const ELEM_ID = (id) => document.getElementById(id);
+        /* Función convertir a entero */
+        const PARSE_INT = (value) => Number.parseInt(value);
+        /* Función convertir array resultado a cadena string para html */
+        const MAKE_CADENA = (array) => array.join().toLocaleString().replaceAll(',', ', \n');
+
+        let calculoFibonacci = [];
+        let calculoCongruencia = [];
+
+        /* Begin boton opciones modelo */
+        var modeloFibonacci = ELEM_ID("modFibonacci");
+        var modeloCongruencia = ELEM_ID("modCongruencia");
+
+        function mostrarFibonacci() {
+            modeloFibonacci.style.display = "block";
+            modeloCongruencia.style.display = "none";
+        }
+
+        function mostrarCongruencia() {
+            modeloFibonacci.style.display = "none";
+            modeloCongruencia.style.display = "block";
+        }
+
+        var bottonFibonacci = ELEM_ID("btnFibonacci");
+        var bottonCongruencia = ELEM_ID("btnCongruencia");
+
+        bottonFibonacci.addEventListener("click", mostrarFibonacci);
+        bottonCongruencia.addEventListener("click", mostrarCongruencia);
+        /* End boton opciones modelo */
+
+        /* Función Fibonacci */
+        function generarFibonacci() {
+            // bloquear los botones de selección n° aleatorios
+            var blo_btnFibonacci = ELEM_ID("btnFibonacci");
+            var blo_btnCongruencia = ELEM_ID("btnCongruencia");
+            blo_btnFibonacci.disabled = true;
+            blo_btnCongruencia.disabled = true;
+
+            // Reinicio la secuencia
+            calculoFibonacci = []
+
+            resultate.style.display = "block";
+
+            const v1 = parseInt(ELEM_ID('v1').value);
+            const v2 = parseInt(ELEM_ID('v2').value);
+            const A = parseInt(ELEM_ID('A').value);
+            const n = parseInt(ELEM_ID('n').value);
+
+            const resultado = ELEM_ID("fibonacciResultado");
+            const cantidad = ELEM_ID("cantidad");
+
+            if (Number.isNaN(v1) || Number.isNaN(v2) || Number.isNaN(A) || Number.isNaN(n)) {
+                resultado.textContent = 'Datos Incompletos, revisa completar los parámetros';
+                return;
+            }
+
+            // A debe ser mayor que v1 y v2
+            if (!(A > v1 && A > v2)) {
+                resultado.textContent = 'La constante de control debe ser mayor que las semillas para iniciar.';
+                return;
+            }
+
+            // n debe ser >= 100
+            if (n < 100) {
+                resultado.textContent = 'La cantidad de iteraciones debe ser mayor que 100 para iniciar.';
+                return;
+            }
+
+            let secuencia = nFibonacci(v1, v2, A, n);
+
+            if (Array.isArray(secuencia)) {
+                resultado.textContent = MAKE_CADENA(secuencia);
+                cantidad.textContent = secuencia.length;
+                calculoFibonacci.push(...secuencia); // guardo la nueva secuencia
+                // Mostrar opciones test
+                var opcionTest = ELEM_ID("opcTest");
+                opcionTest.style.display = "block";
+            } else {
+                resultado.textContent = secuencia; // contiene string error!
+            }
+            return;
+        }
+
+        /* Función Generar Semilla Congruencia */
+        function generarSemilla() {
+            // bloquear los botones de selección n° aleatorios
+            var blo_btnFibonacci = ELEM_ID("btnFibonacci");
+            var blo_btnCongruencia = ELEM_ID("btnCongruencia");
+            blo_btnFibonacci.disabled = true;
+            blo_btnCongruencia.disabled = true;
+
+            const s = ELEM_ID('s').value;
+            const contenedorSemilla = ELEM_ID('contenedorSemilla');
+
+            contenedorSemilla.innerHTML = ' ';
+
+            //s cantidad de semilla a generar
+            for (let i = 1; i <= s; i++) {
+                //Generando el input y aplicando bootstrap 
+                const groupInput = document.createElement('div');
+                groupInput.classList.add('input-group', 'p-2');
+                groupInput.style.width = '95%';
+
+                const labelSpan = document.createElement('span');
+                labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
+                labelSpan.textContent = `Semilla V`;
+
+                const subIndice = document.createElement('sub');
+                subIndice.textContent = i;
+
+                labelSpan.appendChild(subIndice);
+
+
+                const nuevoInput = document.createElement('input');
+                nuevoInput.type = 'number';
+                nuevoInput.id = `semilla${i}`;
+                nuevoInput.classList.add('form-control');
+                nuevoInput.setAttribute('required', true);
+                nuevoInput.setAttribute('min', 1);
+
+                const seedLabelText = document.createElement('span');
+                seedLabelText.textContent = 'Ingrese la semilla V';
+
+                const label = document.createElement('label');
+                label.setAttribute('for', `semilla${i}`);  // Use the current `i` for dynamic ID
+
+                // Combine seedLabelText and subIndice for clearer label content
+                label.textContent = seedLabelText.textContent;  // Set label text directly
+
+                groupInput.appendChild(labelSpan);  // Append labelSpan first
+                groupInput.appendChild(nuevoInput); // Then append nuevoInput
+
+                // Assuming you want to append groupInput to a specific element:
+                contenedorSemilla.appendChild(groupInput);
+            }
+            return;
+        }
+
+        /* Función Congruencia */
+        function generarCongruencia() {
+
+            // Reinicio la secuencia
+            calculoCongruencia = []
+
+            displayResultado.style.display = "block";
+
+            const semillas = [];
+            const s = parseInt(ELEM_ID('s').value);
+
+            const resultadoCongruencia = ELEM_ID('congruenciaResultado');
+            const cantidad = ELEM_ID('lenghtCongruencia');
+
+            /* recibi la cantidad de semillas a generar para crear los campos */
+            if (Number.isNaN(s)) {
+                resultadoCongruencia.textContent = 'Falta ingresar la cantidad de semillas a generar.';
+                return;
+            }
+
+            /* hay al menos una campo semilla creado? */
+            const hayInputsGenerados = ELEM_ID("semilla1");
+            if (hayInputsGenerados === null) {
+                resultadoCongruencia.textContent = 'Debe generar los campos semilla y completarlos.';
+                return;
+            }
+
+            /* capturar las semillas de los input generados */
+            for (let j = 1; j <= s; j++) {
+                const semilla = parseInt(ELEM_ID(`semilla${j}`).value);
+                if (Number.isNaN(semilla)) {
+                    resultadoCongruencia.textContent = 'Datos Incompletos, faltan semilla iniciales';
+                    return;
+                } else {
+                    semillas.push(semilla);
+                }
+            }
+
+            const k = parseInt(ELEM_ID('k').value);
+            const m = parseInt(ELEM_ID('m').value);
+            const a = parseInt(ELEM_ID('a').value);
+            const c = parseInt(ELEM_ID('c').value);
+            const i = parseInt(ELEM_ID('i').value);
+
+            /* validaciones de los parametros k, m, a, c, i */
+            // K <= cantidad de semillas
+            if (k > semillas.length) {
+                resultadoCongruencia.textContent = 'K debe ser menor o igual a la cantidad de semillas.';
+                return;
+            }
+
+            // las semillas, k, a, c, m, i, deben ser enteros no negativos.
+            let args = [...semillas, k, a, c, m, i];
+            for (let i = 0; i < args.length; i++) {
+                if (!(Number.isInteger(args[i]) && args[i] > 0)) {
+                    resultadoCongruencia.textContent = 'los parametros deben ser enteros no negativos para iniciar.';
+                    return;
+                };
+            }
+
+            // M > semillas[i]
+            for (let i = 0; i < semillas.length; i++) {
+                if (!(m > semillas[i])) {
+                    resultadoCongruencia.textContent = 'el valor M debe ser superior a cada semilla para iniciar.';
+                    return;
+                }
+            }
+
+            // si semillas.length < 2 ERROR, necesito al menos 2 semillas.
+            if (semillas.length < 2) {
+                resultadoCongruencia.textContent = 'ERROR: se necesitan minimo 2 semillas para iniciar.';
+                return;
+            }
+
+            // M > A
+            if (!(m > a)) {
+                resultadoCongruencia.textContent = 'ERROR: M debe ser mayor que A para iniciar.';
+                return;
+            }
+
+            // comprobacion por consola del navegador
+            console.log(`semillas: ${semillas}`);
+            console.log(`k:${k}, m:${m}, a:${a}, c:${c}, i:${i}`);
+
+            // no deben haber valores nulos
+            if (Number.isNaN(k) || Number.isNaN(m) || Number.isNaN(a) || Number.isNaN(c) || Number.isNaN(i)) {
+                resultadoCongruencia.textContent = 'Datos Incompletos, revisa para completar los parámetros';
+                return;
+            }
+
+            // i debe ser >= 100
+            if (i < 100) {
+                resultadoCongruencia.textContent = 'La cantidad de iteraciones debe ser mayor que 100 para iniciar.';
+                return;
+            }
+
+            let secuencia = nCongruencia(semillas, k, a, c, m, i);
+
+            if (Array.isArray(secuencia)) {
+                resultadoCongruencia.textContent = MAKE_CADENA(secuencia);
+                cantidad.textContent = secuencia.length;
+                calculoCongruencia.push(...secuencia);
+                // Mostrar opciones test
+                var opcionTest = ELEM_ID("opcTest");
+                opcionTest.style.display = "block";
+            } else {
+                resultadoCongruencia.textContent = secuencia;
+            }
+            return;
+        }
+
+        /* Begin boton opciones test */
+        var opcionPoker = ELEM_ID("opcPoker");
+        var opcionChi = ELEM_ID("opcChi");
+
+        function mostrarPoker() {
+            opcionPoker.style.display = "block";
+            opcionChi.style.display = "none";
+        }
+
+        function mostrarChiCuadrada() {
+            opcionPoker.style.display = "none";
+            opcionChi.style.display = "block";
+        }
+
+        var bottonPoker = ELEM_ID("btnPoker");
+        var bottonChi = ELEM_ID("btnChi");
+
+        bottonPoker.addEventListener("click", mostrarPoker);
+        bottonChi.addEventListener("click", mostrarChiCuadrada);
+        /* End boton opciones test */
+
+        /* Función Poker */
+        function generarPoker() {
+            const seleccionPChi = ELEM_ID('pChiCuadrado').value;
+
+            if (seleccionPChi >= 0) {
+                // Bloquear boton resultado fibonacci y congruencia
+                var blo_btnGenerarFibonacci = ELEM_ID("btnGenerarFibonacci");
+                blo_btnGenerarFibonacci.disabled = true;
+                var blo_btnGenerarChi = ELEM_ID("btnGenerarChi");
+                blo_btnGenerarChi.disabled = true;
+
+                // Bloquear boton test poker y chi
+                var blo_btnPoker = ELEM_ID("btnPoker");
+                var blo_btnChi = ELEM_ID("btnChi");
+                blo_btnPoker.disabled = true;
+                blo_btnChi.disabled = true;
+
+                mostrarTablaPoker.style.display = "block";
+                const conclusionPoker = ELEM_ID('hipotesisPokerIS');
+
+                let resultadoTest = [];
+
+                if (calculoFibonacci.length > 0) {
+                    resultadoTest = testPoker(calculoFibonacci, seleccionPChi);
+                } else if (calculoCongruencia.length > 0) {
+                    resultadoTest = testPoker(calculoCongruencia, seleccionPChi);
+                }
+
+                // tabla base
+                const tablaPoker = ELEM_ID('tbodyPoker');
+                tablaPoker.innerHTML = '';
+                for (let i = 0; i < resultadoTest.categorias_base.length; i++) {
+                    tablaPoker.innerHTML +=
+                        `<tr>
+                        <th scope="row">${resultadoTest.categorias_base[i]}</th>
+                        <td class="text-center" scope="col">${resultadoTest.fo_base[i]}</td>
+                        <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_base[i]}</td>
+                        <td class="text-right" scope="col">${resultadoTest.fe_base[i].toFixed(4)}</td>
+                        <td class="text-right" scope="col">${resultadoTest.x2_base[i].toFixed(4)}</td>
+                    </tr>`;
+                }
+                tablaPoker.innerHTML +=
+                    `<tr>
+                    <th class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
+                    <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
+                    <td class="table-secondary" colspan="2" scope="col"></td>
+                    <td class="h5 text-right font-weight-bold table-danger" scope="col">${resultadoTest.sumatoria_base.toFixed(4)}</td>
+                </tr>`;
+
+                // tabla solapada
+                const tablaPokerIS = ELEM_ID('tbodyPokerIS');
+                tablaPokerIS.innerHTML = '';
+
+                for (let i = 0; i < resultadoTest.categorias_solapada.length; i++) {
+                    tablaPokerIS.innerHTML += `<tr>
+                      <td scope="row">${resultadoTest.categorias_solapada[i]}</th>
+                      <td class="text-center" scope="col">${resultadoTest.fo_solapada[i]}</td>
+                      <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_solapada[i]}</td>
+                      <td class="text-right" scope="col">${resultadoTest.fe_solapada[i].toFixed(4)}</td>
+                      <td class="text-right" scope="col">${resultadoTest.x2_solapada[i].toFixed(4)}</td>
+                  </tr>`;
+                }
+                tablaPokerIS.innerHTML += `<tr>
+                  <td class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
+                  <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
+                  <td class="table-secondary" colspan="2" scope="col"></td>
+                  <td class="h5 text-right font-weight-bold table-danger" scope="col">${resultadoTest.sumatoria_solapada.toFixed(4)}</td>
+                </tr>`;
+
+                // Conclusion Poker
+                conclusionPoker.textContent = resultadoTest.mensaje_conclusion;
+
+
+                return;
+            }
+        }
+
+        /* Función Chi Cuadrado */
+        function generarChi() {
+            const probabilidadChi = ELEM_ID('chiCuadrado').value;
+
+            if (probabilidadChi >= 0) {
+                // Bloquear boton resultado fibonacci y congruencia
+                var blo_btnGenerarFibonacci = ELEM_ID("btnGenerarFibonacci");
+                blo_btnGenerarFibonacci.disabled = true;
+                var blo_btnGenerarChi = ELEM_ID("btnGenerarChi");
+                blo_btnGenerarChi.disabled = true;
+
+                // Bloquear boton test poker y chi
+                var blo_btnPoker = ELEM_ID("btnPoker");
+                var blo_btnChi = ELEM_ID("btnChi");
+                blo_btnPoker.disabled = true;
+                blo_btnChi.disabled = true;
+
+                mostrarChi.style.display = "block";
+                const conclusionTestChi = ELEM_ID('hipotesisChiCuadrado');
+
+                let resultadoTestChi = [];
+
+                if (calculoFibonacci.length > 0) {
+                    resultadoTestChi = testChiCuadrado(calculoFibonacci, probabilidadChi);
+                } else if (calculoCongruencia.length > 0) {
+                    resultadoTestChi = testChiCuadrado(calculoCongruencia, probabilidadChi);
+                }
+
+                const tablaChi = ELEM_ID('tbodyChi');
+                tablaChi.innerHTML = '';
+
+                for (let i = 0; i < 10; i++) {
+                    tablaChi.innerHTML += `<tr">
+                        <td scope="col" class="text-center">${resultadoTestChi[0][i]}</td>
+                        <td scope="col" class="text-center">${resultadoTestChi[1][i]}</td>
+                        <td scope="col" class="text-right">${resultadoTestChi[2]}</td>
+                        <td scope="col" class="text-right">${resultadoTestChi[3][i]}</td>
+                        <td scope="col" class="text-right">${resultadoTestChi[4][i].toFixed(2)}</td>
+                        <td scope="col" class="text-right">${resultadoTestChi[5][i].toFixed(5)}</td>
+                    </tr>`;
+                }
+                tablaChi.innerHTML += `<tr>
+                    <td class="table-secondary" scope="col" colspan="4"></td>
+                    <td class="text-center table-success" scope="row" style="font-size: 25px; font-weight: bold;">&Sigma;</td>
+                    <td class="text-right table-danger" style="font-size: 25px; font-weight: bold;" scope="col">
+                      ${resultadoTestChi[6].toFixed(5)}
+                    </td>
+                </tr>`;
+
+                conclusionTestChi.textContent = resultadoTestChi[7];
+                return;
+            }
+        }
+
+        /* Función Marcas de clases*/
+        function generarMarca() {
+            let resultadoMarcas = marcas(calculoFibonacci);
+            const tablaMarcas = ELEM_ID('tbodyMarcas');
+            mostrarMarca.style.display = "block";
+
+            tablaMarcas.innerHTML = '';
+
+            for (let i = 0; i < 10; i++) {
+                tablaMarcas.innerHTML += `
+                  <tr">
+                      <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
+                      <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
+                      <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
+                  </tr>`;
+            }
+
+            tablaMarcas.innerHTML += `
+                  <tr">
+                      <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
+                      <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
+                  </tr>`;
+            const minimo = ELEM_ID("min");
+            const maximo = ELEM_ID("max");
+            const muestra = ELEM_ID("nMuestra");
+
+            minimo.textContent = resultadoMarcas[10];
+            maximo.textContent = resultadoMarcas[11];
+            muestra.textContent = resultadoMarcas[12];
+        }
+
+    </script>
+
 </body>
 
 </html>

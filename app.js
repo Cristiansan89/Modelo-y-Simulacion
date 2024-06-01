@@ -13,6 +13,8 @@ const staticFiles = {
     '/vendor/jquery-easing/jquery.easing.min.js': 'vendor/jquery-easing/jquery.easing.min.js',
     '/vendor/css/sb-admin-2.min.css': 'vendor/css/sb-admin-2.min.css',
     '/vendor/js/sb-admin-2.min.js': 'vendor/js/sb-admin-2.min.js',
+
+    '/js/integrador.js': 'js/integrador.js',
     '/js/fibonacci.js': 'js/fibonacci.js',
     '/js/congruencia.js': 'js/congruencia.js',
     '/js/poker.js': 'js/poker.js',

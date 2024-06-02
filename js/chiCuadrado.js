@@ -35,11 +35,11 @@ function obtenerChiCuadrado(pseudoAleatorios) {
         qi.push(Math.pow(fi[i] - npi, 2));
     }
 
-     // obtener (qi)²/npi = (fi-npi)²/npi
-     const x2 = [];
-     for (let i = 0; i < k; i++) {
-         x2.push(Math.pow(fi[i] - npi, 2) / npi);
-     }
+    // obtener (qi)²/npi = (fi-npi)²/npi
+    const x2 = [];
+    for (let i = 0; i < k; i++) {
+        x2.push(Math.pow(fi[i] - npi, 2) / npi);
+    }
 
     // obtener chi-cuadrada calculada: sumatoria de los x2[i]
     const sumatoria = x2.reduce((suma, x2iesimo) => suma += x2iesimo, 0);
@@ -86,7 +86,11 @@ function testChiCuadrado(pseudoAleatorios, p = '0.001') {
 
     let mensajeConclusion = `La secuencia pseudoaleatoria ${conclusion[0]} el test siendo x² calculada: ${resultado[6].toFixed(5)} ${conclusion[1]} a x² de la tabla chi cuadrda: ${valoresTablaChiCuadrado[p]}, con 9 grados de libertad y alfa ${p}`;
 
+    resultado.pasa = conclusion[0] === 'PASA' ? 'PASA' : 'NO PASA';
+
     resultado.push(mensajeConclusion);
+
+
 
     // resultado = [[0-9],[fi, ...], npi, [finpi], [qi], [x2, ...], sumatoria, mensajeConclusion]
     resultado

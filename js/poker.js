@@ -162,7 +162,7 @@ function obtenerPoker(pseudoAleatorios) {
         fe_solapada: fe_solapada,
         x2_solapada: x2_solapada,
         sumatoria_solapada: sumatoria_solapada,
-        grados_libertad_solapada: grados_libertad_solapada
+        grados_libertad_solapada: grados_libertad_solapada,
     }
 
     return resultado;
@@ -203,10 +203,17 @@ function testPoker(pseudoAleatorios, p = '0.001') {
         : ['NO PASA', '>='];
 
     let mensaje_conclusion = `La secuencia pseudoaleatoria ${conclusion[0]} el test siendo x² calculada: ${resultado.sumatoria_solapada.toFixed(4)} ${conclusion[1]} a x² de la tabla chi cuadrda: ${valoresTablaChiCuadrado[p][resultado.grados_libertad_solapada]}, con ${resultado.grados_libertad_solapada} grados de libertad y alfa ${p}`;
+    conclusion
 
     //agrego mensaje de conclusion como propiedad
     resultado.mensaje_conclusion = mensaje_conclusion;
+
+    resultado.pasa = conclusion[0] === 'PASA' ? 'PASA' : 'NO PASA';
+
     resultado
 
     return resultado;
 }
+
+let num = [0, 1, 2, 2, 5, 6, 0, 9, 7, 2, 6, 5, 4, 1, 2, 3, 8, 4, 8, 6, 3, 1, 1, 0, 8, 1, 0, 8, 9, 7, 7, 1, 0, 3];
+testPoker(num, '0.001');

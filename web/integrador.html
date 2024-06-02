@@ -362,8 +362,7 @@
                                         </div>
                                         <div class="text-center p-2">
                                             <button id="btnGenerarFibonacci" class="btn btn-primary btn-xl fw-bold p-2"
-                                                onclick="generarFibonacci()" type="submit"
-                                                style="width: 25%;">Resolver</button>
+                                                onclick="generarFibonacci()" type="submit">Resolver</button>
                                         </div>
                                     </div>
                                 </div>
@@ -433,8 +432,8 @@
                                                 required>
                                         </div>
                                         <div class="text-center p-2">
-                                            <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
-                                                style="width: 25%;" onclick="generarSemilla()">Generar</button>
+                                            <button id="opcGenerar" class="btn btn-primary btn-xl fw-bold p-2"
+                                                type="submit" onclick="generarSemilla()">Generar</button>
                                         </div>
                                         <div id="contenedorSemilla"></div>
                                         <div class="input-group p-2" style="width: 95%;">
@@ -462,10 +461,9 @@
                                                 Iteraciones 'i'</span>
                                             <input type="number" required min="100" class="form-control" id="i">
                                         </div>
-                                        <div class="text-center">
+                                        <div class="text-center p-2 mt-2">
                                             <button id="btnGenerarChi" class="btn btn-primary btn-xl fw-bold p-2"
-                                                onclick="generarCongruencia()" type="submit"
-                                                style="width: 25%;">Resolver</button>
+                                                onclick="generarCongruencia()" type="submit">Resolver</button>
                                         </div>
                                     </div>
                                 </div>
@@ -623,8 +621,8 @@
                                                 </select>
                                             </div>
                                             <div class="text-center p-2 mt-2">
-                                                <button class="btn btn-primary btn-xl fw-bold p-2"
-                                                    onclick="generarPoker()" type="submit" style="width: 25%;">
+                                                <button id="btnPokerChi" class="btn btn-primary btn-xl fw-bold p-2"
+                                                    onclick="generarPoker()" type="submit">
                                                     Generar Poker
                                                 </button>
                                             </div>
@@ -712,6 +710,15 @@
                                                         </b>
                                                     </li>
                                                 </ul>
+                                            </div>
+                                        </div>
+                                        <!-- Boton de reset -->
+                                        <div id="btnReset" style="display: none;">
+                                            <div class="text-center p-2 mt-2">
+                                                <button class="btn btn-warning btn-xl fw-bold"
+                                                    onclick="reiniciarIntergrador()" type="submit">
+                                                    Reiniciar
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -866,8 +873,7 @@
                                             </div>
                                             <div class="text-center p-2 mt-2">
                                                 <button class="btn btn-primary btn-xl fw-bold p-2"
-                                                    onclick="generarChi()" type="submit"
-                                                    style="width: 25%;">Generar</button>
+                                                    onclick="generarChi()" type="submit">Generar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -914,6 +920,15 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        <!-- Boton de reset -->
+                                        <div id="btnResetChi" style="display: none;">
+                                            <div class="text-center p-2 mt-2">
+                                                <button class="btn btn-warning btn-xl fw-bold p-2"
+                                                    onclick="reiniciarIntergrador()" type="submit">
+                                                    Reiniciar
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- Fin resultado chi cuadrado -->
                                 </div>
@@ -924,8 +939,34 @@
                 <!-- End Chi Cuadrada -->
 
                 <!-- Begin Marca de Clases -->
-                <div id="marcaClases" style="display: none;">
-
+                <div id="marcaClase" style="display: none;">
+                    <div class="container-fluid mb-4">
+                        <!-- Page Heading -->
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                                    <p>Marcas de Clases</p>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-gray-900">
+                                <div class="p-2" style="min-height: 120px;">
+                                    <div class="card card-body mx-auto" style="width: 60%;">
+                                        <div>
+                                            <p class="h5 font-weight-bold">Seleccione un m&eacute;todo de test
+                                            </p>
+                                        </div>
+                                        <div class="d-flex justify-content-center p-2">
+                                            <button type="button" id="btnPoker"
+                                                class="btn btn-outline-danger font-weight-bold me-md-2">Test
+                                                Poker</button>
+                                            <button type="button" id="btnChi"
+                                                class="btn btn-outline-danger font-weight-bold">Chi Cuadrada</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <!-- End Marca de Clases -->
 
@@ -985,7 +1026,6 @@
     <script src="js/chiCuadrado.js"></script>
 
     <!--Asignando los parametro de las funciones de js al html -->
-
     <script>
         /* Función obtener elemento por ID */
         const ELEM_ID = (id) => document.getElementById(id);
@@ -1266,14 +1306,18 @@
                 // Bloquear boton resultado fibonacci y congruencia
                 var blo_btnGenerarFibonacci = ELEM_ID("btnGenerarFibonacci");
                 blo_btnGenerarFibonacci.disabled = true;
+                var opcionGenerar = ELEM_ID("opcGenerar");
+                opcionGenerar.disabled = true;
                 var blo_btnGenerarChi = ELEM_ID("btnGenerarChi");
                 blo_btnGenerarChi.disabled = true;
 
                 // Bloquear boton test poker y chi
                 var blo_btnPoker = ELEM_ID("btnPoker");
                 var blo_btnChi = ELEM_ID("btnChi");
+                var blo_btnPokerChi = ELEM_ID("btnPokerChi");
                 blo_btnPoker.disabled = true;
                 blo_btnChi.disabled = true;
+                blo_btnPokerChi.disabled = true;
 
                 mostrarTablaPoker.style.display = "block";
                 const conclusionPoker = ELEM_ID('hipotesisPokerIS');
@@ -1330,6 +1374,13 @@
                 // Conclusion Poker
                 conclusionPoker.textContent = resultadoTest.mensaje_conclusion;
 
+                if (resultadoTest.pasa === 'PASA') {
+                    var visibleMarca = ELEM_ID("marcaClase");
+                    visibleMarca.style.display = "block";
+                } else if (resultadoTest.pasa === 'NO PASA') {
+                    var btn_reset = ELEM_ID("btnReset");
+                    btn_reset.style.display = "block";
+                }
 
                 return;
             }
@@ -1343,6 +1394,8 @@
                 // Bloquear boton resultado fibonacci y congruencia
                 var blo_btnGenerarFibonacci = ELEM_ID("btnGenerarFibonacci");
                 blo_btnGenerarFibonacci.disabled = true;
+                var opcionGenerar = ELEM_ID("opcGenerar");
+                opcionGenerar.disabled = true;
                 var blo_btnGenerarChi = ELEM_ID("btnGenerarChi");
                 blo_btnGenerarChi.disabled = true;
 
@@ -1385,47 +1438,60 @@
                 </tr>`;
 
                 conclusionTestChi.textContent = resultadoTestChi[7];
+
+                if (resultadoTestChi.pasa === 'PASA') {
+                    var visibleMarca = ELEM_ID("marcaClase");
+                    visibleMarca.style.display = "block";
+                } else if (resultadoTestChi.pasa === 'NO PASA') {
+                    var btn_reset = ELEM_ID("btnResetChi");
+                    btn_reset.style.display = "block";
+                }
+
+
                 return;
             }
         }
 
-        /* Función Marcas de clases*/
-        function generarMarca() {
-            let resultadoMarcas = marcas(calculoFibonacci);
-            const tablaMarcas = ELEM_ID('tbodyMarcas');
-            mostrarMarca.style.display = "block";
-
-            tablaMarcas.innerHTML = '';
-
-            for (let i = 0; i < 10; i++) {
-                tablaMarcas.innerHTML += `
-                  <tr">
-                      <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
-                      <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
-                      <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
-                  </tr>`;
-            }
-
-            tablaMarcas.innerHTML += `
-                  <tr">
-                      <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
-                      <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
-                  </tr>`;
-            const minimo = ELEM_ID("min");
-            const maximo = ELEM_ID("max");
-            const muestra = ELEM_ID("nMuestra");
-
-            minimo.textContent = resultadoMarcas[10];
-            maximo.textContent = resultadoMarcas[11];
-            muestra.textContent = resultadoMarcas[12];
+        function reiniciarIntergrador() {
+            window.location.href = "integrador.html";
         }
-
+        /* Función Marcas de clases*/
+        /*  function generarMarca() {
+              let resultadoMarcas = marcas(calculoFibonacci);
+              const tablaMarcas = ELEM_ID('tbodyMarcas');
+              mostrarMarca.style.display = "block";
+  
+              tablaMarcas.innerHTML = '';
+  
+              for (let i = 0; i < 10; i++) {
+                  tablaMarcas.innerHTML += `
+                    <tr">
+                        <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
+                        <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
+                        <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
+                    </tr>`;
+              }
+  
+              tablaMarcas.innerHTML += `
+                    <tr">
+                        <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
+                        <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
+                    </tr>`;
+              const minimo = ELEM_ID("min");
+              const maximo = ELEM_ID("max");
+              const muestra = ELEM_ID("nMuestra");
+  
+              minimo.textContent = resultadoMarcas[10];
+              maximo.textContent = resultadoMarcas[11];
+              muestra.textContent = resultadoMarcas[12];
+          }
+  */
     </script>
 
 </body>

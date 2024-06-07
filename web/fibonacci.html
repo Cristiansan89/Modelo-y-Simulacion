@@ -143,6 +143,7 @@
                     </div>
                 </nav>
                 <!-- End of Topbar -->
+
                 <!-- Begin Modelo Fibonacci -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
@@ -167,7 +168,7 @@
                                     </ul>
                                 </div>
                             </div>
-
+                            <!-- Begin input fibonacci -->
                             <div class="p-2" style="min-height: 120px;">
                                 <div class="card card-body mx-auto" style="width: 60%;">
                                     <div class="h3 font-weight-bold">
@@ -194,11 +195,13 @@
                                         <input required type="number" min="100" class="form-control" id="n">
                                     </div>
                                     <div class="text-center p-2">
-                                        <button class="btn btn-primary btn-xl fw-bold p-2" onclick="generarFibonacci()"
-                                            type="submit" style="width: 25%;">Resolver</button>
+                                        <button id="btnFibonacci" class="btn btn-primary btn-xl fw-bold p-2"
+                                            onclick="generarFibonacci()" type="submit"
+                                            style="width: 25%;">Resolver</button>
                                     </div>
                                 </div>
                             </div>
+                            <!-- End Input fibonacci -->
                             <div class="p-2" id="resultate" style="min-height: 120px; display: none;">
                                 <div class="card card-body mx-auto text-gray-900"
                                     style="width: 60%; max-height: 500px; overflow-y: scroll; overflow-x: hidden;">
@@ -519,77 +522,52 @@
                     </div>
                     <!-- Fin Test Chi Cuadrada -->
 
-                    <!-- Marcas de Clases -->
+                    <!-- Begin Guardar Semilla -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingThree">
                             <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                 aria-expanded="false" aria-controls="collapseThree">
-                                Marcas de Clases
+                                Guardar Semilla
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
                             aria-labelledby="headingThree">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item text-gray-900">
-                                        <div class="p-2" style="min-height: 120px;">
-                                            <div class="card card-body mx-auto" style="width: 60%;">
-                                                <div class="h3 font-weight-bold">
-                                                    <p>Generar Tabla con Marcas de Clases</p>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 60%;">
+                                            <div id="guardarSemilla" style="display: none;">
+                                                <div class="h4 font-weight-bold">
+                                                    <p>Guardar la Semilla</p>
+                                                </div>
+                                                <div class="input-group p-2" style="width: 95%;">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">
+                                                        Nombre de la semilla
+                                                    </span>
+                                                    <input required type="number" min="100" class="form-control" id="n">
                                                 </div>
                                                 <div class="text-center p-2">
-                                                    <button id="btnMarca" class="btn btn-primary btn-xl fw-bold p-2"
-                                                        onclick="generarMarca()" type="submit" style="width: 25%;"
-                                                        disabled>
-                                                        Generar
-                                                    </button>
+                                                    <button class="btn btn-success btn-xl fw-bold p-2"
+                                                        onclick="guardarSemilla()" type="submit"
+                                                        style="width: 25%;">Guardar</button>
+                                                </div>
+                                            </div>
+                                            <div id="noPasaTest">
+                                                <div class="h3 font-weight-bold text-center text-danger">
+                                                    <p>TEST SIN PASAR</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="mostrarMarca" style="display: none;">
-                                            <!--Tabla Chi cuadrado -->
-                                            <div class="p-2" style="min-height: 120px;">
-                                                <div class="card card-body mx-auto" style="width: 60%;">
-                                                    <div class="h4 text-center font-weight-bold">
-                                                        <p>Tabla</p>
-                                                    </div>
-                                                    <table class="table table-bordered">
-                                                        <thead>
-                                                            <tr class="h5 text-center font-weight-bold table-secondary">
-                                                                <th scope="col">x</th>
-                                                                <th scope="col">P(x)</th>
-                                                                <th scope="col">F(x)</th>
-                                                                <th scope="col">F<sub>a</sub></th>
-                                                                <th scope="col" colspan="2">Intervalos</th>
-                                                                <th scope="col">Cant. elem. x clase</th>
-                                                                <th scope="col">F<sub>r</sub></th>
-                                                                <th scope="col">Porcentaje</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody id="tbodyMarcas"></tbody>
-                                                    </table>
-                                                    <div class="h6 font-weight-bold text-black">
-                                                        <p>M&iacute;nimo: <span id="min">22</span></p>
-                                                        <p>M&aacute;ximo: <span id="max">21</span></p>
-                                                        <p>Probabilidad de muestra (N): <span id="nMuestra"></span>
-                                                        </p>
-                                                    </div>
-                                                    <div class="h6 font-weight-bold">
-                                                        <p>*F<sub>a</sub>: Frecuencia Acumulada</p>
-                                                        <p>*F<sub>r</sub>: Frecuencia Relativa</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
+
                         </div>
                     </div>
-                    <!--Fin Marcas de clases-->
+                    <!-- End Guardar Semilla -->
                 </div>
-                <!-- Fin Test Poker, Chi Cuadrada y Marcas de clases-->
+                <!-- End Test Poker, Chi Cuadrada y Marcas de clases-->
             </div>
             <!-- End of Main Content -->
 
@@ -666,7 +644,6 @@
             resultate.style.display = "block";
             resolution.style.display = "block";
             resolutionChi.style.display = "block";
-            btnMarca.disabled = false;
 
             const v1 = parseInt(ELEM_ID('v1').value);
             const v2 = parseInt(ELEM_ID('v2').value);
@@ -716,6 +693,8 @@
             }
 
             if (seleccionPChi >= 0) {
+                btnFibonacci.style.display = "none";
+
                 mostrarPoker.style.display = "block";
                 const conclusionPoker = ELEM_ID('hipotesisPokerIS');
 
@@ -767,6 +746,16 @@
 
                 // Conclusion Poker
                 conclusionPoker.textContent = resultadoTest.mensaje_conclusion;
+
+                if (resultadoTest.pasa === 'PASA') {
+                    var setSeed = ELEM_ID("guardarSemilla");
+                    setSeed.style.display = "block";
+                    var notTest = ELEM_ID("noPasaTest");
+                    notTest.style.display = "none";
+                } /*else if (resultadoTest.pasa === 'NO PASA') {
+                    var notTest = ELEM_ID("noPasaTest");
+                    notTest.style.display = "none";
+                }*/
                 return;
             }
         }
@@ -781,6 +770,8 @@
             }
 
             if (probabilidadChi >= 0) {
+                btnFibonacci.style.display = "none";
+
                 mostrarChi.style.display = "block";
                 const conclusionTestChi = ELEM_ID('hipotesisChiCuadrado');
                 let resultadoTestChi = testChiCuadrado(calculoFibonacci, probabilidadChi);
@@ -812,45 +803,23 @@
 
                 conclusionTestChi.textContent = resultadoTestChi[7];
 
+                if (resultadoTestChi.pasa === 'PASA') {
+                    var setSeed2 = ELEM_ID("guardarSemilla");
+                    setSeed2.style.display = "block";
+                    var notTest2 = ELEM_ID("noPasaTest");
+                    notTest2.style.display = "none";
+                } /*else if (resultadoTestChi.pasa === 'NO PASA') {
+                    var notTest = ELEM_ID("noPasaTest");
+                    notTest.style.display = "block";
+                }*/
+
                 return;
             }
         }
 
-        /* Función Marcas de clases*/
-        function generarMarca() {
-            let resultadoMarcas = marcas(calculoFibonacci);
-            const tablaMarcas = ELEM_ID('tbodyMarcas');
-            mostrarMarca.style.display = "block";
+        /* Función Guardar Semilla*/
+        function guardarSemilla() {
 
-            tablaMarcas.innerHTML = '';
-
-            for (let i = 0; i < 10; i++) {
-                tablaMarcas.innerHTML += `
-                    <tr">
-                        <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
-                        <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
-                    </tr>`;
-            }
-
-            tablaMarcas.innerHTML += `
-                    <tr">
-                        <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
-                        <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
-                    </tr>`;
-            const minimo = ELEM_ID("min");
-            const maximo = ELEM_ID("max");
-            const muestra = ELEM_ID("nMuestra");
-
-            minimo.textContent = resultadoMarcas[10];
-            maximo.textContent = resultadoMarcas[11];
-            muestra.textContent = resultadoMarcas[12];
         }
 
     </script>

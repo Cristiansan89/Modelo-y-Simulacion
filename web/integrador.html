@@ -254,6 +254,36 @@
                                         </p>
                                     </ul>
                                 </div>
+                                <div class="card card-body mx-auto my-2">
+                                    <div class="text-center">
+                                        <p class="h3 font-weight-bold">Secuencias Aleatorias Testeadas</p>
+                                    </div>
+                                    <ul>
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="text-wrap align-middle">secuencia:</th>
+                                                    <th scope="col" class="text-wrap align-middle">algoritmo:</th>
+                                                    <th scope="col" class="text-wrap align-middle">tests aprobados:</th>
+                                                    <th scope="col" class="text-wrap align-middle">cant. digitos:</th>
+                                                    <th scope="col" class="text-wrap align-middle">fecha creacion:</th>
+                                                    <th scope="col" class="text-wrap align-middle">acciones:</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tabla">
+                                
+                                            </tbody>
+                                        </table>
+                                    </ul>
+                                </div>
+                                <div class="card card-body mx-auto my-2">
+                                    <div class="text-center">
+                                        <p class="h3 font-weight-bold">Marcas de Clase</p>
+                                    </div>
+                                    <ul>
+                                        <p>Proximamente!!!</p>
+                                    </ul>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -314,6 +344,7 @@
     <script src="js/congruencia.js"></script>
     <script src="js/poker.js"></script>
     <script src="js/chiCuadrado.js"></script>
+    <script src="js/localstorage.js"></script>
 
     <!--Asignando los parametro de las funciones de js al html -->
     <script>
@@ -344,8 +375,8 @@
         var bottonFibonacci = ELEM_ID("btnFibonacci");
         var bottonCongruencia = ELEM_ID("btnCongruencia");
 
-        bottonFibonacci.addEventListener("click", mostrarFibonacci);
-        bottonCongruencia.addEventListener("click", mostrarCongruencia);
+        //bottonFibonacci.addEventListener("click", mostrarFibonacci);
+        //bottonCongruencia.addEventListener("click", mostrarCongruencia);
         /* End boton opciones modelo */
 
         /* Función Fibonacci */
@@ -584,8 +615,8 @@
         var bottonPoker = ELEM_ID("btnPoker");
         var bottonChi = ELEM_ID("btnChi");
 
-        bottonPoker.addEventListener("click", mostrarPoker);
-        bottonChi.addEventListener("click", mostrarChiCuadrada);
+        //bottonPoker.addEventListener("click", mostrarPoker);
+        //bottonChi.addEventListener("click", mostrarChiCuadrada);
         /* End boton opciones test */
 
         /* Función Poker */
@@ -782,6 +813,58 @@
               muestra.textContent = resultadoMarcas[12];
           }
   */
+    
+        /* evento y funcion para recuperar y mostrar localstorage */
+        window.addEventListener("load", function () {
+
+            const tabla = ELEM_ID("tabla");
+            const storage = recuperarLocalStorage();
+
+            // si localstorage vacio
+            if (storage.length === 0) {
+                tabla.innerHTML +=
+                `<tr>
+                    <td class="text-wrap align-middle text-center" colspan="6">no hay secuencias generadas!,
+                        generar con: <a href="./fibonacci.html">fibonacci</a>, <a href="./congruencia.html">congruencia</a> </td>    
+                </tr>`;
+                return;
+            }
+
+            // si localstorage con datos
+            for (let i = 0; i < storage.length; i++) {
+                const element = storage[i];
+                console.log(element);
+                tabla.innerHTML += 
+                    `<tr">
+                        <td class="text-wrap align-middle" scope="row">${element.nombre}</td>
+                        <td class="text-wrap align-middle">${element.algoritmo}</td>
+                        <td class="text-wrap align-middle">
+                            ${(element.test_chi) ? "chi-cuadrado" : ""}
+                            ${(element.test_poker) ? "poker" : ""}
+                        </td>
+                        <td class="text-wrap align-middle">${element.cant_digitos}</td>
+                        <td class="text-wrap align-middle">${element.fecha_creacion}</td>
+                        <td class="text-wrap align-middle">
+                            <button class="btn btn-danger btn-sm" onclick="borrar('${element.nombre}')">borrar</button>
+                        </td>
+                    </tr>`;
+            }
+
+            }, false)
+
+        /* funcion para borrar una secuencia */
+        function borrar(clave) {
+            // mensaje de confirmacion
+            let respuesta = confirm("desea borrar la secuencia! AVISO: esto recargará la página!.");
+            if (respuesta) {
+                // eliminar
+                eliminarDelLocalStorage(clave);
+                // refrescar pagina
+                window.location.reload();
+            }
+            return;
+        }
+    
     </script>
 
 </body>

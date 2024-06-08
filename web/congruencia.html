@@ -658,6 +658,7 @@
     <script src="js/poker.js"></script>
     <script src="js/chiCuadrado.js"></script>
     <script src="js/marcas.js"></script>
+    <script src="js/localStorage.js"></script>
 
     <!--Script para implementar la generación de n cantindad de semilla para congruencia fundamental-->
     <script>
@@ -834,7 +835,6 @@
         function generarPoker() {
             const seleccionPChi = ELEM_ID('pChiCuadrado').value;
 
-            console.log(calculoCongruencia);
             // no hay secuencia, finalizar
             if (calculoCongruencia.length === 0) {
                 alert('Genere una secuencia primero!');
@@ -1004,12 +1004,19 @@
             }
 
             // guardar en local storage
-            console.log(secuencia);
-            mensajes.textContent = 'Secuencia guardada!';
-
+            const respuesta = guardarEnLocalStorage(nombre, secuencia);
+            
+            // si todo ok
+            if (respuesta[0] === 0) {
+                mensajes.textContent = respuesta[1];
+                validaciones.textContent = '';
+            } else {
+                // error
+                validaciones.textContent = respuesta[1];
+                mensajes.textContent = '';
+            }
 
             return;
-
         }
 
     </script>

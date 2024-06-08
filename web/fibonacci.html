@@ -647,6 +647,7 @@
     <script src="js/poker.js"></script>
     <script src="js/chiCuadrado.js"></script>
     <script src="js/marcas.js"></script>
+    <script src="js/localStorage.js"></script>
 
     <!--Asignando los parametro de las funciones de js al html -->
     <!--Fibonacci-->
@@ -883,9 +884,17 @@
             }
 
             // guardar en local storage
-            console.log(secuencia);
-            mensajes.textContent = 'Secuencia guardada!';
-
+            const respuesta = guardarEnLocalStorage(nombre, secuencia);
+            
+            // si todo ok
+            if (respuesta[0] === 0) {
+                mensajes.textContent = respuesta[1];
+                validaciones.textContent = '';
+            } else {
+                // error
+                validaciones.textContent = respuesta[1];
+                mensajes.textContent = '';
+            }
 
             return;
         }

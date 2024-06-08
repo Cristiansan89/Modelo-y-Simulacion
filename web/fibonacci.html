@@ -216,7 +216,7 @@
                 </div>
                 <!-- End Modelo Fibonacci -->
 
-                <!-- Test Poker, Chi Cuadrada y Marcas de clases -->
+                <!-- Test Poker, Chi Cuadrada y Guardar Secuencia -->
                 <div class="accordion container-fluid pt-4" id="accordionExample">
                     <!-- Test Poker -->
                     <div class="accordion-item">
@@ -528,7 +528,7 @@
                             <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
                                 type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                                 aria-expanded="false" aria-controls="collapseThree">
-                                Guardar Semilla
+                                Guardar Secuencia
                             </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample"
@@ -539,17 +539,42 @@
                                         <div class="card card-body mx-auto" style="width: 60%;">
                                             <div id="guardarSemilla" style="display: none;">
                                                 <div class="h4 font-weight-bold">
-                                                    <p>Guardar la Semilla</p>
+                                                    <p>Guardar la Secuencia</p>
                                                 </div>
+                                                <!-- input nombre de secuencia -->
                                                 <div class="input-group p-2" style="width: 95%;">
-                                                    <span class="input-group-text font-weight-bold text-gray-900">
-                                                        Nombre de la semilla
-                                                    </span>
-                                                    <input required type="number" min="100" class="form-control" id="n">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">Nombre de la secuencia</span>
+                                                    <input required type="text" class="form-control" id="nombre">
+                                                </div>
+                                                <div style="display: flex; width: 95%;">
+                                                    <!-- input test de chi -->
+                                                    <div class="input-group p-2" style="width: 50%;">
+                                                        <span class="input-group-text font-weight-bold text-gray-900">¿Pasó el test de chi^2?</span>
+                                                        <div class="p-2">
+                                                            <input type="checkbox" name="test_chi" id="test_chi" value="chi-cuadrado">
+                                                            <span>si</span>
+                                                        </div>
+                                                    </div>
+                                                    <!-- input test de poker -->
+                                                    <div class="input-group p-2" style="width: 50%;">
+                                                        <span class="input-group-text font-weight-bold text-gray-900">¿Pasó el test de poker?</span>
+                                                        <div class="p-2">
+                                                            <input type="checkbox" name="test_poker" id="test_poker" value="poker">
+                                                            <span>si</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- validaciones de errores -->
+                                                <div class="text-center" style="width: 95%;">
+                                                    <p id="validaciones" style="color: rgb(221, 32, 32);"></p>
+                                                </div>
+                                                <!-- mensajes -->
+                                                <div class="text-center" style="width: 95%;">
+                                                    <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
                                                 </div>
                                                 <div class="text-center p-2">
                                                     <button class="btn btn-success btn-xl fw-bold p-2"
-                                                        onclick="guardarSemilla()" type="submit"
+                                                        onclick="guardarSecuencia()" type="submit"
                                                         style="width: 25%;">Guardar</button>
                                                 </div>
                                             </div>
@@ -817,9 +842,52 @@
             }
         }
 
-        /* Función Guardar Semilla*/
-        function guardarSemilla() {
+        /* Función Guardar Secuencia*/
+        function guardarSecuencia() {
 
+            /* obtener inputs */
+            const nombreSecuencia = ELEM_ID('nombre');
+            const testChi = ELEM_ID('test_chi');
+            const testPoker = ELEM_ID('test_poker');
+            const validaciones = ELEM_ID('validaciones');
+            const mensajes = ELEM_ID('mensajes');
+
+            // validaciones
+            if (nombreSecuencia.value.length === 0) {
+                validaciones.textContent = 'Indique un nombre de secuencia!';
+                return;
+            }
+
+            if (!(testChi.checked || testPoker.checked)) {
+                validaciones.textContent = 'Indique si al menos 1 test fue superado!';
+                return;
+            }
+
+            // sin errores
+            validaciones.textContent = '';
+
+            // preparar valores
+            const regex = /\s/g;
+            const nombre = nombreSecuencia.value.trim().replaceAll(regex,'-');
+            const fecha = new Date().toGMTString();
+
+            // objeto a guardar
+            const secuencia = {
+                nombre: nombre,
+                algoritmo: "fibonacci",
+                test_chi: testChi.checked,
+                test_poker: testPoker.checked,
+                fecha_creacion: fecha,
+                cant_digitos: calculoFibonacci.length,
+                secuencia: [...calculoFibonacci]
+            }
+
+            // guardar en local storage
+            console.log(secuencia);
+            mensajes.textContent = 'Secuencia guardada!';
+
+
+            return;
         }
 
     </script>

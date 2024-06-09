@@ -543,25 +543,43 @@
                                                 </div>
                                                 <!-- input nombre de secuencia -->
                                                 <div class="input-group p-2" style="width: 95%;">
-                                                    <span class="input-group-text font-weight-bold text-gray-900">Nombre de la secuencia</span>
+                                                    <span class="input-group-text font-weight-bold text-gray-900">Nombre
+                                                        de la secuencia</span>
                                                     <input required type="text" class="form-control" id="nombre">
                                                 </div>
-                                                <div style="display: flex; width: 95%;">
-                                                    <!-- input test de chi -->
-                                                    <div class="input-group p-2" style="width: 50%;">
-                                                        <span class="input-group-text font-weight-bold text-gray-900">¿Pasó el test de chi^2?</span>
-                                                        <div class="p-2">
-                                                            <input type="checkbox" name="test_chi" id="test_chi" value="chi-cuadrado">
-                                                            <span>si</span>
-                                                        </div>
+                                                <div class="input-group p-2" style="width: 95%;">
+                                                    <div class="font-weight-bold ">
+                                                        ¿Seleccione qu&eacute; test pasar&oacute;n?
                                                     </div>
+                                                </div>
+                                                <div class=" input-group p-2" style="width: 95%;">
                                                     <!-- input test de poker -->
-                                                    <div class="input-group p-2" style="width: 50%;">
-                                                        <span class="input-group-text font-weight-bold text-gray-900">¿Pasó el test de poker?</span>
-                                                        <div class="p-2">
-                                                            <input type="checkbox" name="test_poker" id="test_poker" value="poker">
-                                                            <span>si</span>
-                                                        </div>
+                                                    <div class="input-group" style="width: 30%;">
+                                                        <form class="was-validated">
+                                                            <div class="custom-control custom-checkbox mb-3">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    id="test_poker" name="test_poker" value="poker"
+                                                                    required>
+                                                                <label class="custom-control-label font-weight-bold"
+                                                                    for="test_poker">
+                                                                    Test Poker
+                                                                </label>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <!-- input test de chi -->
+                                                    <div class="input-group" style="width: 30%;">
+                                                        <form class="was-validated">
+                                                            <div class="custom-control custom-checkbox mb-3">
+                                                                <input type="checkbox" class="custom-control-input"
+                                                                    name="test_chi" id="test_chi" value="chi-cuadrado"
+                                                                    required>
+                                                                <label class="custom-control-label font-weight-bold"
+                                                                    for="test_chi">
+                                                                    Test Chi Cuadrado
+                                                                </label>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <!-- validaciones de errores -->
@@ -572,7 +590,7 @@
                                                 <div class="text-center" style="width: 95%;">
                                                     <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
                                                 </div>
-                                                <div class="text-center p-2">
+                                                <div class="text-center">
                                                     <button class="btn btn-success btn-xl fw-bold p-2"
                                                         onclick="guardarSecuencia()" type="submit"
                                                         style="width: 25%;">Guardar</button>
@@ -852,6 +870,7 @@
             const testPoker = ELEM_ID('test_poker');
             const validaciones = ELEM_ID('validaciones');
             const mensajes = ELEM_ID('mensajes');
+            const probabilidadChi = ELEM_ID('chiCuadrado').value;
 
             // validaciones
             if (nombreSecuencia.value.length === 0) {
@@ -869,15 +888,16 @@
 
             // preparar valores
             const regex = /\s/g;
-            const nombre = nombreSecuencia.value.trim().replaceAll(regex,'-');
+            const nombre = nombreSecuencia.value.trim().replaceAll(regex, '-');
             const fecha = new Date().toGMTString();
 
             // objeto a guardar
             const secuencia = {
                 nombre: nombre,
-                algoritmo: "fibonacci",
+                algoritmo: "Fibonacci",
                 test_chi: testChi.checked,
                 test_poker: testPoker.checked,
+                probabilidad: probabilidadChi,
                 fecha_creacion: fecha,
                 cant_digitos: calculoFibonacci.length,
                 secuencia: [...calculoFibonacci]
@@ -885,7 +905,7 @@
 
             // guardar en local storage
             const respuesta = guardarEnLocalStorage(nombre, secuencia);
-            
+
             // si todo ok
             if (respuesta[0] === 0) {
                 mensajes.textContent = respuesta[1];

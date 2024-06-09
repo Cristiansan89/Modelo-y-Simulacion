@@ -149,7 +149,7 @@
                     <!-- Page Heading -->
                     <ul class="list-group">
                         <li class="list-group-item">
-                            <div class="h3 mt-3 text-gray-900 text-center font-weight-bold">
+                            <div class="h3 mt-3 text-gray-900 text-center font-weight-bold text-black">
                                 <p>Integrador</p>
                             </div>
                         </li>
@@ -157,9 +157,9 @@
                             <div class="p-2">
                                 <div class="card card-body mx-auto">
                                     <div>
-                                        <p class="h3 font-weight-bold">Modelo de Existencia</p>
+                                        <p class="h3 font-weight-bold text-black">Modelo de Existencia</p>
                                     </div>
-                                    <ul>
+                                    <ul style="list-style: none;">
                                         <p>
                                             <li> Las empresas mantienen inventarios de materias primas y de
                                                 productos terminados. Puesto que estos inventarios representan
@@ -256,33 +256,95 @@
                                 </div>
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
-                                        <p class="h3 font-weight-bold">Secuencias Aleatorias Testeadas</p>
+                                        <p class="h3 font-weight-bold text-black">Secuencias Aleatorias Testeadas</p>
                                     </div>
                                     <ul>
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="text-wrap align-middle">secuencia:</th>
-                                                    <th scope="col" class="text-wrap align-middle">algoritmo:</th>
-                                                    <th scope="col" class="text-wrap align-middle">tests aprobados:</th>
-                                                    <th scope="col" class="text-wrap align-middle">cant. digitos:</th>
-                                                    <th scope="col" class="text-wrap align-middle">fecha creacion:</th>
-                                                    <th scope="col" class="text-wrap align-middle">acciones:</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">Secuencia
+                                                    </th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">Algoritmo
+                                                    </th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">Tests
+                                                        Aprobados</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">
+                                                        Probabilidad</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">Cant.
+                                                        D&iacute;gitos
+                                                    </th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">Fecha
+                                                        Creacion</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">Acciones
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tabla">
-                                
+
                                             </tbody>
                                         </table>
                                     </ul>
                                 </div>
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
-                                        <p class="h3 font-weight-bold">Marcas de Clase</p>
+                                        <p class="h3 font-weight-bold text-black">Marca de Clases</p>
                                     </div>
-                                    <ul>
-                                        <p>Proximamente!!!</p>
-                                    </ul>
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 90%;">
+                                            <div class="h4 font-weight-bold text-black p-2">
+                                                <p>Generar los nombre de las marca de clases</p>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 95%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    T&iacute;tulo
+                                                </span>
+                                                <input type="text" class="form-control" id="primerTitulo"
+                                                    autocomplete="off" required>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 95%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Ingrese Cantidad de Clase
+                                                </span>
+                                                <input type="number" class="form-control" id="primeraClase" min="2"
+                                                    autocomplete="off" required>
+                                            </div>
+                                            <div class="text-center p-2" id="btnGenerarClase">
+                                                <button class="btn btn-outline-primary btn-xl fw-bold p-2" type="submit"
+                                                    style="width: 25%;" onclick="generarClase()">Generar</button>
+                                            </div>
+                                            <div id="contenedorClase"></div>
+                                            <div class="text-center p-2" id="btnGuardarClase" style="display: none;">
+                                                <button class="btn btn-outline-danger btn-xl fw-bold p-2" type="submit"
+                                                    style="width: 25%;" onclick="reset()">Volver</button>
+                                                <button class="btn btn-outline-success btn-xl fw-bold p-2" type="submit"
+                                                    style="width: 25%;" onclick="guardarClase()">Guardar</button>
+                                            </div>
+                                        </div>
+                                        <div id="segundoTitulo" style="display: none;">
+                                            <div class="card card-body mx-auto" style="width: 60%;">
+                                                <div class="input-group p-2" style="width: 95%;">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">
+                                                        Segundo T&iacute;tulo
+                                                    </span>
+                                                    <input type="number" class="form-control" id="segundoTitulo" min="2"
+                                                        autocomplete="off" required>
+                                                </div>
+                                                <div class="input-group p-2" style="width: 95%;">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">
+                                                        Ingrese Cantidad de Clase
+                                                    </span>
+                                                    <input type="number" class="form-control" id="segundaClase" min="2"
+                                                        autocomplete="off" required>
+                                                </div>
+                                                <div class="text-center p-2">
+                                                    <button id="" class="btn btn-outline-primary btn-xl fw-bold p-2"
+                                                        type="submit" style="width: 25%;"
+                                                        onclick="generarClase()">Generar</button>
+                                                </div>
+                                                <div id="contenedorClase1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </li>
@@ -340,13 +402,74 @@
     </script>
 
     <!--Path de las Funciones -->
-    <script src="js/fibonacci.js"></script>
-    <script src="js/congruencia.js"></script>
-    <script src="js/poker.js"></script>
-    <script src="js/chiCuadrado.js"></script>
     <script src="js/localstorage.js"></script>
 
     <!--Asignando los parametro de las funciones de js al html -->
+    <script>
+        function generarClase() {
+            const cantidadClase = document.getElementById('primeraClase').value;
+            const contenedorClase = document.getElementById('contenedorClase');
+            contenedorClase.innerHTML = ' ';
+
+            //s cantidad de semilla a generar
+            for (let i = 1; i <= cantidadClase; i++) {
+                //Generando el input y aplicando bootstrap 
+                const groupInput = document.createElement('div');
+                groupInput.classList.add('input-group', 'p-2');
+                groupInput.style.width = '75%';
+
+                const labelSpan = document.createElement('span');
+                labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
+                labelSpan.textContent = `Nombre de la Clase ` + i;
+
+                const nuevoInput = document.createElement('input');
+                nuevoInput.type = 'text';
+                nuevoInput.id = `clase${i}`;
+                nuevoInput.classList.add('form-control');
+                nuevoInput.setAttribute('required', true);
+
+                const labelSpanP = document.createElement('span');
+                labelSpanP.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900', 'ml-2');
+                labelSpanP.textContent = `P(x)`;
+
+                const selectDiv = document.createElement('div');
+                const select = document.createElement('select');
+                select.classList.add('form-select');
+                select.setAttribute('aria-label', 'Selección predeterminado');
+                select.id = `valorP${i}`;
+
+                const opciones = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"];
+                opciones.forEach(opcionValor => {
+                    const opcion = document.createElement('option');
+                    opcion.value = opcionValor;
+                    opcion.textContent = opcionValor.replace('.', ',');
+                    select.appendChild(opcion);
+                });
+
+
+                selectDiv.appendChild(select);
+
+                groupInput.appendChild(labelSpan);
+                groupInput.appendChild(nuevoInput);
+                groupInput.appendChild(labelSpanP);
+                groupInput.appendChild(selectDiv);
+
+                contenedorClase.appendChild(groupInput);
+            }
+
+            btnGenerarClase.style.display = "none";
+            btnGuardarClase.style.display = "block";
+            contenedorClase.style.display = "block";
+
+            return;
+        }
+
+        function reset() {
+            btnGenerarClase.style.display = "block";
+            btnGuardarClase.style.display = "none";
+            contenedorClase.style.display = "none";
+        }
+    </script>
     <script>
         /* Función obtener elemento por ID */
         const ELEM_ID = (id) => document.getElementById(id);
@@ -358,462 +481,10 @@
         let calculoFibonacci = [];
         let calculoCongruencia = [];
 
-        /* Begin boton opciones modelo */
-        var modeloFibonacci = ELEM_ID("modFibonacci");
-        var modeloCongruencia = ELEM_ID("modCongruencia");
-
-        function mostrarFibonacci() {
-            modeloFibonacci.style.display = "block";
-            modeloCongruencia.style.display = "none";
-        }
-
-        function mostrarCongruencia() {
-            modeloFibonacci.style.display = "none";
-            modeloCongruencia.style.display = "block";
-        }
-
-        var bottonFibonacci = ELEM_ID("btnFibonacci");
-        var bottonCongruencia = ELEM_ID("btnCongruencia");
-
-        //bottonFibonacci.addEventListener("click", mostrarFibonacci);
-        //bottonCongruencia.addEventListener("click", mostrarCongruencia);
-        /* End boton opciones modelo */
-
-        /* Función Fibonacci */
-        function generarFibonacci() {
-            // bloquear los botones de selección n° aleatorios
-            var blo_btnFibonacci = ELEM_ID("btnFibonacci");
-            var blo_btnCongruencia = ELEM_ID("btnCongruencia");
-            blo_btnFibonacci.disabled = true;
-            blo_btnCongruencia.disabled = true;
-
-            // Reinicio la secuencia
-            calculoFibonacci = []
-
-            resultate.style.display = "block";
-
-            const v1 = parseInt(ELEM_ID('v1').value);
-            const v2 = parseInt(ELEM_ID('v2').value);
-            const A = parseInt(ELEM_ID('A').value);
-            const n = parseInt(ELEM_ID('n').value);
-
-            const resultado = ELEM_ID("fibonacciResultado");
-            const cantidad = ELEM_ID("cantidad");
-
-            if (Number.isNaN(v1) || Number.isNaN(v2) || Number.isNaN(A) || Number.isNaN(n)) {
-                resultado.textContent = 'Datos Incompletos, revisa completar los parámetros';
-                return;
-            }
-
-            // A debe ser mayor que v1 y v2
-            if (!(A > v1 && A > v2)) {
-                resultado.textContent = 'La constante de control debe ser mayor que las semillas para iniciar.';
-                return;
-            }
-
-            // n debe ser >= 100
-            if (n < 100) {
-                resultado.textContent = 'La cantidad de iteraciones debe ser mayor que 100 para iniciar.';
-                return;
-            }
-
-            let secuencia = nFibonacci(v1, v2, A, n);
-
-            if (Array.isArray(secuencia)) {
-                resultado.textContent = MAKE_CADENA(secuencia);
-                cantidad.textContent = secuencia.length;
-                calculoFibonacci.push(...secuencia); // guardo la nueva secuencia
-                // Mostrar opciones test
-                var opcionTest = ELEM_ID("opcTest");
-                opcionTest.style.display = "block";
-            } else {
-                resultado.textContent = secuencia; // contiene string error!
-            }
-            return;
-        }
-
-        /* Función Generar Semilla Congruencia */
-        function generarSemilla() {
-            // bloquear los botones de selección n° aleatorios
-            var blo_btnFibonacci = ELEM_ID("btnFibonacci");
-            var blo_btnCongruencia = ELEM_ID("btnCongruencia");
-            blo_btnFibonacci.disabled = true;
-            blo_btnCongruencia.disabled = true;
-
-            const s = ELEM_ID('s').value;
-            const contenedorSemilla = ELEM_ID('contenedorSemilla');
-
-            contenedorSemilla.innerHTML = ' ';
-
-            //s cantidad de semilla a generar
-            for (let i = 1; i <= s; i++) {
-                //Generando el input y aplicando bootstrap 
-                const groupInput = document.createElement('div');
-                groupInput.classList.add('input-group', 'p-2');
-                groupInput.style.width = '95%';
-
-                const labelSpan = document.createElement('span');
-                labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
-                labelSpan.textContent = `Semilla V`;
-
-                const subIndice = document.createElement('sub');
-                subIndice.textContent = i;
-
-                labelSpan.appendChild(subIndice);
-
-
-                const nuevoInput = document.createElement('input');
-                nuevoInput.type = 'number';
-                nuevoInput.id = `semilla${i}`;
-                nuevoInput.classList.add('form-control');
-                nuevoInput.setAttribute('required', true);
-                nuevoInput.setAttribute('min', 1);
-
-                const seedLabelText = document.createElement('span');
-                seedLabelText.textContent = 'Ingrese la semilla V';
-
-                const label = document.createElement('label');
-                label.setAttribute('for', `semilla${i}`);  // Use the current `i` for dynamic ID
-
-                // Combine seedLabelText and subIndice for clearer label content
-                label.textContent = seedLabelText.textContent;  // Set label text directly
-
-                groupInput.appendChild(labelSpan);  // Append labelSpan first
-                groupInput.appendChild(nuevoInput); // Then append nuevoInput
-
-                // Assuming you want to append groupInput to a specific element:
-                contenedorSemilla.appendChild(groupInput);
-            }
-            return;
-        }
-
-        /* Función Congruencia */
-        function generarCongruencia() {
-
-            // Reinicio la secuencia
-            calculoCongruencia = []
-
-            displayResultado.style.display = "block";
-
-            const semillas = [];
-            const s = parseInt(ELEM_ID('s').value);
-
-            const resultadoCongruencia = ELEM_ID('congruenciaResultado');
-            const cantidad = ELEM_ID('lenghtCongruencia');
-
-            /* recibi la cantidad de semillas a generar para crear los campos */
-            if (Number.isNaN(s)) {
-                resultadoCongruencia.textContent = 'Falta ingresar la cantidad de semillas a generar.';
-                return;
-            }
-
-            /* hay al menos una campo semilla creado? */
-            const hayInputsGenerados = ELEM_ID("semilla1");
-            if (hayInputsGenerados === null) {
-                resultadoCongruencia.textContent = 'Debe generar los campos semilla y completarlos.';
-                return;
-            }
-
-            /* capturar las semillas de los input generados */
-            for (let j = 1; j <= s; j++) {
-                const semilla = parseInt(ELEM_ID(`semilla${j}`).value);
-                if (Number.isNaN(semilla)) {
-                    resultadoCongruencia.textContent = 'Datos Incompletos, faltan semilla iniciales';
-                    return;
-                } else {
-                    semillas.push(semilla);
-                }
-            }
-
-            const k = parseInt(ELEM_ID('k').value);
-            const m = parseInt(ELEM_ID('m').value);
-            const a = parseInt(ELEM_ID('a').value);
-            const c = parseInt(ELEM_ID('c').value);
-            const i = parseInt(ELEM_ID('i').value);
-
-            /* validaciones de los parametros k, m, a, c, i */
-            // K <= cantidad de semillas
-            if (k > semillas.length) {
-                resultadoCongruencia.textContent = 'K debe ser menor o igual a la cantidad de semillas.';
-                return;
-            }
-
-            // las semillas, k, a, c, m, i, deben ser enteros no negativos.
-            let args = [...semillas, k, a, c, m, i];
-            for (let i = 0; i < args.length; i++) {
-                if (!(Number.isInteger(args[i]) && args[i] > 0)) {
-                    resultadoCongruencia.textContent = 'los parametros deben ser enteros no negativos para iniciar.';
-                    return;
-                };
-            }
-
-            // M > semillas[i]
-            for (let i = 0; i < semillas.length; i++) {
-                if (!(m > semillas[i])) {
-                    resultadoCongruencia.textContent = 'el valor M debe ser superior a cada semilla para iniciar.';
-                    return;
-                }
-            }
-
-            // si semillas.length < 2 ERROR, necesito al menos 2 semillas.
-            if (semillas.length < 2) {
-                resultadoCongruencia.textContent = 'ERROR: se necesitan minimo 2 semillas para iniciar.';
-                return;
-            }
-
-            // M > A
-            if (!(m > a)) {
-                resultadoCongruencia.textContent = 'ERROR: M debe ser mayor que A para iniciar.';
-                return;
-            }
-
-            // comprobacion por consola del navegador
-            console.log(`semillas: ${semillas}`);
-            console.log(`k:${k}, m:${m}, a:${a}, c:${c}, i:${i}`);
-
-            // no deben haber valores nulos
-            if (Number.isNaN(k) || Number.isNaN(m) || Number.isNaN(a) || Number.isNaN(c) || Number.isNaN(i)) {
-                resultadoCongruencia.textContent = 'Datos Incompletos, revisa para completar los parámetros';
-                return;
-            }
-
-            // i debe ser >= 100
-            if (i < 100) {
-                resultadoCongruencia.textContent = 'La cantidad de iteraciones debe ser mayor que 100 para iniciar.';
-                return;
-            }
-
-            let secuencia = nCongruencia(semillas, k, a, c, m, i);
-
-            if (Array.isArray(secuencia)) {
-                resultadoCongruencia.textContent = MAKE_CADENA(secuencia);
-                cantidad.textContent = secuencia.length;
-                calculoCongruencia.push(...secuencia);
-                // Mostrar opciones test
-                var opcionTest = ELEM_ID("opcTest");
-                opcionTest.style.display = "block";
-            } else {
-                resultadoCongruencia.textContent = secuencia;
-            }
-            return;
-        }
-
-        /* Begin boton opciones test */
-        var opcionPoker = ELEM_ID("opcPoker");
-        var opcionChi = ELEM_ID("opcChi");
-
-        function mostrarPoker() {
-            opcionPoker.style.display = "block";
-            opcionChi.style.display = "none";
-        }
-
-        function mostrarChiCuadrada() {
-            opcionPoker.style.display = "none";
-            opcionChi.style.display = "block";
-        }
-
-        var bottonPoker = ELEM_ID("btnPoker");
-        var bottonChi = ELEM_ID("btnChi");
-
-        //bottonPoker.addEventListener("click", mostrarPoker);
-        //bottonChi.addEventListener("click", mostrarChiCuadrada);
-        /* End boton opciones test */
-
-        /* Función Poker */
-        function generarPoker() {
-            const seleccionPChi = ELEM_ID('pChiCuadrado').value;
-
-            if (seleccionPChi >= 0) {
-                // Bloquear boton resultado fibonacci y congruencia
-                var blo_btnGenerarFibonacci = ELEM_ID("btnGenerarFibonacci");
-                blo_btnGenerarFibonacci.disabled = true;
-                var opcionGenerar = ELEM_ID("opcGenerar");
-                opcionGenerar.disabled = true;
-                var blo_btnGenerarChi = ELEM_ID("btnGenerarChi");
-                blo_btnGenerarChi.disabled = true;
-
-                // Bloquear boton test poker y chi
-                var blo_btnPoker = ELEM_ID("btnPoker");
-                var blo_btnChi = ELEM_ID("btnChi");
-                var blo_btnPokerChi = ELEM_ID("btnPokerChi");
-                blo_btnPoker.disabled = true;
-                blo_btnChi.disabled = true;
-                blo_btnPokerChi.disabled = true;
-
-                mostrarTablaPoker.style.display = "block";
-                const conclusionPoker = ELEM_ID('hipotesisPokerIS');
-
-                let resultadoTest = [];
-
-                if (calculoFibonacci.length > 0) {
-                    resultadoTest = testPoker(calculoFibonacci, seleccionPChi);
-                } else if (calculoCongruencia.length > 0) {
-                    resultadoTest = testPoker(calculoCongruencia, seleccionPChi);
-                }
-
-                // tabla base
-                const tablaPoker = ELEM_ID('tbodyPoker');
-                tablaPoker.innerHTML = '';
-                for (let i = 0; i < resultadoTest.categorias_base.length; i++) {
-                    tablaPoker.innerHTML +=
-                        `<tr>
-                        <th scope="row">${resultadoTest.categorias_base[i]}</th>
-                        <td class="text-center" scope="col">${resultadoTest.fo_base[i]}</td>
-                        <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_base[i]}</td>
-                        <td class="text-right" scope="col">${resultadoTest.fe_base[i].toFixed(4)}</td>
-                        <td class="text-right" scope="col">${resultadoTest.x2_base[i].toFixed(4)}</td>
-                    </tr>`;
-                }
-                tablaPoker.innerHTML +=
-                    `<tr>
-                    <th class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
-                    <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
-                    <td class="table-secondary" colspan="2" scope="col"></td>
-                    <td class="h5 text-right font-weight-bold table-danger" scope="col">${resultadoTest.sumatoria_base.toFixed(4)}</td>
-                </tr>`;
-
-                // tabla solapada
-                const tablaPokerIS = ELEM_ID('tbodyPokerIS');
-                tablaPokerIS.innerHTML = '';
-
-                for (let i = 0; i < resultadoTest.categorias_solapada.length; i++) {
-                    tablaPokerIS.innerHTML += `<tr>
-                      <td scope="row">${resultadoTest.categorias_solapada[i]}</th>
-                      <td class="text-center" scope="col">${resultadoTest.fo_solapada[i]}</td>
-                      <td class="text-right" scope="col">${resultadoTest.probabilidad_categorias_solapada[i]}</td>
-                      <td class="text-right" scope="col">${resultadoTest.fe_solapada[i].toFixed(4)}</td>
-                      <td class="text-right" scope="col">${resultadoTest.x2_solapada[i].toFixed(4)}</td>
-                  </tr>`;
-                }
-                tablaPokerIS.innerHTML += `<tr>
-                  <td class="h5 font-weight-bold table-success" scope="row">&#931; - Sumatoria</th>
-                  <td class="h5 text-center font-weight-bold table-warning" scope="col">${resultadoTest.fo_sum_base}</td>
-                  <td class="table-secondary" colspan="2" scope="col"></td>
-                  <td class="h5 text-right font-weight-bold table-danger" scope="col">${resultadoTest.sumatoria_solapada.toFixed(4)}</td>
-                </tr>`;
-
-                // Conclusion Poker
-                conclusionPoker.textContent = resultadoTest.mensaje_conclusion;
-
-                if (resultadoTest.pasa === 'PASA') {
-                    var visibleMarca = ELEM_ID("marcaClase");
-                    visibleMarca.style.display = "block";
-                } else if (resultadoTest.pasa === 'NO PASA') {
-                    var btn_reset = ELEM_ID("btnReset");
-                    btn_reset.style.display = "block";
-                }
-
-                return;
-            }
-        }
-
-        /* Función Chi Cuadrado */
-        function generarChi() {
-            const probabilidadChi = ELEM_ID('chiCuadrado').value;
-
-            if (probabilidadChi >= 0) {
-                // Bloquear boton resultado fibonacci y congruencia
-                var blo_btnGenerarFibonacci = ELEM_ID("btnGenerarFibonacci");
-                blo_btnGenerarFibonacci.disabled = true;
-                var opcionGenerar = ELEM_ID("opcGenerar");
-                opcionGenerar.disabled = true;
-                var blo_btnGenerarChi = ELEM_ID("btnGenerarChi");
-                blo_btnGenerarChi.disabled = true;
-
-                // Bloquear boton test poker y chi
-                var blo_btnPoker = ELEM_ID("btnPoker");
-                var blo_btnChi = ELEM_ID("btnChi");
-                blo_btnPoker.disabled = true;
-                blo_btnChi.disabled = true;
-
-                mostrarChi.style.display = "block";
-                const conclusionTestChi = ELEM_ID('hipotesisChiCuadrado');
-
-                let resultadoTestChi = [];
-
-                if (calculoFibonacci.length > 0) {
-                    resultadoTestChi = testChiCuadrado(calculoFibonacci, probabilidadChi);
-                } else if (calculoCongruencia.length > 0) {
-                    resultadoTestChi = testChiCuadrado(calculoCongruencia, probabilidadChi);
-                }
-
-                const tablaChi = ELEM_ID('tbodyChi');
-                tablaChi.innerHTML = '';
-
-                for (let i = 0; i < 10; i++) {
-                    tablaChi.innerHTML += `<tr">
-                        <td scope="col" class="text-center">${resultadoTestChi[0][i]}</td>
-                        <td scope="col" class="text-center">${resultadoTestChi[1][i]}</td>
-                        <td scope="col" class="text-right">${resultadoTestChi[2]}</td>
-                        <td scope="col" class="text-right">${resultadoTestChi[3][i]}</td>
-                        <td scope="col" class="text-right">${resultadoTestChi[4][i].toFixed(2)}</td>
-                        <td scope="col" class="text-right">${resultadoTestChi[5][i].toFixed(5)}</td>
-                    </tr>`;
-                }
-                tablaChi.innerHTML += `<tr>
-                    <td class="table-secondary" scope="col" colspan="4"></td>
-                    <td class="text-center table-success" scope="row" style="font-size: 25px; font-weight: bold;">&Sigma;</td>
-                    <td class="text-right table-danger" style="font-size: 25px; font-weight: bold;" scope="col">
-                      ${resultadoTestChi[6].toFixed(5)}
-                    </td>
-                </tr>`;
-
-                conclusionTestChi.textContent = resultadoTestChi[7];
-
-                if (resultadoTestChi.pasa === 'PASA') {
-                    var visibleMarca = ELEM_ID("marcaClase");
-                    visibleMarca.style.display = "block";
-                } else if (resultadoTestChi.pasa === 'NO PASA') {
-                    var btn_reset = ELEM_ID("btnResetChi");
-                    btn_reset.style.display = "block";
-                }
-
-
-                return;
-            }
-        }
-
         function reiniciarIntergrador() {
             window.location.href = "integrador.html";
         }
-        /* Función Marcas de clases*/
-        /*  function generarMarca() {
-              let resultadoMarcas = marcas(calculoFibonacci);
-              const tablaMarcas = ELEM_ID('tbodyMarcas');
-              mostrarMarca.style.display = "block";
-  
-              tablaMarcas.innerHTML = '';
-  
-              for (let i = 0; i < 10; i++) {
-                  tablaMarcas.innerHTML += `
-                    <tr">
-                        <td scope="col" class="text-center">${resultadoMarcas[0][i]}</td>
-                        <td scope="col" class="text-center">${resultadoMarcas[1][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[2][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[3][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[4][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[5][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[6][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[7][i]}</td>
-                        <td scope="col" class="text-right">${resultadoMarcas[8][i]}</td>
-                    </tr>`;
-              }
-  
-              tablaMarcas.innerHTML += `
-                    <tr">
-                        <td scope="col" class="text-center bg-gray-200" colspan="8"></td>
-                        <td scope="col" class="text-right">${resultadoMarcas[9]}%</td>
-                    </tr>`;
-              const minimo = ELEM_ID("min");
-              const maximo = ELEM_ID("max");
-              const muestra = ELEM_ID("nMuestra");
-  
-              minimo.textContent = resultadoMarcas[10];
-              maximo.textContent = resultadoMarcas[11];
-              muestra.textContent = resultadoMarcas[12];
-          }
-  */
-    
+
         /* evento y funcion para recuperar y mostrar localstorage */
         window.addEventListener("load", function () {
 
@@ -823,9 +494,9 @@
             // si localstorage vacio
             if (storage.length === 0) {
                 tabla.innerHTML +=
-                `<tr>
-                    <td class="text-wrap align-middle text-center" colspan="6">no hay secuencias generadas!,
-                        generar con: <a href="./fibonacci.html">fibonacci</a>, <a href="./congruencia.html">congruencia</a> </td>    
+                    `<tr>
+                    <td class="text-wrap align-middle text-center" colspan="6">No hay secuencias generadas!,
+                        generar con: <a href="./fibonacci.html">Fibonacci</a>, <a href="./congruencia.html">Congruencia</a> </td>    
                 </tr>`;
                 return;
             }
@@ -834,28 +505,29 @@
             for (let i = 0; i < storage.length; i++) {
                 const element = storage[i];
                 console.log(element);
-                tabla.innerHTML += 
+                tabla.innerHTML +=
                     `<tr">
                         <td class="text-wrap align-middle" scope="row">${element.nombre}</td>
-                        <td class="text-wrap align-middle">${element.algoritmo}</td>
-                        <td class="text-wrap align-middle">
-                            ${(element.test_chi) ? "chi-cuadrado" : ""}
-                            ${(element.test_poker) ? "poker" : ""}
+                        <td class="text-wrap align-middle text-center">${element.algoritmo}</td>
+                        <td class="text-wrap align-middle text-center">
+                            ${(element.test_chi) ? "Chi-Cuadrado" : ""}
+                            ${(element.test_poker) ? "Poker" : ""}
                         </td>
-                        <td class="text-wrap align-middle">${element.cant_digitos}</td>
-                        <td class="text-wrap align-middle">${element.fecha_creacion}</td>
-                        <td class="text-wrap align-middle">
-                            <button class="btn btn-danger btn-sm" onclick="borrar('${element.nombre}')">borrar</button>
+                        <td class="text-wrap align-middle text-center">${element.probabilidad}</td>
+                        <td class="text-wrap align-middle text-center">${element.cant_digitos}</td>
+                        <td class="text-wrap align-middle text-center">${element.fecha_creacion}</td>
+                        <td class="text-wrap align-middle text-center">
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.nombre}')">Borrar</button>
                         </td>
                     </tr>`;
             }
 
-            }, false)
+        }, false)
 
         /* funcion para borrar una secuencia */
         function borrar(clave) {
             // mensaje de confirmacion
-            let respuesta = confirm("desea borrar la secuencia! AVISO: esto recargará la página!.");
+            let respuesta = confirm("Desea borrar la secuencia! AVISO: Esto recargará la página!.");
             if (respuesta) {
                 // eliminar
                 eliminarDelLocalStorage(clave);
@@ -864,7 +536,12 @@
             }
             return;
         }
-    
+
+        /* funcion para la primera marca de clase*/
+        function marcaClase() {
+
+        }
+
     </script>
 
 </body>

@@ -22,7 +22,7 @@ function guardarEnLocalStorage(clave, objeto) {
 
     // si ya existe un guardado con la misma clave
     if (lst.getItem(clave) !== null) {
-        return [1, "ya existe una secuencia con ese nombre!"];
+        return [1, "Ya existe una secuencia con ese nombre!"];
     }
 
     // guardar
@@ -34,7 +34,7 @@ function guardarEnLocalStorage(clave, objeto) {
         return error.getMessage();
     }
 
-    return [0, "secuencia guardada"];
+    return [0, "Secuencia guardada"];
 }
 
 /**
@@ -51,7 +51,7 @@ function obtenerDeLocalStorage(clave) {
 
     // validacion
     if (objeto === null) {
-        return "la secuencia buscada no existe!";
+        return "La secuencia buscada no existe!";
     }
 
     return JSON.parse(objeto);
@@ -80,7 +80,7 @@ function recuperarLocalStorage() {
 }
 
 function eliminarDelLocalStorage(clave) {
- 
+
     // local storage
     const lst = window.localStorage;
 

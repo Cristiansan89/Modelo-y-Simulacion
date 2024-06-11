@@ -280,7 +280,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tabla">
-
                                             </tbody>
                                         </table>
                                     </ul>
@@ -290,58 +289,71 @@
                                         <p class="h3 font-weight-bold text-black">Marca de Clases</p>
                                     </div>
                                     <div class="p-2" style="min-height: 120px;">
-                                        <div class="card card-body mx-auto" style="width: 90%;">
+                                        <div class="card card-body mx-auto" style="width: 95%;">
                                             <div class="h4 font-weight-bold text-black p-2">
                                                 <p>Generar los nombre de las marca de clases</p>
                                             </div>
-                                            <div class="input-group p-2" style="width: 95%;">
+                                            <div class="input-group p-2" style="width: 100%;">
                                                 <span class="input-group-text font-weight-bold text-gray-900">
                                                     T&iacute;tulo
                                                 </span>
                                                 <input type="text" class="form-control" id="primerTitulo"
                                                     autocomplete="off" required>
                                             </div>
-                                            <div class="input-group p-2" style="width: 95%;">
-                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900"
+                                                    id="spanCantClase">
                                                     Ingrese Cantidad de Clase
                                                 </span>
-                                                <input type="number" class="form-control" id="primeraClase" min="2"
+                                                <input type="number" class="form-control" id="cantClase" min="2"
                                                     autocomplete="off" required>
                                             </div>
                                             <div class="text-center p-2" id="btnGenerarClase">
                                                 <button class="btn btn-outline-primary btn-xl fw-bold p-2" type="submit"
-                                                    style="width: 25%;" onclick="generarClase()">Generar</button>
+                                                    style="width: 15%;" onclick="generarClase()">Generar</button>
                                             </div>
                                             <div id="contenedorClase"></div>
+                                            <div id="min_max" style="display: none;">
+                                                <div class="input-group p-2" style="width: 100%;">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">
+                                                        M&iacute;nimo </span>
+                                                    <input type="text" class="form-control" id="minimo"
+                                                        autocomplete="off" required>
+                                                    <span class="input-group-text font-weight-bold text-gray-900 ml-2">
+                                                        M&aacute;ximo </span>
+                                                    <input type="text" class="form-control" id="maximo"
+                                                        autocomplete="off" required>
+                                                </div>
+                                                <div class="input-group p-2" style="width: 100%;">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">
+                                                        Secuencia
+                                                    </span>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        id="chiCuadrado">
+                                                        <option value="-1" selected>
+                                                            Seleccione una secuencia
+                                                        </option>
+                                                        <option id="selectSecuencia"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="text-center p-2" id="btnGuardarClase" style="display: none;">
                                                 <button class="btn btn-outline-danger btn-xl fw-bold p-2" type="submit"
-                                                    style="width: 25%;" onclick="reset()">Volver</button>
+                                                    style="width: 15%;" onclick="reset()">Volver</button>
                                                 <button class="btn btn-outline-success btn-xl fw-bold p-2" type="submit"
-                                                    style="width: 25%;" onclick="guardarClase()">Guardar</button>
+                                                    style="width: 15%;" onclick="guardarClase()">Guardar</button>
                                             </div>
-                                        </div>
-                                        <div id="segundoTitulo" style="display: none;">
-                                            <div class="card card-body mx-auto" style="width: 60%;">
-                                                <div class="input-group p-2" style="width: 95%;">
-                                                    <span class="input-group-text font-weight-bold text-gray-900">
-                                                        Segundo T&iacute;tulo
-                                                    </span>
-                                                    <input type="number" class="form-control" id="segundoTitulo" min="2"
-                                                        autocomplete="off" required>
+                                            <div id="mensajeGuardado" style="display: none;">
+                                                <div class="text-center" style="width: 95%;">
+                                                    <p id="mensajes" style="color: rgb(20, 129, 16);">se guardo -
+                                                        limpiar esta parte</p>
                                                 </div>
-                                                <div class="input-group p-2" style="width: 95%;">
-                                                    <span class="input-group-text font-weight-bold text-gray-900">
-                                                        Ingrese Cantidad de Clase
-                                                    </span>
-                                                    <input type="number" class="form-control" id="segundaClase" min="2"
-                                                        autocomplete="off" required>
-                                                </div>
-                                                <div class="text-center p-2">
-                                                    <button id="" class="btn btn-outline-primary btn-xl fw-bold p-2"
-                                                        type="submit" style="width: 25%;"
-                                                        onclick="generarClase()">Generar</button>
-                                                </div>
-                                                <div id="contenedorClase1"></div>
+                                            </div>
+                                            <div class="text-center p-2" id="btnNuevaClase" style="display: none;">
+                                                <button class="btn btn-warning btn-xl fw-bold p-2" type="submit"
+                                                    style="width: 15%;" onclick="nuevaClase()">Nueva</button>
+                                                <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
+                                                    style="width: 15%;" onclick="finalizarClase()">Finalizar</button>
                                             </div>
                                         </div>
                                     </div>
@@ -407,7 +419,7 @@
     <!--Asignando los parametro de las funciones de js al html -->
     <script>
         function generarClase() {
-            const cantidadClase = document.getElementById('primeraClase').value;
+            const cantidadClase = document.getElementById('cantClase').value;
             const contenedorClase = document.getElementById('contenedorClase');
             contenedorClase.innerHTML = ' ';
 
@@ -416,7 +428,7 @@
                 //Generando el input y aplicando bootstrap 
                 const groupInput = document.createElement('div');
                 groupInput.classList.add('input-group', 'p-2');
-                groupInput.style.width = '75%';
+                groupInput.style.width = '100%';
 
                 const labelSpan = document.createElement('span');
                 labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
@@ -446,7 +458,6 @@
                     select.appendChild(opcion);
                 });
 
-
                 selectDiv.appendChild(select);
 
                 groupInput.appendChild(labelSpan);
@@ -457,17 +468,60 @@
                 contenedorClase.appendChild(groupInput);
             }
 
+            min_max.style.display = "block";
+            cantClase.style.display = "none";
+            spanCantClase.style.display = "none";
             btnGenerarClase.style.display = "none";
             btnGuardarClase.style.display = "block";
             contenedorClase.style.display = "block";
-
             return;
         }
 
         function reset() {
+            min_max.style.display = "none";
             btnGenerarClase.style.display = "block";
             btnGuardarClase.style.display = "none";
             contenedorClase.style.display = "none";
+            cantClase.style.display = "block";
+            spanCantClase.style.display = "block";
+            primerTitulo.value = "";
+            cantClase.value = "";
+            return;
+        }
+
+        function guardarClase() {
+            mensajeGuardado.style.display = "block";
+            btnGuardarClase.style.display = "none";
+            btnNuevaClase.style.display = "block";
+            return;
+        }
+
+        function nuevaClase() {
+            min_max.style.display = "none";
+            btnGenerarClase.style.display = "block";
+            btnGuardarClase.style.display = "none";
+            btnNuevaClase.style.display = "none";
+            contenedorClase.style.display = "none";
+            cantClase.style.display = "block";
+            spanCantClase.style.display = "block";
+            mensajeGuardado.style.display = "none";
+            primerTitulo.value = "";
+            cantClase.value = "";
+            return;
+        }
+
+        function finalizarClase() {
+            btnNuevaClase.style.display = "none";
+            min_max.style.display = "none";
+            btnGenerarClase.style.display = "block";
+            btnGuardarClase.style.display = "none";
+            contenedorClase.style.display = "none";
+            cantClase.style.display = "block";
+            spanCantClase.style.display = "block";
+            primerTitulo.value = "";
+            cantClase.value = "";
+            mensajeGuardado.style.display = "none";
+            return;
         }
     </script>
     <script>
@@ -520,6 +574,28 @@
                             <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.nombre}')">Borrar</button>
                         </td>
                     </tr>`;
+            }
+
+        }, false)
+
+        window.addEventListener("load", function () {
+
+            const selectselectSecuencia = ELEM_ID("selectSecuencia");
+            const storage = recuperarLocalStorage();
+
+            // si localstorage vacio
+            if (storage.length === 0) {
+                selectselectSecuencia.innerHTML +=
+                    `<option>No hay secuencias generadas!</option>`;
+                return;
+            }
+
+            // si localstorage con datos
+            for (let i = 0; i < storage.length; i++) {
+                const element = storage[i];
+                console.log(element);
+                selectselectSecuencia.innerHTML +=
+                    `<option>${element.nombre}</option>`;
             }
 
         }, false)

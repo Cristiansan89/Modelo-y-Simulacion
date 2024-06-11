@@ -535,7 +535,7 @@
                     </div>
                     <!-- Fin Test Chi Cuadrada -->
 
-                    <!-- Begin Guardar Semilla -->
+                    <!-- Begin Guardar Secuencia -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingThree">
                             <button class="accordion-button text-gray-900 text-center font-weight-bold collapsed"
@@ -624,7 +624,7 @@
 
                         </div>
                     </div>
-                    <!-- End Guardar Semilla -->
+                    <!-- End Guardar Secuencia -->
                 </div>
                 <!-- Fin Test Poker, Chi Cuadrada y Marcas de clases-->
             </div>
@@ -985,13 +985,17 @@
 
         /* Función Guardar Semilla*/
         function guardarSecuencia() {
+
             /* obtener inputs */
             const nombreSecuencia = ELEM_ID('nombre');
             const testChi = ELEM_ID('test_chi');
             const testPoker = ELEM_ID('test_poker');
+            const probabilidadChi = ELEM_ID('chiCuadrado').value; // probabilidad del test chi-cuadrado
+            const probabilidadPoker = ELEM_ID('pChiCuadrado').value; // probabilidad del test de poker
+
+            /* obtener divs para validaciones */
             const validaciones = ELEM_ID('validaciones');
             const mensajes = ELEM_ID('mensajes');
-            const probabilidadChi = ELEM_ID('chiCuadrado').value;
 
             // validaciones
             if (nombreSecuencia.value.length === 0) {
@@ -1010,16 +1014,32 @@
             // preparar valores
             const regex = /\s/g;
             const nombre = nombreSecuencia.value.trim().replaceAll(regex, '-');
-            const fecha = new Date().toGMTString();
+            const tipo = esSecuenciaNumerica();
+            const fecha = new Date();
+            const fecha_formato = fecha.toLocaleDateString() + " - " + fecha.toLocaleTimeString();
+
+             /** 
+                * *formato del objeto secuencia numerica:
+                * {
+                *  nombre: "nombre representativo del objeto",
+                *  tipo: "TIPO_SECUENCIA"
+                *  algoritmo: "algoritmo usado",
+                *  test_chi: [true | false, alfa],
+                *  test_poker: [true | false, alfa],
+                *  fecha_creacion: "date",
+                *  cant_digitos: n,
+                *  secuencia: []
+                * }
+            */
 
             // objeto a guardar
             const secuencia = {
                 nombre: nombre,
-                algoritmo: "Congruencia Fundamental",
-                test_chi: testChi.checked,
-                test_poker: testPoker.checked,
-                probabilidad: probabilidadChi,
-                fecha_creacion: fecha,
+                tipo: tipo,
+                algoritmo: "Congruencia Fund.",
+                test_chi: [testChi.checked, probabilidadChi],
+                test_poker: [testPoker.checked, probabilidadPoker],
+                fecha_creacion: fecha_formato,
                 cant_digitos: calculoCongruencia.length,
                 secuencia: [...calculoCongruencia]
             }
@@ -1027,12 +1047,12 @@
             // guardar en local storage
             const respuesta = guardarEnLocalStorage(nombre, secuencia);
 
-            // si todo ok
+            // si todo ok, respuesta[0] es 0
             if (respuesta[0] === 0) {
                 mensajes.textContent = respuesta[1];
                 validaciones.textContent = '';
             } else {
-                // error
+                // error, respuesta[0] es 1
                 validaciones.textContent = respuesta[1];
                 mensajes.textContent = '';
             }

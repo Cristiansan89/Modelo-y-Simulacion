@@ -254,6 +254,7 @@
                                         </p>
                                     </ul>
                                 </div>
+                                <!-- inicio tabla de secuencias aleatorias testeadas -->
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Secuencias Aleatorias Testeadas</p>
@@ -268,8 +269,6 @@
                                                     </th>
                                                     <th scope="col" class="text-wrap align-middle text-center">Tests
                                                         Aprobados</th>
-                                                    <th scope="col" class="text-wrap align-middle text-center">
-                                                        Probabilidad</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">Cant.
                                                         D&iacute;gitos
                                                     </th>
@@ -284,6 +283,7 @@
                                         </table>
                                     </ul>
                                 </div>
+                                <!-- fin tabla de secuencias aleatorias testeadas -->
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Crear Marca de Clases</p>
@@ -571,18 +571,35 @@
             window.location.href = "integrador.html";
         }
 
+        /* funcion para retornar SVG "borrar" */
+        function svgBorrar() {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+            </svg>`;
+        }
+
+        /* funcion para retornar SVG "ver" */
+        function svgVer() {
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-zoom-in" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"/>
+                <path d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z"/>
+                <path fill-rule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5"/>
+            </svg>`;
+        }
+
         /* evento y funcion para recuperar y mostrar localstorage */
+        /* SOLO SECUENCIAS NUMERICAS */
         window.addEventListener("load", function () {
 
             const tabla = ELEM_ID("tabla");
-            const storage = recuperarLocalStorage();
+            const storage = recuperarLocalStorage(esSecuenciaNumerica()); // recupera SOLO SECUENCIAS NUMERICAS 
 
             // si localstorage vacio
             if (storage.length === 0) {
                 tabla.innerHTML +=
-                    `<tr>
-                    <td class="text-wrap align-middle text-center" colspan="6">No hay secuencias generadas!,
-                        generar con: <a href="./fibonacci.html">Fibonacci</a>, <a href="./congruencia.html">Congruencia</a> </td>    
+                `<tr>
+                    <td class="text-wrap align-middle text-center" colspan="6">No hay secuencias generadas!, generar con: <a href="./fibonacci.html">Fibonacci</a>, <a href="./congruencia.html">Congruencia</a> </td>    
                 </tr>`;
                 return;
             }
@@ -593,21 +610,17 @@
                 console.log(element);
                 tabla.innerHTML +=
                     `<tr">
-                        <td class="text-wrap align-middle" scope="row">${element.nombre}</td>
+                        <td class="text-wrap align-middle text-capitalize" scope="row">${element.nombre}</td>
                         <td class="text-wrap align-middle text-center">${element.algoritmo}</td>
                         <td class="text-wrap align-middle text-center">
-                            ${(element.test_chi) ? "Chi-Cuadrado" : ""}
-                            ${(element.test_poker) ? "Poker" : ""}
+                            ${(element.test_chi[0]) ? `Chi-cuadrado: (${element.test_chi[1]})` : ""}
+                            ${(element.test_poker) ? `Poker: (${element.test_poker[1]})` : ""}
                         </td>
-                        <td class="text-wrap align-middle text-center">${element.probabilidad}</td>
                         <td class="text-wrap align-middle text-center">${element.cant_digitos}</td>
                         <td class="text-wrap align-middle text-center">${element.fecha_creacion}</td>
                         <td class="text-wrap align-middle text-center">
                             <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.nombre}')">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                                </svg>
+                                ${svgBorrar()}
                                 Borrar
                             </button>
                         </td>
@@ -616,40 +629,18 @@
 
         }, false)
 
-        window.addEventListener("load", function () {
-
-            const selectselectSecuencia = ELEM_ID("selectSecuencia");
-            const storage = recuperarLocalStorage();
-
-            // si localstorage vacio
-            if (storage.length === 0) {
-                selectselectSecuencia.innerHTML +=
-                    `<option>No hay secuencias generadas!</option>`;
-                return;
-            }
-
-            // si localstorage con datos
-            for (let i = 0; i < storage.length; i++) {
-                const element = storage[i];
-                console.log(element);
-                selectselectSecuencia.innerHTML +=
-                    `<option>${element.nombre}</option>`;
-            }
-
-        }, false)
-
         /* evento y funcion para recuperar y mostrar localstorage */
+        /* SOLO MARCAS DE CLASE */
         window.addEventListener("load", function () {
 
             const tablaMarca = ELEM_ID("tablaMarca");
-            const storage = recuperarLocalStorage();
+            const storage = recuperarLocalStorage(esMarcaDeClase());
 
             // si localstorage vacio
             if (storage.length === 0) {
                 tablaMarca.innerHTML +=
                     `<tr>
-                        <td class="text-wrap align-middle text-center" colspan="6">No hay marcas de clases generadas!
-                        </td>    
+                        <td class="text-wrap align-middle text-center" colspan="6">No hay marcas de clases generadas!</td>    
                     </tr>`;
                 return;
             }
@@ -660,37 +651,31 @@
                 console.log(element);
                 tablaMarca.innerHTML +=
                     `<tr">
-                <td class="text-wrap align-middle" scope="row">${element.titulo}</td>
-                <td class="text-wrap align-middle text-center">${element.nombre}</td>
-                <td class="text-wrap align-middle text-center">${element.minimo}</td>
-                <td class="text-wrap align-middle text-center">${element.maximo}</td>
-                <td class="text-wrap align-middle text-center">${element.fecha_creacion}</td>
-                <td class="text-wrap align-middle text-center">
-                    <button class="btn btn-outline-primary btn-sm" onclick="marcaClase('${element.titulo}')">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-zoom-in" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11M13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0"/>
-                        <path d="M10.344 11.742q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1 6.5 6.5 0 0 1-1.398 1.4z"/>
-                        <path fill-rule="evenodd" d="M6.5 3a.5.5 0 0 1 .5.5V6h2.5a.5.5 0 0 1 0 1H7v2.5a.5.5 0 0 1-1 0V7H3.5a.5.5 0 0 1 0-1H6V3.5a.5.5 0 0 1 .5-.5"/>
-                        </svg>
-                        Ver
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.titulo}')">
-                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                        </svg>
-                        Borrar
-                    </button>
-                </td>
-                </tr>`;
+                        <td class="text-wrap align-middle text-capitalize" scope="row">${element.nombre}</td>
+                        <td class="text-wrap align-middle text-center">${element.secuencia}</td>
+                        <td class="text-wrap align-middle text-center">${element.minimo}</td>
+                        <td class="text-wrap align-middle text-center">${element.maximo}</td>
+                        <td class="text-wrap align-middle text-center">${element.fecha_creacion}</td>
+                        <td class="text-wrap align-middle text-center">
+                            <button class="btn btn-outline-primary btn-sm" onclick="">
+                                ${svgVer()}
+                                Ver
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.nombre}')">
+                                ${svgBorrar()}
+                                Borrar
+                            </button>
+                        </td>
+                    </tr>`;
             }
 
         }, false)
 
-        /* funcion para borrar una secuencia */
+        /* funcion para borrar un objeto de localstorage */
+        /* SECUENCIA O MARCA DE CLASE */
         function borrar(clave) {
             // mensaje de confirmacion
-            let respuesta = confirm("Desea borrar la secuencia! AVISO: Esto recargará la página!.");
+            let respuesta = confirm("Desea borrar la secuencia! AVISO: Esto recargará la página!");
             if (respuesta) {
                 // eliminar
                 eliminarDelLocalStorage(clave);
@@ -700,9 +685,9 @@
             return;
         }
 
-        /* funcion para la primera marca de clase*/
+        /* funcion para generar marcas de clase*/
         function marcaClase() {
-
+            //capturar inputs ... 
         }
 
     </script>

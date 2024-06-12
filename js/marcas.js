@@ -1,85 +1,129 @@
 
-function obtenerMarcas(pseudoAleatorios) {
+function obtenerMarcas(nombreGeneral, nombreMarcas, pxMarcas, valMin, valMax) {
 
-    // digitos constantes
-    const digitosNaturales = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // * objeto inicial, sera una tabla de marcas de clase luego
+    // TODO: ¿como trabajo un rango con valores min y max negativos?
+    const marca = {
+        nombreGeneral: nombreGeneral,
+        nombreMarcas: [...nombreMarcas],
+        pxMarcas: [...pxMarcas], //P(x)
+        fxMarcas: [],
+        valMin: valMin,
+        valMax: valMax,
+        valRango: Math.abs(valMax - valMin),
+        min_max_porcentual: [], // minimos y maximos porcentuales
+        min_max_digitos: [] // minimos y maximos en digitos
+    };
 
-    // parametros de calculo
-    const n = pseudoAleatorios.length;
-    const k = digitosNaturales.length;
-    const min = Math.min(...digitosNaturales);
-    const max = Math.max(...digitosNaturales);
-    const valAbs = Math.abs(min - max);
+    // * obtener frecuencia acumulada F(x)
+    for (let i = 0; i < marca.pxMarcas.length; i++) {
+        const element = marca.pxMarcas[i];
+        (i === 0)
+            ? marca.fxMarcas.push(element)
+            : marca.fxMarcas.push(element + marca.fxMarcas[i - 1])
+    };
 
-    // obtener frecuencia absoluta
-    const fa = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < k; i++) {
-        for (let j = 0; j < n; j++) {
-            if (pseudoAleatorios[j] === digitosNaturales[i]) fa[i]++
+    /**
+     *  * crear rangos min. y max. porcentuales para cada marca individual
+     *  busco lograr el siguiente formato:
+     *  min_max_porcentual: [
+     *  { nombreMarca: nombreMarcas[i-esima], min: 0                 , max: F(x)-iesimo},
+     *  { nombreMarca: nombreMarcas[i-esima], min: F(x)-iesimo + 0.01, max: F(x)-iesimo},
+     *  ...
+     * ]
+     */
+    marca.min_max_porcentual = marca.fxMarcas.map((element, index) => {
+
+        // capturo el nombre de cada marca de clase del objeto marca
+        let nombreMarca = marca.nombreMarcas[index];
+        // preparo el minimo y maximo de la marca
+        let min, max;
+
+        if (index === 0) {
+            min = 0;
+            max = element;
+        } else {
+            min = marca.fxMarcas[index - 1] + 0.01;
+            max = element;
         }
-    }
 
-    // obtener P(x)
-    const px = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < k; i++) {
-        px[i] = 1 / k;
-    }
+        // retorno una marca de clase individual
+        return { nombreMarca, min, max }
+    });
 
-    // obtener F(x)
-    const fx = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    fx[0] = px[0];
-    let factor = Math.pow(10, 1);
-    for (let i = 1; i < k; i++) {
-        let a = fx[i - 1] + px[i];
-        fx[i] = Math.round(a * factor) / factor;
-    }
+    //* crear rangos min. y max. en digitos para cada marca individual
 
-    // cantidad elemento x marca de clase
-    const cantMarca = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < k; i++) {
-        cantMarca[i] = px[i] * valAbs;
-    }
+    // 1- array con cantidad de digitos por marca de clase
+    const cantDigitos = marca.pxMarcas.map( px => Math.round(px * marca.valRango) );
 
-    // obtener las marcas de clases
-    const intervalA = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    const intervalB = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    // 2- formato de array de rangos
+    marca.min_max_digitos = cantDigitos.map( (cantDigito, index) => { 
+        return {
+            nombreMarca: nombreMarcas[index],
+            cantDigitos: cantDigito,
+            min: 0,
+            max: 0
+        } 
+    } );
 
-    intervalA[0] = 0;
-    intervalB[0] = px[0];
-    for (let i = 1; i < k; i++) {
-        intervalA[i] = intervalB[i - 1];
-        let interval = intervalA[i] + px[i];
-        intervalB[i] = Math.round(interval * factor) / factor;
-    }
+    // 3- calcular minimos y maximos por fila recursivamente
+    let i = 0;
+    function minMaxRecursivo(min, max, i) {
+        if (i <= cantDigitos.length) {
 
-    // obtener la frecuencia relativa
-    const fr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let factorFx = Math.pow(10, 5);
-    for (let i = 0; i < k; i++) {
-        let frel = fa[i] / n;
-        fr[i] = Math.round(frel * factorFx) / factorFx;
-    }
+            marca.min_max_digitos[i].min = min; // tomo minimo inicial y siguientes
+            marca.min_max_digitos[i].max = max; // tomo maximo inicial y siguientes
+            i++; // indicar siguiente recursividad
+            
+            if (i > 0 && i < cantDigitos.length - 1) {
+                minMaxRecursivo(max + 1, max + 1 + cantDigitos[i], i);
+            }
 
-    // obtener la frecuencia relativa
-    const porcentaje = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    let factorPorcien = Math.pow(10, 2);
-    let sumatoria = 0;
-    for (let i = 0; i < fr.length; i++) {
-        let porcien = fr[i] * 100;
-        porcentaje[i] = Math.round(porcien * factorPorcien) / factorPorcien + "%";
-        sumatoria = sumatoria + porcien;
+            if (i === cantDigitos.length - 1) {
+                minMaxRecursivo(max + 1, marca.valMax, i);
+            }
+        };
+
+        return;
     }
-    let sumatoriaPorcentaje = Math.round(sumatoria);
-    return [digitosNaturales, px, fx, fa, intervalA, intervalB, cantMarca, fr, porcentaje, sumatoriaPorcentaje, min, max, n];
+    // minimo y maximo inicial
+    minMaxRecursivo(marca.valMin, marca.valMin + cantDigitos[i], i)
+
+    return marca;
 }
 
-function marcas(pseudoAleatorios) {
+// prueba temperaturas
+console.log(obtenerMarcas(
+    "temperatura",
+    ["muy-frio", "frio", "templado", "calido", "caluroso"],
+    [0.08, 0.17, 0.26, 0.35, 0.14],
+    -2,
+    35)
+);
 
-    const resultado = [...obtenerMarcas(pseudoAleatorios)]
+// prueba edades
+console.log(obtenerMarcas(
+    "edades",
+    ["adol.", "jov.", "adult."],
+    [0.2, 0.5, 0.3],
+    17,
+    35
+));
 
-    resultado
-    return resultado;
+// prueba integrador demoras
+console.log(obtenerMarcas(
+    "demoras",
+    ["demora-media", "demora-normal", "demora-alta"],
+    [0.4, 0.5, 0.1],
+    1,
+    10
+));
 
-}
-
-//marcas([2, 3, 7, 1, 7, 7, 4, 1, 4, 5, 9, 1, 2, 6, 0, 1, 0, 6, 3, 6, 6, 4, 7, 2, 9, 3, 5, 6, 5, 6, 5, 8, 4, 7, 8, 3, 9, 1, 1, 2, 4, 5, 1, 5, 6, 3, 9, 4, 0, 9, 3, 0, 3, 7, 1, 2, 2, 7, 0, 2, 3, 7, 5, 0, 7, 7, 4, 4, 5, 0, 6, 5, 0, 5, 2, 6, 6, 2, 6, 2, 9, 2, 3, 1, 8, 6, 1, 0, 1, 8, 3, 4, 8, 2, 3, 1, 2, 7, 9, 5, 1, 0, 4, 4, 5, 5, 4, 5, 9, 8, 4, 0, 7, 2, 6, 0, 6, 6, 7, 1, 8, 2, 1, 0, 4, 2, 8, 6, 3, 9, 0, 6, 7, 6, 3, 2, 1, 2, 5, 2, 5, 7, 3, 8, 0, 6, 5, 3, 7, 3, 3, 6, 4, 1, 6, 2, 9, 5, 2, 5, 4, 0, 9, 1, 8, 9, 5, 9, 8, 4, 2, 6, 4, 0, 6, 8, 2, 5, 7, 7, 5, 1, 4, 3, 4, 6, 1, 1, 5, 4, 6, 1, 5, 7, 6, 2, 9, 2, 1, 2, 3, 4, 1, 5, 5, 3, 8, 2, 0, 8, 1, 2, 0, 9, 2, 1, 0, 4, 1, 9, 6, 2, 9, 3, 0, 3, 1, 8, 7, 4, 9, 0, 6, 7, 7, 4, 2, 2, 3, 5, 4, 3, 1, 3, 8, 5, 4, 1, 6, 5, 6, 4, 7, 2, 5, 2, 8, 2, 5, 5, 3, 8, 2, 9, 3, 3, 3, 1, 6, 2, 4, 2, 1, 0, 8, 9, 2, 9, 9, 3, 8, 8, 6, 8, 7, 3, 3, 0, 2, 7, 2, 6, 0, 2]);
+// prueba integrador demandas
+console.log(obtenerMarcas(
+    "demandas",
+    ["baja", "media", "alta"],
+    [0.5, 0.3, 0.2],
+    125,
+    175
+));

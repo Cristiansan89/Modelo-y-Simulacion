@@ -284,6 +284,7 @@
                                     </ul>
                                 </div>
                                 <!-- fin tabla de secuencias aleatorias testeadas -->
+                                <!-- Generar Nombre de Clases -->
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Crear Marca de Clases</p>
@@ -324,18 +325,6 @@
                                                     <input type="number" class="form-control" id="maximo"
                                                         autocomplete="off" required>
                                                 </div>
-                                                <div class="input-group p-2" style="width: 100%;">
-                                                    <span class="input-group-text font-weight-bold text-gray-900">
-                                                        Secuencia
-                                                    </span>
-                                                    <select class="form-select" aria-label="Default select example"
-                                                        id="chiCuadrado">
-                                                        <option value="-1" selected>
-                                                            Seleccione una secuencia
-                                                        </option>
-                                                        <option id="selectSecuencia"></option>
-                                                    </select>
-                                                </div>
                                             </div>
                                             <div class="text-center p-2" id="btnGuardarClase" style="display: none;">
                                                 <button class="btn btn-outline-danger btn-xl fw-bold p-2" type="submit"
@@ -345,20 +334,14 @@
                                             </div>
                                             <div id="mensajeGuardado" style="display: none;">
                                                 <div class="text-center" style="width: 95%;">
-                                                    <p id="mensajes" style="color: rgb(20, 129, 16);">se guardo -
-                                                        limpiar esta parte</p>
+                                                    <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
                                                 </div>
                                             </div>
                                             <div class="text-center p-2" id="btnNuevaClase" style="display: none;">
-                                                <button class="btn btn-warning btn-xl fw-bold p-2" type="submit"
-                                                    style="width: 15%;" onclick="nuevaClase()"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                                        <path fill-rule="evenodd"
-                                                            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
-                                                    </svg>Nueva</button>
                                                 <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
-                                                    style="width: 15%;" onclick="finalizarClase()">Finalizar</button>
+                                                    style="width: 15%;" onclick="finalizarClase()">
+                                                    Finalizar
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -373,12 +356,6 @@
                                                 <tr>
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         Titulo</th>
-                                                    <th scope="col" class="text-wrap align-middle text-center">
-                                                        Secuencia</th>
-                                                    <th scope="col" class="text-wrap align-middle text-center">
-                                                        M&iacute;nimo</th>
-                                                    <th scope="col" class="text-wrap align-middle text-center">
-                                                        M&aacute;ximo </th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         Fecha Creaci&oacute;n</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
@@ -395,7 +372,6 @@
                     </ul>
                 </div>
                 <!-- Fin descripción integrador -->
-
             </div>
             <!-- End Main Content -->
 
@@ -521,41 +497,12 @@
             return;
         }
 
-        function guardarClase() {
-            mensajeGuardado.style.display = "block";
-            btnGuardarClase.style.display = "none";
-            btnNuevaClase.style.display = "block";
-            return;
-        }
-
-        function nuevaClase() {
-            min_max.style.display = "none";
-            btnGenerarClase.style.display = "block";
-            btnGuardarClase.style.display = "none";
-            btnNuevaClase.style.display = "none";
-            contenedorClase.style.display = "none";
-            cantClase.style.display = "block";
-            spanCantClase.style.display = "block";
-            mensajeGuardado.style.display = "none";
-            primerTitulo.value = "";
-            cantClase.value = "";
-            return;
-        }
-
         function finalizarClase() {
-            btnNuevaClase.style.display = "none";
-            min_max.style.display = "none";
-            btnGenerarClase.style.display = "block";
-            btnGuardarClase.style.display = "none";
-            contenedorClase.style.display = "none";
-            cantClase.style.display = "block";
-            spanCantClase.style.display = "block";
-            primerTitulo.value = "";
-            cantClase.value = "";
-            mensajeGuardado.style.display = "none";
+            window.location.reload();
             return;
         }
     </script>
+
     <script>
         /* Función obtener elemento por ID */
         const ELEM_ID = (id) => document.getElementById(id);
@@ -597,10 +544,11 @@
 
             // si localstorage vacio
             if (storage.length === 0) {
+                selectSecuencia.textContent = "No hay marcas de clases generadas!";
                 tabla.innerHTML +=
-                `<tr>
-                    <td class="text-wrap align-middle text-center" colspan="6">No hay secuencias generadas!, generar con: <a href="./fibonacci.html">Fibonacci</a>, <a href="./congruencia.html">Congruencia</a> </td>    
-                </tr>`;
+                    `<tr>
+                        <td class="text-wrap align-middle text-center" colspan="6">No hay secuencias generadas!, generar con: <a href="./fibonacci.html">Fibonacci</a>, <a href="./congruencia.html">Congruencia</a> </td>    
+                    </tr>`;
                 return;
             }
 
@@ -629,6 +577,85 @@
 
         }, false)
 
+        /* funcion para borrar un objeto de localstorage */
+        /* SECUENCIA O MARCA DE CLASE */
+        function borrar(clave) {
+            // mensaje de confirmacion
+            let respuesta = confirm("Desea borrar la secuencia! AVISO: Esto recargará la página!");
+            if (respuesta) {
+                // eliminar
+                eliminarDelLocalStorage(clave);
+                // refrescar pagina
+                window.location.reload();
+            }
+            return;
+        }
+
+        function guardarClase() {
+            mensajeGuardado.style.display = "block";
+            btnGuardarClase.style.display = "none";
+            btnNuevaClase.style.display = "block";
+
+            /* obtener inputs */
+            const primerTitulo = ELEM_ID('primerTitulo');
+            const cantidadClase = ELEM_ID('cantidadClase');
+            const minimo = ELEM_ID('minimo').value;
+            const maximo = ELEM_ID('maximo').value;
+            const mensajes = ELEM_ID('mensajes');
+            const nombreClases = [];
+
+            /* capturar las semillas de los input generados */
+            for (let j = 1; j <= cantidadClase; j++) {
+                const clase = ELEM_ID(`clase${j}`);
+                const px = parseInt(ELEM_ID(`valorP${j}`).value);
+
+                if (clase === null || clase === '') {
+                    mensajes.textContent = 'Datos Incompletos, faltan completar los nombre de clases';
+                    return;
+                } else {
+                    nombreClases.push([clase, px]);
+                }
+            }
+
+            // validaciones
+            if (primerTitulo.value.length === 0) {
+                mensajes.textContent = 'Indique un título de la clase!';
+                return;
+            }
+
+            // preparar valores
+            const regex = /\s/g;
+            const titulo = primerTitulo.value.trim().replaceAll(regex, '-');
+            const tipo = esMarcaDeClase();
+            const fecha = new Date();
+            const fecha_formato = fecha.toLocaleDateString() + " - " + fecha.toLocaleTimeString();
+
+            // objeto a guardar
+            const secuencia = {
+                titulo: titulo,
+                tipo: tipo,
+                nombreClases: nombreClases,
+                minimo: minimo,
+                maximo: maximo,
+                fecha_creacion: fecha_formato,
+            }
+
+            // guardar en local storage
+            const respuesta = guardarEnLocalStorage(titulo, secuencia);
+
+            // si todo ok, respuesta[0] es 0
+            if (respuesta[0] === 0) {
+                mensajes.textContent = respuesta[1];
+                validaciones.textContent = '';
+            } else {
+                // error, respuesta[0] es 1
+                validaciones.textContent = respuesta[1];
+                mensajes.textContent = '';
+            }
+
+            return;
+        }
+
         /* evento y funcion para recuperar y mostrar localstorage */
         /* SOLO MARCAS DE CLASE */
         window.addEventListener("load", function () {
@@ -651,17 +678,14 @@
                 console.log(element);
                 tablaMarca.innerHTML +=
                     `<tr">
-                        <td class="text-wrap align-middle text-capitalize" scope="row">${element.nombre}</td>
-                        <td class="text-wrap align-middle text-center">${element.secuencia}</td>
-                        <td class="text-wrap align-middle text-center">${element.minimo}</td>
-                        <td class="text-wrap align-middle text-center">${element.maximo}</td>
+                        <td class="text-wrap align-middle text-capitalize" scope="row">${element.titulo}</td>
                         <td class="text-wrap align-middle text-center">${element.fecha_creacion}</td>
                         <td class="text-wrap align-middle text-center">
-                            <button class="btn btn-outline-primary btn-sm" onclick="">
+                            <button class="btn btn-outline-primary btn-sm" onclick="marcaClase()">
                                 ${svgVer()}
                                 Ver
                             </button>
-                            <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.nombre}')">
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.titulo}')">
                                 ${svgBorrar()}
                                 Borrar
                             </button>
@@ -670,20 +694,6 @@
             }
 
         }, false)
-
-        /* funcion para borrar un objeto de localstorage */
-        /* SECUENCIA O MARCA DE CLASE */
-        function borrar(clave) {
-            // mensaje de confirmacion
-            let respuesta = confirm("Desea borrar la secuencia! AVISO: Esto recargará la página!");
-            if (respuesta) {
-                // eliminar
-                eliminarDelLocalStorage(clave);
-                // refrescar pagina
-                window.location.reload();
-            }
-            return;
-        }
 
         /* funcion para generar marcas de clase*/
         function marcaClase() {

@@ -332,6 +332,11 @@
                                                 <button class="btn btn-outline-success btn-xl fw-bold p-2" type="submit"
                                                     style="width: 15%;" onclick="guardarClase()">Guardar</button>
                                             </div>
+                                            <!-- validaciones de errores -->
+                                            <div class="text-center" style="width: 95%;">
+                                                <p id="validaciones" style="color: rgb(221, 32, 32);"></p>
+                                            </div>
+                                            <!-- Mensajes -->
                                             <div id="mensajeGuardado" style="display: none;">
                                                 <div class="text-center" style="width: 95%;">
                                                     <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
@@ -426,62 +431,81 @@
 
     <!--Asignando los parametro de las funciones de js al html -->
     <script>
+
+        /* Función obtener elemento por ID */
+        const ELEM_ID = (id) => document.getElementById(id);
+        /* Función convertir a entero */
+        const PARSE_INT = (value) => Number.parseInt(value);
+        /* Función convertir array resultado a cadena string para html */
+        const MAKE_CADENA = (array) => array.join().toLocaleString().replaceAll(',', ', \n');
+
+        let calculoFibonacci = [];
+        let calculoCongruencia = [];
+
         function generarClase() {
-            const cantidadClase = document.getElementById('cantClase').value;
-            const contenedorClase = document.getElementById('contenedorClase');
+            const mensajes = ELEM_ID('mensajes');
+            const validaciones = ELEM_ID('validaciones');
+            const mensajeGuardado = ELEM_ID('mensajeGuardado');
+            const cantidadClase = ELEM_ID('cantClase').value;
+            const contenedorClase = ELEM_ID('contenedorClase');
             contenedorClase.innerHTML = ' ';
 
-            //s cantidad de semilla a generar
-            for (let i = 1; i <= cantidadClase; i++) {
-                //Generando el input y aplicando bootstrap 
-                const groupInput = document.createElement('div');
-                groupInput.classList.add('input-group', 'p-2');
-                groupInput.style.width = '100%';
+            if (cantidadClase === '' || isNaN(cantidadClase)) {
+                validaciones.style.display = "block";
+                validaciones.textContent = "Ingrese la cantidad de clases";
+            } else {
+                for (let i = 0; i < cantidadClase; ++i) {
+                    //Generando el input y aplicando bootstrap 
+                    const groupInput = document.createElement('div');
+                    groupInput.classList.add('input-group', 'p-2');
+                    groupInput.style.width = '100%';
 
-                const labelSpan = document.createElement('span');
-                labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
-                labelSpan.textContent = `Nombre de la Clase ` + i;
+                    const labelSpan = document.createElement('span');
+                    labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
+                    const a = i;
+                    labelSpan.textContent = `Nombre de la Clase ${a + 1}`;
 
-                const nuevoInput = document.createElement('input');
-                nuevoInput.type = 'text';
-                nuevoInput.id = `clase${i}`;
-                nuevoInput.classList.add('form-control');
-                nuevoInput.setAttribute('required', true);
+                    const nuevoInput = document.createElement('input');
+                    nuevoInput.type = 'text';
+                    nuevoInput.id = `nameClass${i}`;
+                    nuevoInput.classList.add('form-control');
+                    nuevoInput.setAttribute('required', true);
 
-                const labelSpanP = document.createElement('span');
-                labelSpanP.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900', 'ml-2');
-                labelSpanP.textContent = `P(x)`;
+                    const labelSpanP = document.createElement('span');
+                    labelSpanP.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900', 'ml-2');
+                    labelSpanP.textContent = 'P(x)';
 
-                const selectDiv = document.createElement('div');
-                const select = document.createElement('select');
-                select.classList.add('form-select');
-                select.setAttribute('aria-label', 'Selección predeterminado');
-                select.id = `valorP${i}`;
+                    const selectDiv = document.createElement('div');
+                    const select = document.createElement('select');
+                    select.classList.add('form-select');
+                    select.setAttribute('aria-label', 'Selección predeterminado');
+                    select.id = `valorP${i}`;
 
-                const opciones = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"];
-                opciones.forEach(opcionValor => {
-                    const opcion = document.createElement('option');
-                    opcion.value = opcionValor;
-                    opcion.textContent = opcionValor.replace('.', ',');
-                    select.appendChild(opcion);
-                });
+                    const opciones = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"];
+                    opciones.forEach(opcionValor => {
+                        const opcion = document.createElement('option');
+                        opcion.value = opcionValor;
+                        opcion.textContent = opcionValor.replace('.', ',');
+                        select.appendChild(opcion);
+                    });
 
-                selectDiv.appendChild(select);
+                    selectDiv.appendChild(select);
 
-                groupInput.appendChild(labelSpan);
-                groupInput.appendChild(nuevoInput);
-                groupInput.appendChild(labelSpanP);
-                groupInput.appendChild(selectDiv);
+                    groupInput.appendChild(labelSpan);
+                    groupInput.appendChild(nuevoInput);
+                    groupInput.appendChild(labelSpanP);
+                    groupInput.appendChild(selectDiv);
 
-                contenedorClase.appendChild(groupInput);
+                    contenedorClase.appendChild(groupInput);
+                }
+                min_max.style.display = "block";
+                cantClase.style.display = "none";
+                spanCantClase.style.display = "none";
+                btnGenerarClase.style.display = "none";
+                btnGuardarClase.style.display = "block";
+                contenedorClase.style.display = "block";
+                validaciones.style.display = "none";
             }
-
-            min_max.style.display = "block";
-            cantClase.style.display = "none";
-            spanCantClase.style.display = "none";
-            btnGenerarClase.style.display = "none";
-            btnGuardarClase.style.display = "block";
-            contenedorClase.style.display = "block";
             return;
         }
 
@@ -501,18 +525,6 @@
             window.location.reload();
             return;
         }
-    </script>
-
-    <script>
-        /* Función obtener elemento por ID */
-        const ELEM_ID = (id) => document.getElementById(id);
-        /* Función convertir a entero */
-        const PARSE_INT = (value) => Number.parseInt(value);
-        /* Función convertir array resultado a cadena string para html */
-        const MAKE_CADENA = (array) => array.join().toLocaleString().replaceAll(',', ', \n');
-
-        let calculoFibonacci = [];
-        let calculoCongruencia = [];
 
         function reiniciarIntergrador() {
             window.location.href = "integrador.html";
@@ -592,36 +604,42 @@
         }
 
         function guardarClase() {
-            mensajeGuardado.style.display = "block";
-            btnGuardarClase.style.display = "none";
-            btnNuevaClase.style.display = "block";
-
             /* obtener inputs */
+            const btnGenerarClase = ELEM_ID('btnGuardarClase');
             const primerTitulo = ELEM_ID('primerTitulo');
-            const cantidadClase = ELEM_ID('cantidadClase');
-            const minimo = ELEM_ID('minimo').value;
-            const maximo = ELEM_ID('maximo').value;
-            const mensajes = ELEM_ID('mensajes');
+            const cantidadClase = ELEM_ID('cantClase').value;
+            const minimo = parseFloat(ELEM_ID('minimo').value);
+            const maximo = parseFloat(ELEM_ID('maximo').value);
+
             const nombreClases = [];
-
-            /* capturar las semillas de los input generados */
-            for (let j = 1; j <= cantidadClase; j++) {
-                const clase = ELEM_ID(`clase${j}`);
-                const px = parseInt(ELEM_ID(`valorP${j}`).value);
-
-                if (clase === null || clase === '') {
-                    mensajes.textContent = 'Datos Incompletos, faltan completar los nombre de clases';
-                    return;
-                } else {
-                    nombreClases.push([clase, px]);
-                }
-            }
 
             // validaciones
             if (primerTitulo.value.length === 0) {
-                mensajes.textContent = 'Indique un título de la clase!';
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = 'Indique un título de la clase!';
                 return;
             }
+
+            console.log(cantidadClase);
+            /* capturar las semillas de los input generados */
+            for (let j = 0; j < cantidadClase; j++) {
+
+                const nombreClass = ELEM_ID(`nameClass${j}`).value;
+                const valorPx = ELEM_ID(`valorP${j}`).value;
+
+                console.log(nombreClass);
+                console.log(valorPx);
+
+                if (nombreClass === '') {
+                    ELEM_ID('validaciones').style.display = "block";
+                    ELEM_ID('validaciones').textContent = "Todos los nombres de clase deben ser completados";
+                    return;
+                }
+                nombreClases.push({ nombre: nombreClass, px: valorPx });
+
+            }
+
+            validaciones.textContent = '';
 
             // preparar valores
             const regex = /\s/g;
@@ -643,16 +661,19 @@
             // guardar en local storage
             const respuesta = guardarEnLocalStorage(titulo, secuencia);
 
+
             // si todo ok, respuesta[0] es 0
-            if (respuesta[0] === 0) {
+            if (respuesta[0] === OK) {
                 mensajes.textContent = respuesta[1];
                 validaciones.textContent = '';
+                mensajeGuardado.style.display = "block";
+                btnGuardarClase.style.display = "none";
+                btnNuevaClase.style.display = "block";
             } else {
                 // error, respuesta[0] es 1
                 validaciones.textContent = respuesta[1];
                 mensajes.textContent = '';
             }
-
             return;
         }
 

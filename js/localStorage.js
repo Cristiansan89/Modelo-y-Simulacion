@@ -17,14 +17,20 @@
  * }
  * 
  * * formato del objeto marca de clase:
- * TODO: describir la estructura de este objeto
- * {
- *  nombre: "nombre representativo del objeto",
- *  tipo: "TIPO_MARCA_CLASE",
- *  secuencia: "nombre de la secuencia a usar",
- *  minimo: numero,
- *  maximo: numero,
- *  fecha_creacion: "date",
+ * el siguiente formato de objeto lo retorna marcas.js
+ * a este objeto se le debe agregar al final el atributo tipo y fecha.
+ *  {
+ *   nombreGeneral: "nombre representativo del objeto",
+ *   nombreMarcas: [...nombreMarcas], 
+ *   pxMarcas: [...pxMarcas], //P(x)
+ *   fxMarcas: [],
+ *   valMin: valMin,
+ *   valMax: valMax,
+ *   valRango: Math.abs(valMax - valMin),
+ *   min_max_porcentual: [], // minimos y maximos porcentuales
+ *   min_max_digitos: [], // minimos y maximos en digitos
+ *   tipo: "TIPO_MARCA_CLASE",
+ *   fecha_creacion: "date",
  * }
  */
 

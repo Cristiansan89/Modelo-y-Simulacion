@@ -311,7 +311,7 @@
                                             </div>
                                             <div class="text-center p-2" id="btnGenerarClase">
                                                 <button class="btn btn-outline-primary btn-xl fw-bold p-2" type="submit"
-                                                    style="width: 15%;" onclick="generarClase()">Generar</button>
+                                                    style="width: 15%;" onclick="generarInputsClase()">Generar</button>
                                             </div>
                                             <div id="contenedorClase"></div>
                                             <div id="min_max" style="display: none;">
@@ -319,11 +319,11 @@
                                                     <span class="input-group-text font-weight-bold text-gray-900">
                                                         M&iacute;nimo </span>
                                                     <input type="number" class="form-control" id="minimo"
-                                                        autocomplete="off" required>
+                                                        autocomplete="off" value="" required>
                                                     <span class="input-group-text font-weight-bold text-gray-900 ml-2">
                                                         M&aacute;ximo </span>
                                                     <input type="number" class="form-control" id="maximo"
-                                                        autocomplete="off" required>
+                                                        autocomplete="off" value="" required>
                                                 </div>
                                             </div>
                                             <div class="text-center p-2" id="btnGuardarClase" style="display: none;">
@@ -361,6 +361,10 @@
                                                 <tr>
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         Titulo</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">
+                                                        Marcas</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">
+                                                        P(x)</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         Fecha Creaci&oacute;n</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
@@ -428,6 +432,7 @@
 
     <!--Path de las Funciones -->
     <script src="js/localstorage.js"></script>
+    <script src="js/marcas.js"></script>
 
     <!--Asignando los parametro de las funciones de js al html -->
     <script>
@@ -442,69 +447,175 @@
         let calculoFibonacci = [];
         let calculoCongruencia = [];
 
-        function generarClase() {
-            const mensajes = ELEM_ID('mensajes');
-            const validaciones = ELEM_ID('validaciones');
-            const mensajeGuardado = ELEM_ID('mensajeGuardado');
-            const cantidadClase = ELEM_ID('cantClase').value;
+        /**
+         * * genera los inputs necesarios segun la cantidad de clases indicada
+         * solo prepara el formulario necesario.
+        */
+        function generarInputsClase() {
+
+            const cantidadClase = parseInt(ELEM_ID('cantClase').value);
             const contenedorClase = ELEM_ID('contenedorClase');
             contenedorClase.innerHTML = ' ';
 
+            // validacion, se reuiere que indique la cantidad de marcas de clase para trabajar
             if (cantidadClase === '' || isNaN(cantidadClase)) {
-                validaciones.style.display = "block";
-                validaciones.textContent = "Ingrese la cantidad de clases";
-            } else {
-                for (let i = 0; i < cantidadClase; ++i) {
-                    //Generando el input y aplicando bootstrap 
-                    const groupInput = document.createElement('div');
-                    groupInput.classList.add('input-group', 'p-2');
-                    groupInput.style.width = '100%';
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = "Ingrese la cantidad de clases!";
+                return;
+            }
 
-                    const labelSpan = document.createElement('span');
-                    labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
-                    const a = i;
-                    labelSpan.textContent = `Nombre de la Clase ${a + 1}`;
+            // validacion, se requiere un minimo de 2 marcas de clase para trabajar
+            if (cantidadClase < 2) {
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = "La cantidad debe ser mayor o igual a 2 marcas de clase!";
+                return;
+            }
 
-                    const nuevoInput = document.createElement('input');
-                    nuevoInput.type = 'text';
-                    nuevoInput.id = `nameClass${i}`;
-                    nuevoInput.classList.add('form-control');
-                    nuevoInput.setAttribute('required', true);
+            //Generando el input y aplicando bootstrap
+            for (let i = 0; i < cantidadClase; ++i) {
 
-                    const labelSpanP = document.createElement('span');
-                    labelSpanP.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900', 'ml-2');
-                    labelSpanP.textContent = 'P(x)';
+                const groupInput = document.createElement('div');
+                groupInput.classList.add('input-group', 'p-2');
+                groupInput.style.width = '100%';
 
-                    const selectDiv = document.createElement('div');
-                    const select = document.createElement('select');
-                    select.classList.add('form-select');
-                    select.setAttribute('aria-label', 'Selección predeterminado');
-                    select.id = `valorP${i}`;
+                const labelSpan = document.createElement('span');
+                labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
+                const a = i;
+                labelSpan.textContent = `Nombre de la Clase ${a + 1}`;
 
-                    const opciones = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"];
-                    opciones.forEach(opcionValor => {
-                        const opcion = document.createElement('option');
-                        opcion.value = opcionValor;
-                        opcion.textContent = opcionValor.replace('.', ',');
-                        select.appendChild(opcion);
-                    });
+                const nuevoInput = document.createElement('input');
+                nuevoInput.type = 'text';
+                nuevoInput.id = `nameClass${i}`;
+                nuevoInput.classList.add('form-control');
+                nuevoInput.setAttribute('required', true);
 
-                    selectDiv.appendChild(select);
+                const labelSpanP = document.createElement('span');
+                labelSpanP.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900', 'ml-2');
+                labelSpanP.textContent = 'P(x)';
 
-                    groupInput.appendChild(labelSpan);
-                    groupInput.appendChild(nuevoInput);
-                    groupInput.appendChild(labelSpanP);
-                    groupInput.appendChild(selectDiv);
+                const selectDiv = document.createElement('div');
+                const select = document.createElement('select');
+                select.classList.add('form-select');
+                select.setAttribute('aria-label', 'Selección predeterminado');
+                select.id = `valorP${i}`;
 
-                    contenedorClase.appendChild(groupInput);
-                }
+                const opciones = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"];
+                opciones.forEach(opcionValor => {
+                    const opcion = document.createElement('option');
+                    opcion.value = opcionValor;
+                    opcion.textContent = opcionValor.replace('.', ',');
+                    select.appendChild(opcion);
+                });
+
+                selectDiv.appendChild(select);
+
+                groupInput.appendChild(labelSpan);
+                groupInput.appendChild(nuevoInput);
+                groupInput.appendChild(labelSpanP);
+                groupInput.appendChild(selectDiv);
+
+                contenedorClase.appendChild(groupInput);
+
                 min_max.style.display = "block";
                 cantClase.style.display = "none";
                 spanCantClase.style.display = "none";
                 btnGenerarClase.style.display = "none";
                 btnGuardarClase.style.display = "block";
                 contenedorClase.style.display = "block";
-                validaciones.style.display = "none";
+            }
+            
+            ELEM_ID('validaciones').style.display = "none";
+            return;
+        }
+
+        /**
+         * * calcula las marcas de clase.
+         * valida los inputs del formulario primero.
+        */
+        function guardarClase() {
+
+            /* obtener inputs */
+            const primerTitulo = ELEM_ID('primerTitulo');
+            const cantidadClase = ELEM_ID('cantClase').value;
+            const minimo = parseFloat(ELEM_ID('minimo').value);
+            const maximo = parseFloat(ELEM_ID('maximo').value);
+            const nombreClases = []; // nombres de cada marca de clase y su probabilidad
+
+            // validacion, debe indicarse un titulo general de la marca clase
+            if (primerTitulo.value.length === 0) {
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = 'Indique un título general de la marca de clase!';
+                return;
+            }
+
+            // obtener nombres de clase y P(x) para validar
+            for (let j = 0; j < cantidadClase; j++) {
+                nombreClases.push({
+                    nombre: ELEM_ID(`nameClass${j}`).value,
+                    px: parseFloat(ELEM_ID(`valorP${j}`).value)
+                });
+            }
+
+            // validacion, todos los nombres de marca de clase deben ser proporcionados con su valor P(x)
+            for (let j = 0; j < cantidadClase; j++) {
+                if (nombreClases[j].nombre.length === 0) {
+                    ELEM_ID('validaciones').style.display = "block";
+                    ELEM_ID('validaciones').textContent = 'Ingrese todos los nombres de las marcas de clase!';
+                    return;
+                }
+            }
+
+            // validacion, la suma total de las probabilidades P(x) debe ser 1
+            const sumaPxTotal = nombreClases.reduce((suma, clase) => { return suma += clase.px }, 0);
+            if (sumaPxTotal !== 1) {
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = 'La suma total de todos los P(x) debe ser 1 (o el 100%)!';
+                return;
+            }
+
+            // validacion, minimo y maximo debe ser numerico
+            // si minimo y maximo son NaN, quiere decir que parseFloat() no recibio un numero
+            if (isNaN(minimo)) {
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = 'Ingrese un número para minimo!';
+                return;
+            }
+
+            if (isNaN(maximo)) {
+                ELEM_ID('validaciones').style.display = "block";
+                ELEM_ID('validaciones').textContent = 'Ingrese un número para maximo!';
+                return;
+            }
+
+            // preparar valores
+            const regex = /\s/g;
+            const nombreGeneral = primerTitulo.value.trim().replaceAll(regex, '-');
+            const nombreMarcas = nombreClases.map( marca => marca.nombre.trim().replaceAll(regex, '-') );
+            const pxMarcas = nombreClases.map( marca => marca.px );
+            const tipo = esMarcaDeClase();
+            const fecha = new Date();
+            const fecha_formato = fecha.toLocaleDateString() + " - " + fecha.toLocaleTimeString();
+
+            // objeto a guardar
+            // NOTA se crea la marca de clase por completo usando marcas.js
+            const marcaClase = obtenerMarcas(nombreGeneral, nombreMarcas, pxMarcas, minimo, maximo);
+            marcaClase.tipo = tipo;
+            marcaClase.fecha = fecha_formato;
+
+            // guardar en local storage
+            const respuesta = guardarEnLocalStorage(nombreGeneral, marcaClase);
+
+            // si todo ok, respuesta[0] es 0
+            if (respuesta[0] === OK) {
+                ELEM_ID('mensajes').textContent = respuesta[1];
+                ELEM_ID('validaciones').textContent = '';
+                ELEM_ID('mensajeGuardado').style.display = "block";
+                ELEM_ID('btnGuardarClase').style.display = "none";
+                ELEM_ID('btnNuevaClase').style.display = "block";
+            } else {
+                // error, respuesta[0] es 1
+                ELEM_ID('validaciones').textContent = respuesta[1];
+                ELEM_ID('mensajes').textContent = '';
             }
             return;
         }
@@ -567,7 +678,6 @@
             // si localstorage con datos
             for (let i = 0; i < storage.length; i++) {
                 const element = storage[i];
-                console.log(element);
                 tabla.innerHTML +=
                     `<tr">
                         <td class="text-wrap align-middle text-capitalize" scope="row">${element.nombre}</td>
@@ -587,95 +697,7 @@
                     </tr>`;
             }
 
-        }, false)
-
-        /* funcion para borrar un objeto de localstorage */
-        /* SECUENCIA O MARCA DE CLASE */
-        function borrar(clave) {
-            // mensaje de confirmacion
-            let respuesta = confirm("Desea borrar la secuencia! AVISO: Esto recargará la página!");
-            if (respuesta) {
-                // eliminar
-                eliminarDelLocalStorage(clave);
-                // refrescar pagina
-                window.location.reload();
-            }
-            return;
-        }
-
-        function guardarClase() {
-            /* obtener inputs */
-            const btnGenerarClase = ELEM_ID('btnGuardarClase');
-            const primerTitulo = ELEM_ID('primerTitulo');
-            const cantidadClase = ELEM_ID('cantClase').value;
-            const minimo = parseFloat(ELEM_ID('minimo').value);
-            const maximo = parseFloat(ELEM_ID('maximo').value);
-
-            const nombreClases = [];
-
-            // validaciones
-            if (primerTitulo.value.length === 0) {
-                ELEM_ID('validaciones').style.display = "block";
-                ELEM_ID('validaciones').textContent = 'Indique un título de la clase!';
-                return;
-            }
-
-            console.log(cantidadClase);
-            /* capturar las semillas de los input generados */
-            for (let j = 0; j < cantidadClase; j++) {
-
-                const nombreClass = ELEM_ID(`nameClass${j}`).value;
-                const valorPx = ELEM_ID(`valorP${j}`).value;
-
-                console.log(nombreClass);
-                console.log(valorPx);
-
-                if (nombreClass === '') {
-                    ELEM_ID('validaciones').style.display = "block";
-                    ELEM_ID('validaciones').textContent = "Todos los nombres de clase deben ser completados";
-                    return;
-                }
-                nombreClases.push({ nombre: nombreClass, px: valorPx });
-
-            }
-
-            validaciones.textContent = '';
-
-            // preparar valores
-            const regex = /\s/g;
-            const titulo = primerTitulo.value.trim().replaceAll(regex, '-');
-            const tipo = esMarcaDeClase();
-            const fecha = new Date();
-            const fecha_formato = fecha.toLocaleDateString() + " - " + fecha.toLocaleTimeString();
-
-            // objeto a guardar
-            const secuencia = {
-                titulo: titulo,
-                tipo: tipo,
-                nombreClases: nombreClases,
-                minimo: minimo,
-                maximo: maximo,
-                fecha_creacion: fecha_formato,
-            }
-
-            // guardar en local storage
-            const respuesta = guardarEnLocalStorage(titulo, secuencia);
-
-
-            // si todo ok, respuesta[0] es 0
-            if (respuesta[0] === OK) {
-                mensajes.textContent = respuesta[1];
-                validaciones.textContent = '';
-                mensajeGuardado.style.display = "block";
-                btnGuardarClase.style.display = "none";
-                btnNuevaClase.style.display = "block";
-            } else {
-                // error, respuesta[0] es 1
-                validaciones.textContent = respuesta[1];
-                mensajes.textContent = '';
-            }
-            return;
-        }
+        }, false);
 
         /* evento y funcion para recuperar y mostrar localstorage */
         /* SOLO MARCAS DE CLASE */
@@ -699,14 +721,24 @@
                 console.log(element);
                 tablaMarca.innerHTML +=
                     `<tr">
-                        <td class="text-wrap align-middle text-capitalize" scope="row">${element.titulo}</td>
-                        <td class="text-wrap align-middle text-center">${element.fecha_creacion}</td>
+                        <td class="text-wrap align-middle text-capitalize" scope="row">
+                            ${element.nombreGeneral}
+                        </td>
                         <td class="text-wrap align-middle text-center">
-                            <button class="btn btn-outline-primary btn-sm" onclick="marcaClase()">
+                            ${element.nombreMarcas}
+                        </td>
+                        <td class="text-wrap align-middle text-center">
+                            ${element.pxMarcas}
+                        </td>
+                        <td class="text-wrap align-middle text-center">
+                            ${element.fecha}
+                        </td>
+                        <td class="text-wrap align-middle text-center">
+                            <button class="btn btn-outline-primary btn-sm" >
                                 ${svgVer()}
                                 Ver
                             </button>
-                            <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.titulo}')">
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrar('${element.nombreGeneral}')">
                                 ${svgBorrar()}
                                 Borrar
                             </button>
@@ -716,9 +748,18 @@
 
         }, false)
 
-        /* funcion para generar marcas de clase*/
-        function marcaClase() {
-            //capturar inputs ... 
+        /* funcion para borrar un objeto de localstorage */
+        /* SECUENCIA O MARCA DE CLASE */
+        function borrar(clave) {
+            // mensaje de confirmacion
+            let respuesta = confirm("Desea borrar el objeto! AVISO: Esto recargará la página!");
+            if (respuesta) {
+                // eliminar
+                eliminarDelLocalStorage(clave);
+                // refrescar pagina
+                window.location.reload();
+            }
+            return;
         }
 
     </script>

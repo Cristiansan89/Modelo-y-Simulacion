@@ -1,4 +1,12 @@
-
+/**
+ * * calcula las marcas de clase con rangos minimos y maximos
+ * @param {string} nombreGeneral nombre representativo de las marcas de clases
+ * @param {array<string>} nombreMarcas array de nombres individuales de cada marca
+ * @param {array<number>} pxMarcas probabilidad P(x) individual de cada marca
+ * @param {number} valMin rango minimo de valores
+ * @param {number} valMax rango maximo de valores
+ * @returns {object}
+ */
 function obtenerMarcas(nombreGeneral, nombreMarcas, pxMarcas, valMin, valMax) {
 
     // * objeto inicial, sera una tabla de marcas de clase luego
@@ -91,39 +99,3 @@ function obtenerMarcas(nombreGeneral, nombreMarcas, pxMarcas, valMin, valMax) {
 
     return marca;
 }
-
-// prueba temperaturas
-console.log(obtenerMarcas(
-    "temperatura",
-    ["muy-frio", "frio", "templado", "calido", "caluroso"],
-    [0.08, 0.17, 0.26, 0.35, 0.14],
-    -2,
-    35)
-);
-
-// prueba edades
-console.log(obtenerMarcas(
-    "edades",
-    ["adol.", "jov.", "adult."],
-    [0.2, 0.5, 0.3],
-    17,
-    35
-));
-
-// prueba integrador demoras
-console.log(obtenerMarcas(
-    "demoras",
-    ["demora-media", "demora-normal", "demora-alta"],
-    [0.4, 0.5, 0.1],
-    1,
-    10
-));
-
-// prueba integrador demandas
-console.log(obtenerMarcas(
-    "demandas",
-    ["baja", "media", "alta"],
-    [0.5, 0.3, 0.2],
-    125,
-    175
-));

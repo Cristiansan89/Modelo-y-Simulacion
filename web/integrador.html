@@ -284,7 +284,7 @@
                                     </ul>
                                 </div>
                                 <!-- fin tabla de secuencias aleatorias testeadas -->
-                                <!-- Generar Nombre de Clases -->
+                                <!-- inicio generar marcas de clase -->
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Crear Marca de Clases</p>
@@ -351,11 +351,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- fin generar marcas de clase -->
+                                <!-- inicio mostrar marcas de clase -->
                                 <div class="card card-body mx-auto my-2">
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Lista Marca de Clases</p>
                                     </div>
                                     <ul>
+                                        <!-- tabla de marcas de clase -->
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
@@ -374,8 +377,14 @@
                                             <tbody id="tablaMarca">
                                             </tbody>
                                         </table>
+                                        <!-- vista previa de cada marca -->
+                                         <div id="vistaPreviaMarcas">
+                                            <!-- div contenedor -->
+                                            <!-- gneracion dinamica de tablas de vista previa -->
+                                         </div>
                                     </ul>
                                 </div>
+                                <!-- fin mostrar marcas de clase -->
                             </div>
                         </li>
                     </ul>
@@ -443,9 +452,6 @@
         const PARSE_INT = (value) => Number.parseInt(value);
         /* Función convertir array resultado a cadena string para html */
         const MAKE_CADENA = (array) => array.join().toLocaleString().replaceAll(',', ', \n');
-
-        let calculoFibonacci = [];
-        let calculoCongruencia = [];
 
         /**
          * * genera los inputs necesarios segun la cantidad de clases indicada
@@ -718,9 +724,8 @@
             // si localstorage con datos
             for (let i = 0; i < storage.length; i++) {
                 const element = storage[i];
-                console.log(element);
                 tablaMarca.innerHTML +=
-                    `<tr">
+                    `<tr>
                         <td class="text-wrap align-middle text-capitalize" scope="row">
                             ${element.nombreGeneral}
                         </td>
@@ -734,7 +739,7 @@
                             ${element.fecha}
                         </td>
                         <td class="text-wrap align-middle text-center">
-                            <button class="btn btn-outline-primary btn-sm" >
+                            <button class="btn btn-outline-primary btn-sm" onclick="vistaDetallada('${element.nombreGeneral}')">
                                 ${svgVer()}
                                 Ver
                             </button>
@@ -762,6 +767,76 @@
             return;
         }
 
+        /* mostrar la vista detallada de una marca de clases debajo de la tabla de marcas de clase */
+        function vistaDetallada(clave) {
+
+            // recuperar de localStorage la marca de clase
+            const marcaClase = obtenerDeLocalStorage(clave);
+
+            // si recupere correctamente, traje un objeto con tipo "MC", sino, un array de error
+            if (!marcaClase.nombreGeneral) {
+                alert(marcaClase[1] + " Recarge la página!"); // error
+            };
+
+            // crear la tabla dinamica con cabecera
+            const plantillaTablaVistaPrevia = `
+                <table class="table table-striped table-hover" id="${marcaClase.nombreGeneral}">
+                    <thead>
+                        <tr>
+                            <th colspan="4" scope="col" class="text-wrap align-middle text-left">Vista Previa</th>
+                            <th colspan="4" scope="col" class="text-wrap align-middle text-right">
+                                <button class="btn btn-outline-primary btn-sm" onclick="cerrarVistaDetallada()">Cerrar</button>    
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3" scope="col" class="text-wrap align-middle text-center">Titulo: ${marcaClase.nombreGeneral}</th>
+                            <th colspan="2" scope="col" class="text-wrap align-middle text-center">Min, Max Porcentual</th>
+                            <th colspan="3" scope="col" class="text-wrap align-middle text-center">Min, Max Digitos</th>
+                        </tr>
+                        <tr>
+                            <th scope="col" class="text-wrap align-middle text-center">Marca</th>
+                            <th scope="col" class="text-wrap align-middle text-center">P(x)</th>
+                            <th scope="col" class="text-wrap align-middle text-center">F(x)</th>
+                            <th scope="col" class="text-wrap align-middle text-center">min %</th>
+                            <th scope="col" class="text-wrap align-middle text-center">max %</th>
+                            <th scope="col" class="text-wrap align-middle text-center">cant dgts.</th>
+                            <th scope="col" class="text-wrap align-middle text-center">min</th>
+                            <th scope="col" class="text-wrap align-middle text-center">max</th>
+                        </tr>
+                    </thead>
+                    <tbody id="${marcaClase.nombreGeneral}Body">
+                    </tbody>
+                </table>`;
+
+            // insertar la tabla dinamica en el div contenedor de tablas, si no esta presente
+            // primero: tabla con cabecera y cuerpo vacio
+            const contenedorVistaPreviaMarcas = ELEM_ID('vistaPreviaMarcas');
+            contenedorVistaPreviaMarcas.innerHTML = plantillaTablaVistaPrevia;
+
+            // segundo: crear e inserto cuerpo de tabla
+            const cuerpoTablaVistaPrevia = ELEM_ID(marcaClase.nombreGeneral+"Body");
+            for (let i = 0; i < marcaClase.nombreMarcas.length; i++) {
+                cuerpoTablaVistaPrevia.innerHTML += 
+                    `<tr>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.nombreMarcas[i]}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.pxMarcas[i]}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.fxMarcas[i]}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].min}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].max}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].cantDigitos}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].min}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].max}</td>
+                    </tr>`
+            };
+
+            return;
+        }
+
+        /* cerrar la vista previa detallada */
+        function cerrarVistaDetallada() {
+            const contenedorVistaPreviaMarcas = ELEM_ID('vistaPreviaMarcas');
+            contenedorVistaPreviaMarcas.innerHTML = "";
+        }
     </script>
 
 </body>

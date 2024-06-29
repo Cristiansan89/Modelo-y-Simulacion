@@ -325,22 +325,34 @@
                                                     <input type="number" class="form-control" id="maximo"
                                                         autocomplete="off" value="" required>
                                                 </div>
+                                                <div class="input-group p-2" style="width: 100%;">
+                                                    <span class="input-group-text font-weight-bold text-gray-900">
+                                                        Tipo de Marca de Clases
+                                                    </span>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        id="tipoMarca">
+                                                        <option value="-1" selected>Seleccione un tipo de marca de clase
+                                                        </option>
+                                                        <option value="demanda">Demanda</option>
+                                                        <option value="demora">Demora</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- validaciones de errores -->
+                                            <div class="text-center font-weight-bold mt-2">
+                                                <p id="validaciones" style="color: rgb(221, 32, 32);"></p>
+                                            </div>
+                                            <!-- Mensajes -->
+                                            <div id="mensajeGuardado" style="display: none;">
+                                                <div class="text-center font-weight-bold mt-2">
+                                                    <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
+                                                </div>
                                             </div>
                                             <div class="text-center p-2" id="btnGuardarClase" style="display: none;">
                                                 <button class="btn btn-outline-danger btn-xl fw-bold p-2" type="submit"
                                                     style="width: 15%;" onclick="reset()">Volver</button>
                                                 <button class="btn btn-outline-success btn-xl fw-bold p-2" type="submit"
                                                     style="width: 15%;" onclick="guardarClase()">Guardar</button>
-                                            </div>
-                                            <!-- validaciones de errores -->
-                                            <div class="text-center" style="width: 95%;">
-                                                <p id="validaciones" style="color: rgb(221, 32, 32);"></p>
-                                            </div>
-                                            <!-- Mensajes -->
-                                            <div id="mensajeGuardado" style="display: none;">
-                                                <div class="text-center" style="width: 95%;">
-                                                    <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
-                                                </div>
                                             </div>
                                             <div class="text-center p-2" id="btnNuevaClase" style="display: none;">
                                                 <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
@@ -365,6 +377,8 @@
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         Titulo</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
+                                                        Tipo</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">
                                                         Marcas</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         P(x)</th>
@@ -378,13 +392,85 @@
                                             </tbody>
                                         </table>
                                         <!-- vista previa de cada marca -->
-                                         <div id="vistaPreviaMarcas">
+                                        <div id="vistaPreviaMarcas">
                                             <!-- div contenedor -->
                                             <!-- gneracion dinamica de tablas de vista previa -->
-                                         </div>
+                                        </div>
                                     </ul>
                                 </div>
                                 <!-- fin mostrar marcas de clase -->
+                                <!-- Begin simulación del integrador -->
+                                <div class="card card-body mx-auto my-2">
+                                    <div class="text-center">
+                                        <p class="h3 font-weight-bold text-black">Simulaci&oacute;n del Integrador</p>
+                                    </div>
+                                    <div class="p-2" style="min-height: 120px;">
+                                        <div class="card card-body mx-auto" style="width: 95%;">
+                                            <div class="h4 font-weight-bold text-black p-2">
+                                                <p>Ingresar los par&aacute;metros</p>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Existencia Inicial
+                                                </span>
+                                                <input type="number" class="form-control" id="existenciaInicial"
+                                                    autocomplete="off" required>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Existencia M&iacute;nima
+                                                </span>
+                                                <input type="number" class="form-control" id="existenciaMinima"
+                                                    autocomplete="off" required>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Tiempo a Simular
+                                                    (d&iacute;as)
+                                                </span>
+                                                <input type="number" class="form-control" id="tiempoSimulacion"
+                                                    autocomplete="off" required>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Demanda
+                                                </span>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    id="selectDemanda">
+                                                    <option value="-1" selected>Seleccione la marca de clase
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Demora
+                                                </span>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    id="selectDemora">
+                                                    <option value="-1" selected>Seleccione la marca de clase
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group p-2" style="width: 100%;">
+                                                <span class="input-group-text font-weight-bold text-gray-900">
+                                                    Secuencia Aleatoria
+                                                </span>
+                                                <select class="form-select" aria-label="Default select example"
+                                                    id="selectSecuencia">
+                                                    <option value="-1" selected>Seleccione una secuencia aleatoria
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="text-center p-2" id="btnSimular">
+                                                <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
+                                                    style="width: 15%;" onclick="generarSimulacion()">
+                                                    Simular
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End simulación del integrador -->
                             </div>
                         </li>
                     </ul>
@@ -450,6 +536,8 @@
         const ELEM_ID = (id) => document.getElementById(id);
         /* Función convertir a entero */
         const PARSE_INT = (value) => Number.parseInt(value);
+        /* Función de crear elemento */
+        const CREATE_ELEM = (tagName) => document.createElement(tagName);
         /* Función convertir array resultado a cadena string para html */
         const MAKE_CADENA = (array) => array.join().toLocaleString().replaceAll(',', ', \n');
 
@@ -480,34 +568,34 @@
             //Generando el input y aplicando bootstrap
             for (let i = 0; i < cantidadClase; ++i) {
 
-                const groupInput = document.createElement('div');
+                const groupInput = CREATE_ELEM('div');
                 groupInput.classList.add('input-group', 'p-2');
                 groupInput.style.width = '100%';
 
-                const labelSpan = document.createElement('span');
+                const labelSpan = CREATE_ELEM('span');
                 labelSpan.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900');
                 const a = i;
                 labelSpan.textContent = `Nombre de la Clase ${a + 1}`;
 
-                const nuevoInput = document.createElement('input');
+                const nuevoInput = CREATE_ELEM('input');
                 nuevoInput.type = 'text';
                 nuevoInput.id = `nameClass${i}`;
                 nuevoInput.classList.add('form-control');
                 nuevoInput.setAttribute('required', true);
 
-                const labelSpanP = document.createElement('span');
+                const labelSpanP = CREATE_ELEM('span');
                 labelSpanP.classList.add('input-group-text', 'font-weight-bold', 'text-gray-900', 'ml-2');
                 labelSpanP.textContent = 'P(x)';
 
-                const selectDiv = document.createElement('div');
-                const select = document.createElement('select');
+                const selectDiv = CREATE_ELEM('div');
+                const select = CREATE_ELEM('select');
                 select.classList.add('form-select');
                 select.setAttribute('aria-label', 'Selección predeterminado');
                 select.id = `valorP${i}`;
 
                 const opciones = ["0.1", "0.2", "0.3", "0.4", "0.5", "0.6", "0.7", "0.8", "0.9"];
                 opciones.forEach(opcionValor => {
-                    const opcion = document.createElement('option');
+                    const opcion = CREATE_ELEM('option');
                     opcion.value = opcionValor;
                     opcion.textContent = opcionValor.replace('.', ',');
                     select.appendChild(opcion);
@@ -529,7 +617,7 @@
                 btnGuardarClase.style.display = "block";
                 contenedorClase.style.display = "block";
             }
-            
+
             ELEM_ID('validaciones').style.display = "none";
             return;
         }
@@ -542,6 +630,7 @@
 
             /* obtener inputs */
             const primerTitulo = ELEM_ID('primerTitulo');
+            const unTipoMarca = ELEM_ID('tipoMarca');
             const cantidadClase = ELEM_ID('cantClase').value;
             const minimo = parseFloat(ELEM_ID('minimo').value);
             const maximo = parseFloat(ELEM_ID('maximo').value);
@@ -596,15 +685,16 @@
             // preparar valores
             const regex = /\s/g;
             const nombreGeneral = primerTitulo.value.trim().replaceAll(regex, '-');
-            const nombreMarcas = nombreClases.map( marca => marca.nombre.trim().replaceAll(regex, '-') );
-            const pxMarcas = nombreClases.map( marca => marca.px );
+            const tipoMarca = unTipoMarca.value.trim();
+            const nombreMarcas = nombreClases.map(marca => marca.nombre.trim().replaceAll(regex, '-'));
+            const pxMarcas = nombreClases.map(marca => marca.px);
             const tipo = esMarcaDeClase();
             const fecha = new Date();
             const fecha_formato = fecha.toLocaleDateString() + " - " + fecha.toLocaleTimeString();
 
             // objeto a guardar
             // NOTA se crea la marca de clase por completo usando marcas.js
-            const marcaClase = obtenerMarcas(nombreGeneral, nombreMarcas, pxMarcas, minimo, maximo);
+            const marcaClase = obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, minimo, maximo);
             marcaClase.tipo = tipo;
             marcaClase.fecha = fecha_formato;
 
@@ -639,8 +729,9 @@
             contenedorClase.style.display = "none";
             cantClase.style.display = "block";
             spanCantClase.style.display = "block";
-            primerTitulo.value = "";
-            cantClase.value = "";
+            validaciones.style.display = "none";
+            ELEM_ID('primerTitulo').value = '';
+            ELEM_ID('cantClase').value = '';
             return;
         }
 
@@ -673,13 +764,12 @@
         /* evento y funcion para recuperar y mostrar localstorage */
         /* SOLO SECUENCIAS NUMERICAS */
         window.addEventListener("load", function () {
-
+            const selectSecuencia = ELEM_ID("selectSecuencia");
             const tabla = ELEM_ID("tabla");
             const storage = recuperarLocalStorage(esSecuenciaNumerica()); // recupera SOLO SECUENCIAS NUMERICAS 
 
             // si localstorage vacio
             if (storage.length === 0) {
-                selectSecuencia.textContent = "No hay marcas de clases generadas!";
                 tabla.innerHTML +=
                     `<tr>
                         <td class="text-wrap align-middle text-center" colspan="6">No hay secuencias generadas!, generar con: <a href="./fibonacci.html">Fibonacci</a>, <a href="./congruencia.html">Congruencia</a> </td>    
@@ -707,6 +797,16 @@
                             </button>
                         </td>
                     </tr>`;
+
+                // Funcion para agregar opciones al select
+                function agregarOpcionSelect(selectElement, nombre) {
+                    const option = CREATE_ELEM("option");
+                    option.value = nombre;
+                    option.textContent = nombre;
+                    selectElement.appendChild(option);
+                }
+
+                agregarOpcionSelect(selectSecuencia, element.nombre);
             }
 
         }, false);
@@ -714,8 +814,9 @@
         /* evento y funcion para recuperar y mostrar localstorage */
         /* SOLO MARCAS DE CLASE */
         window.addEventListener("load", function () {
-
             const tablaMarca = ELEM_ID("tablaMarca");
+            const opcionDemora = ELEM_ID(selectDemora);
+            const opcionDemanda = ELEM_ID(selectDemanda);
             const storage = recuperarLocalStorage(esMarcaDeClase());
 
             // si localstorage vacio
@@ -727,6 +828,14 @@
                 return;
             }
 
+            // Funcion para agregar opciones al select
+            function agregarOpcionSelect(selectElement, nombreGeneral) {
+                const option = CREATE_ELEM("option");
+                option.value = nombreGeneral;
+                option.textContent = nombreGeneral;
+                selectElement.appendChild(option);
+            }
+
             // si localstorage con datos
             for (let i = 0; i < storage.length; i++) {
                 const element = storage[i];
@@ -734,6 +843,9 @@
                     `<tr>
                         <td class="text-wrap align-middle text-capitalize" scope="row">
                             ${element.nombreGeneral}
+                        </td>
+                          <td class="text-wrap align-middle text-center">
+                            ${element.tipoMarca}
                         </td>
                         <td class="text-wrap align-middle text-center">
                             ${element.nombreMarcas}
@@ -755,11 +867,17 @@
                             </button>
                         </td>
                     </tr>`;
-            }
 
+                // agregar opciones al select según el tipo de marca
+                if (element.tipoMarca === "demanda") {
+                    agregarOpcionSelect(selectDemanda, element.nombreGeneral);
+                } else if (element.tipoMarca === "demora") {
+                    agregarOpcionSelect(selectDemora, element.nombreGeneral);
+                }
+            }
         }, false)
 
-        /* funcion para borrar un objeto de localstorage */
+        /* Función para borrar un objeto de localstorage */
         /* SECUENCIA O MARCA DE CLASE */
         function borrar(clave) {
             // mensaje de confirmacion
@@ -803,11 +921,11 @@
                             <th scope="col" class="text-wrap align-middle text-center">Marca</th>
                             <th scope="col" class="text-wrap align-middle text-center">P(x)</th>
                             <th scope="col" class="text-wrap align-middle text-center">F(x)</th>
-                            <th scope="col" class="text-wrap align-middle text-center">min %</th>
-                            <th scope="col" class="text-wrap align-middle text-center">max %</th>
-                            <th scope="col" class="text-wrap align-middle text-center">cant dgts.</th>
-                            <th scope="col" class="text-wrap align-middle text-center">min</th>
-                            <th scope="col" class="text-wrap align-middle text-center">max</th>
+                            <th scope="col" class="text-wrap align-middle text-center">M&iacute;n %</th>
+                            <th scope="col" class="text-wrap align-middle text-center">M&aacute;x %</th>
+                            <th scope="col" class="text-wrap align-middle text-center">Cant dgts.</th>
+                            <th scope="col" class="text-wrap align-middle text-center">M&iacute;nimo</th>
+                            <th scope="col" class="text-wrap align-middle text-center">M&aacute;ximo</th>
                         </tr>
                     </thead>
                     <tbody id="${marcaClase.nombreGeneral}Body">
@@ -820,21 +938,20 @@
             contenedorVistaPreviaMarcas.innerHTML = plantillaTablaVistaPrevia;
 
             // segundo: crear e inserto cuerpo de tabla
-            const cuerpoTablaVistaPrevia = ELEM_ID(marcaClase.nombreGeneral+"Body");
+            const cuerpoTablaVistaPrevia = ELEM_ID(marcaClase.nombreGeneral + "Body");
             for (let i = 0; i < marcaClase.nombreMarcas.length; i++) {
-                cuerpoTablaVistaPrevia.innerHTML += 
+                cuerpoTablaVistaPrevia.innerHTML +=
                     `<tr>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.nombreMarcas[i]}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.pxMarcas[i]}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.fxMarcas[i]}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].min}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].max}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].min.toFixed(1)}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].max.toFixed(1)}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].cantDigitos}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].min}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].max}</td>
                     </tr>`
             };
-
             return;
         }
 

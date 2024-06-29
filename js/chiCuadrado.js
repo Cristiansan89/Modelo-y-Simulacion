@@ -90,8 +90,6 @@ function testChiCuadrado(pseudoAleatorios, p = '0.001') {
 
     resultado.push(mensajeConclusion);
 
-
-
     // resultado = [[0-9],[fi, ...], npi, [finpi], [qi], [x2, ...], sumatoria, mensajeConclusion]
     resultado
     return resultado;

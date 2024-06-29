@@ -599,11 +599,11 @@
                                                     </div>
                                                 </div>
                                                 <!-- validaciones de errores -->
-                                                <div class="text-center" style="width: 95%;">
+                                                <div class="text-center font-weight-bold">
                                                     <p id="validaciones" style="color: rgb(221, 32, 32);"></p>
                                                 </div>
                                                 <!-- mensajes -->
-                                                <div class="text-center" style="width: 95%;">
+                                                <div class="text-center font-weight-bold">
                                                     <p id="mensajes" style="color: rgb(20, 129, 16);"></p>
                                                 </div>
                                                 <div class="text-center p-2">
@@ -1018,19 +1018,19 @@
             const fecha = new Date();
             const fecha_formato = fecha.toLocaleDateString() + " - " + fecha.toLocaleTimeString();
 
-             /** 
-                * *formato del objeto secuencia numerica:
-                * {
-                *  nombre: "nombre representativo del objeto",
-                *  tipo: "TIPO_SECUENCIA"
-                *  algoritmo: "algoritmo usado",
-                *  test_chi: [true | false, alfa],
-                *  test_poker: [true | false, alfa],
-                *  fecha_creacion: "date",
-                *  cant_digitos: n,
-                *  secuencia: []
-                * }
-            */
+            /** 
+               * *formato del objeto secuencia numerica:
+               * {
+               *  nombre: "nombre representativo del objeto",
+               *  tipo: "TIPO_SECUENCIA"
+               *  algoritmo: "algoritmo usado",
+               *  test_chi: [true | false, alfa],
+               *  test_poker: [true | false, alfa],
+               *  fecha_creacion: "date",
+               *  cant_digitos: n,
+               *  secuencia: []
+               * }
+           */
 
             // objeto a guardar
             const secuencia = {

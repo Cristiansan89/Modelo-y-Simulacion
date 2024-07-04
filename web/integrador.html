@@ -383,6 +383,8 @@
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         P(x)</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
+                                                        Min - Max</th>
+                                                    <th scope="col" class="text-wrap align-middle text-center">
                                                         Fecha Creaci&oacute;n</th>
                                                     <th scope="col" class="text-wrap align-middle text-center">
                                                         Acciones</th>
@@ -823,7 +825,7 @@
             if (storage.length === 0) {
                 tablaMarca.innerHTML +=
                     `<tr>
-                        <td class="text-wrap align-middle text-center" colspan="6">No hay marcas de clases generadas!</td>    
+                        <td class="text-wrap align-middle text-center" colspan="7">No hay marcas de clases generadas!</td>    
                     </tr>`;
                 return;
             }
@@ -852,6 +854,9 @@
                         </td>
                         <td class="text-wrap align-middle text-center">
                             ${element.pxMarcas}
+                        </td>
+                        <td class="text-wrap align-middle text-center">
+                            ${element.valMin + " - " + element.valMax}
                         </td>
                         <td class="text-wrap align-middle text-center">
                             ${element.fecha}
@@ -907,20 +912,21 @@
                 <table class="table table-striped table-hover" id="${marcaClase.nombreGeneral}">
                     <thead>
                         <tr>
-                            <th colspan="4" scope="col" class="text-wrap align-middle text-left">Vista Previa</th>
+                            <th colspan="5" scope="col" class="text-wrap align-middle text-left">Vista Previa</th>
                             <th colspan="4" scope="col" class="text-wrap align-middle text-right">
                                 <button class="btn btn-outline-primary btn-sm" onclick="cerrarVistaDetallada()">Cerrar</button>    
                             </th>
                         </tr>
                         <tr>
                             <th colspan="3" scope="col" class="text-wrap align-middle text-center">Titulo: ${marcaClase.nombreGeneral}</th>
-                            <th colspan="2" scope="col" class="text-wrap align-middle text-center">Min, Max Porcentual</th>
+                            <th colspan="3" scope="col" class="text-wrap align-middle text-center">Min, Max Porcentual</th>
                             <th colspan="3" scope="col" class="text-wrap align-middle text-center">Min, Max Digitos</th>
                         </tr>
                         <tr>
                             <th scope="col" class="text-wrap align-middle text-center">Marca</th>
                             <th scope="col" class="text-wrap align-middle text-center">P(x)</th>
                             <th scope="col" class="text-wrap align-middle text-center">F(x)</th>
+                            <th scope="col" class="text-wrap align-middle text-center">Cant dgts. %</th>
                             <th scope="col" class="text-wrap align-middle text-center">M&iacute;n %</th>
                             <th scope="col" class="text-wrap align-middle text-center">M&aacute;x %</th>
                             <th scope="col" class="text-wrap align-middle text-center">Cant dgts.</th>
@@ -945,8 +951,9 @@
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.nombreMarcas[i]}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.pxMarcas[i]}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.fxMarcas[i]}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].min.toFixed(1)}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].max.toFixed(1)}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].cantDigitosPorcentual}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].min.toFixed(2)}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_porcentual[i].max.toFixed(2)}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].cantDigitos}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].min}</td>
                         <td scope="col" class="text-wrap align-middle text-center">${marcaClase.min_max_digitos[i].max}</td>

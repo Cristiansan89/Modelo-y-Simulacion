@@ -21,6 +21,7 @@ function obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, valMin,
         valMin: valMin,
         valMax: valMax,
         valRango: Math.abs(valMax - valMin),
+        valMaxSup: 0, // 0 a menos que el maximo de la ultima marca de clase en digitos es mayor al maximo general por redondeo
         min_max_porcentual: [], // minimos y maximos porcentuales
         min_max_digitos: [] // minimos y maximos en digitos
     };
@@ -99,6 +100,15 @@ function obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, valMin,
 
     // minimo y maximo inicial
     minMaxRecursivo(marca.valMin, marca.valMin + cantDigitos[i], i)
+
+    /**
+     * * si el maximo general es superado por el maximo de la ultima marca de clase en digitos
+     * capturo el maximo superior.
+     */
+    let ultimoMaximo = marca.min_max_digitos[marca.min_max_digitos.length-1].max;
+    (marca.valMax < ultimoMaximo) 
+        ? marca.valMaxSup = ultimoMaximo
+        : marca.valMaxSup = marca.valMax;
 
     return marca;
 }

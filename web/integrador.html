@@ -490,6 +490,17 @@
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Resultado de la Simulaci&oacute;n</p>
                                     </div>
+                                    <div class="py-2">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Parametros Iniciales</th>
+                                                    <th scope="col">Resumen de Simulacion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablaResumenSimulacion"></tbody>
+                                        </table>
+                                    </div>
                                     <div class="overflow-y-scroll py-2" style="max-height: 700px;">
                                         <table class="table table-striped table-hover">
                                             <thead id="cabeceraTablaSimulacion"></thead>
@@ -688,13 +699,17 @@
                 }
             }
 
+            console.log(nombreClases);
+
             // validacion, la suma total de las probabilidades P(x) debe ser 1
             const sumaPxTotal = nombreClases.reduce((suma, clase) => { return suma += clase.px }, 0);
-            if (sumaPxTotal !== 1) {
+            const sumaPxTotalFormateada = Math.fround(sumaPxTotal);
+            if (sumaPxTotalFormateada !== 1) {
                 ELEM_ID('validaciones').style.display = "block";
                 ELEM_ID('validaciones').textContent = 'La suma total de todos los P(x) debe ser 1 (o el 100%)!';
                 return;
             }
+
 
             // validacion, minimo y maximo debe ser numerico
             // si minimo y maximo son NaN, quiere decir que parseFloat() no recibio un numero
@@ -997,6 +1012,14 @@
         /* simular escenario */
         function generarSimulacion() {
 
+            // tabla de simulacion
+            const cabecera_tabla = ELEM_ID("cabeceraTablaSimulacion");
+            const cuerpo_tabla = ELEM_ID("cuerpoTablaSimulacion");
+
+            // reset de las tablas antes de simular
+            cabecera_tabla.innerHTML = "";
+            cuerpo_tabla.innerHTML = "";
+
             // parametros
             const max_inventario = Number(ELEM_ID("existenciaInicial").value);
             const min_inventario = Number(ELEM_ID("existenciaMinima").value);
@@ -1027,33 +1050,82 @@
             const simulacion = simularExistencias(min_inventario, max_inventario, politica_pedidos, 
                 dias_simular, marca_demanda, marca_demora, secuencia_aleatoria.secuencia);
 
-            console.log(simulacion);
-
+            // generar encabezado de resumen
+            const tabla_resumen = ELEM_ID("tablaResumenSimulacion");
+            tabla_resumen.innerHTML = `
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Stock Max: ${max_inventario}.    
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">
+                        Ventas: ${simulacion.total_ventas.vendido} unidades, en: ${simulacion.total_ventas.dias} dias.    
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Stock Min: ${min_inventario}.
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">
+                        Perdidas: ${simulacion.total_perdida.perdido} unidades, en: ${simulacion.total_perdida.dias} dias.    
+                    </td>    
+                </tr>
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Politica de pedidos: ultimos ${politica_pedidos} dias.    
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">
+                        Stock Final: ${simulacion.stock_general} unidades.  
+                    </td>    
+                </tr>
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Dias Simulados: ${dias_simular} dias.    
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">-</td>    
+                </tr>
+            `;
+                
             // generar tabla de simulacion
-            const cabecera_tabla = ELEM_ID("cabeceraTablaSimulacion");
-            const cuerpo_tabla = ELEM_ID("cuerpoTablaSimulacion");
-            
             const filas_cabecera_tabla = `
                 <tr>
                     <th scope="col" class="text-wrap align-middle text-center">Dia</th>
+                    <th scope="col" class="text-wrap align-middle text-center">Stock Inicial</th>
                     <th scope="col" class="text-wrap align-middle text-center">Demanda</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Tipo Demanda</th>
                     <th scope="col" class="text-wrap align-middle text-center">Estado</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Stock</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Pedido?</th>
+                    <th scope="col" class="text-wrap align-middle text-center">Stock Final</th>
+                    <th scope="col" class="text-wrap align-middle text-center">Pedido</th>
+                    <th scope="col" class="text-wrap align-middle text-center">Reposicion</th>
                 </tr>`;
             
             cabecera_tabla.innerHTML = filas_cabecera_tabla;
 
             for (let i = 0; i < dias_simular; i++) {
+
+                // dia
+                let un_dia = simulacion.dias[i];
+                // pedido al dia, y reposicion al dia
+                let un_pedido = un_dia.pedido;
+                let una_reposicion = un_dia.reposicion;
+
                 cuerpo_tabla.innerHTML += `
                     <tr>
-                        <td scope="col" class="text-wrap align-middle text-center">${simulacion.dias[i].dia}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${simulacion.dias[i].demanda.cantidad}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${simulacion.dias[i].demanda.clasificacion}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${simulacion.dias[i].status}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${simulacion.dias[i].stock}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">...</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.dia}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.stock_inicial}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.demanda.cantidad + " - " + un_dia.demanda.clasificacion}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.status}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.stock_final}</td>
+                        <td scope="col" class="text-wrap align-middle text-center">
+                            ${(un_pedido.hay_pedido_dia) 
+                                    ? "Pedido: " + un_pedido.detalle_pedido.cantidad_pedido + " - (llega en: " + un_pedido.detalle_pedido.demora.cantidad + " dias)"
+                                    : "-"
+                            }
+                        </td>
+                        <td scope="col" class="text-wrap align-middle text-center">
+                            ${(una_reposicion.hay_reposicion_dia)
+                                    ? "Reposicion de: " + una_reposicion.detalle_reposicion.cantidad_repuesta
+                                    : "-"
+                            }   
+                        </td>
                     </tr>`;
             };
             

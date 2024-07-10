@@ -69,19 +69,12 @@ function simularExistencias(
     const simulacion = {
         stock_general: max_inventario,
         stock_minimo: min_inventario,
-        politica_pedidos,
+        politica_pedidos: politica_pedidos,
         cantidad_proximo_pedido: [],
         pedido_en_transito: { hayPedido: false, pedido: { demora: {}, cantidad_pedido: 0 }, contador_dias: 0 },
         historial_de_pedidos: [],
         dias: [],
     };
-
-    //los numeros aleatorios, tomados de a 2, alcanzan para simular los n dias?
-    let cantidad_digitos = num_aleatorios.length;
-    let cantidad_posible = Math.floor(cantidad_digitos/2);
-    if (cantidad_posible < n_dias_simulacion) {
-        return simulacion.error = "ingrese mas numeros aleatorios para simular los dias solicitados";
-    }
 
     // iterador del array de numeros aleatorios
     const iteradorDemanda = crearIteradorNumerosAleatorios(num_aleatorios);
@@ -154,54 +147,3 @@ function simularExistencias(
 
     return simulacion;
 }
-
- // marcas de clase de prueba gneradas con marcas.js
- let demanda = {
-    nombreGeneral: 'demanda',
-    tipoMarca: '',
-    nombreMarcas: [ 'a', 'b', 'c' ],
-    pxMarcas: [ 0.5, 0.3, 0.2 ],
-    fxMarcas: [ 0.5, 0.8, 1 ],
-    valMin: 125,
-    valMax: 175,
-    valRango: 50,
-    valMaxSup: 177,
-    min_max_porcentual: [
-        { nombreMarca: 'a', cantDigitosPorcentual: 50, min: 0, max: 0.5 },
-        { nombreMarca: 'b', cantDigitosPorcentual: 30, min: 0.51, max: 0.8 },
-        { nombreMarca: 'c', cantDigitosPorcentual: 20, min: 0.81, max: 1 }
-    ],
-    min_max_digitos: [
-        { nombreMarca: 'a', cantDigitos: 25, min: 125, max: 150 },
-        { nombreMarca: 'b', cantDigitos: 15, min: 151, max: 166 },
-        { nombreMarca: 'c', cantDigitos: 10, min: 167, max: 177 }
-    ]
-};
-
-let demora = { 
-    nombreGeneral: 'demora',
-    tipoMarca: '',
-    nombreMarcas: [ 'a', 'b', 'c' ],
-    pxMarcas: [ 0.4, 0.5, 0.1 ],
-    fxMarcas: [ 0.4, 0.9, 1 ],
-    valMin: 1,
-    valMax: 15,
-    valRango: 14,
-    valMaxSup: 17,
-    min_max_porcentual: [
-        { nombreMarca: 'a', cantDigitosPorcentual: 40, min: 0, max: 0.4 },
-        { nombreMarca: 'b', cantDigitosPorcentual: 50, min: 0.41, max: 0.9 },
-        { nombreMarca: 'c', cantDigitosPorcentual: 10, min: 0.91, max: 1 }
-    ],
-    min_max_digitos: [
-        { nombreMarca: 'a', cantDigitos: 6, min: 1, max: 7 },
-        { nombreMarca: 'b', cantDigitos: 7, min: 8, max: 15 },
-        { nombreMarca: 'c', cantDigitos: 1, min: 16, max: 17 }
-    ]
-};
-
-// let aleatorios = [3, 3, 6, 5, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 8, 3, 4, 6, 5, 7, 6, 9, 9, 9, 7, 9, 2, 9, 7, 0, 8, 0, 4, 6, 8, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 6, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 4, 4, 0, 9, 8, 4, 8, 5, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7, 1, 9, 2, 4, 4, 0, 9, 8, 4, 8, 5, 8, 3, 4, 6, 5, 7, 6, 9, 9, 9, 7, 9, 2, 9, 7, 0, 8, 0, 4, 6, 8, 6, 1, 6, 9, 4, 5, 0, 9, 6, 1, 6, 9, 4, 6, 1, 6, 9, 4, 5, 0, 9, 3, 1, 5, 8, 9, 7, 8, 1, 4, 3, 6, 6, 2, 0, 6, 3, 8, 1, 2, 4, 7, 4, 2, 0, 0, 3, 8, 1, 5, 6, 2, 3, 0, 4, 2, 9, 2, 0, 5, 6, 6, 1, 4, 0, 9, 9, 0, 8, 3, 4, 1, 0, 3, 3, 4, 2, 8, 1, 1, 3, 3, 2, 2, 7, 4, 5, 8, 1, 1, 0, 3, 9, 2, 1, 7];
-
-// let test = simularExistencias(300, 2000, 5, 60, demanda, demora, aleatorios);
-
-// console.log(test);

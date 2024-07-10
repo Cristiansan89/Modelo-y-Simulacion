@@ -21,6 +21,7 @@ function obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, valMin,
         valMin: valMin,
         valMax: valMax,
         valRango: Math.abs(valMax - valMin),
+        valMaxSup: 0, // 0 a menos que el maximo de la ultima marca de clase en digitos es mayor al maximo general por redondeo
         min_max_porcentual: [], // minimos y maximos porcentuales
         min_max_digitos: [] // minimos y maximos en digitos
     };
@@ -50,23 +51,22 @@ function obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, valMin,
         let min = (index === 0) ? 0 : marca.fxMarcas[index - 1] + 0.01;
         let max = element;
 
-        /*let min, max;
+        // aseguro dos decimales
+        min = Number(min.toFixed(2));
+        max = Number(max.toFixed(2));
 
-        if (index === 0) {
-            min = 0;
-            max = element;
-        } else {
-            min = marca.fxMarcas[index - 1] + 0.01;
-            max = element;
-        }*/
+        // calculo la cantidad de digitos que corresponden a la marca, de 0 a 99
+        cantDigitosPorcentual = marca.pxMarcas[index]*100;
 
         // retorno una marca de clase individual
-        return { nombreMarca, min, max };
+        return { nombreMarca, cantDigitosPorcentual, min, max };
     });
 
+    
     //* crear rangos min. y max. en digitos para cada marca individual
-
-    // 1- array con cantidad de digitos por marca de clase
+    // 1- array con cantidad de digitos por marca de clase, redondeo hacia arriba o abajo dependiendo de la parte decimal
+    // cantidad de valores del rango que corresponden a cada marca 
+    // https://parzibyte.me/blog/2018/09/13/redondear-numeros-en-javascript/
     const cantDigitos = marca.pxMarcas.map(px => Math.round(px * marca.valRango));
 
     // 2- formato de array de rangos
@@ -82,8 +82,8 @@ function obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, valMin,
     function minMaxRecursivo(min, max, i) {
         if (i <= cantDigitos.length) {
 
-            marca.min_max_digitos[i].min = min; // tomo minimo inicial y siguientes
-            marca.min_max_digitos[i].max = max; // tomo maximo inicial y siguientes
+            marca.min_max_digitos[i].min = Number(min.toFixed(2)); // tomo minimo inicial y siguientes
+            marca.min_max_digitos[i].max = Number(max.toFixed(2)); // tomo maximo inicial y siguientes
             i++; // indicar siguiente recursividad
 
             if (i > 0 && i < cantDigitos.length - 1) {
@@ -91,14 +91,45 @@ function obtenerMarcas(nombreGeneral, tipoMarca, nombreMarcas, pxMarcas, valMin,
             }
 
             if (i === cantDigitos.length - 1) {
-                minMaxRecursivo(max + 1, marca.valMax, i);
+                minMaxRecursivo(max + 1, max + 1 + cantDigitos[i], i);
             }
         };
 
         return;
-    }
+    };
+
     // minimo y maximo inicial
     minMaxRecursivo(marca.valMin, marca.valMin + cantDigitos[i], i)
 
+    /**
+     * * si el maximo general es superado por el maximo de la ultima marca de clase en digitos
+     * capturo el maximo superior.
+     */
+    let ultimoMaximo = marca.min_max_digitos[marca.min_max_digitos.length-1].max;
+    (marca.valMax < ultimoMaximo) 
+        ? marca.valMaxSup = ultimoMaximo
+        : marca.valMaxSup = marca.valMax;
+
     return marca;
 }
+
+/* let testDemanda = obtenerMarcas(
+    "demanda",
+    "",
+    ["a","b","c"],
+    [0.5,0.3,0.2],
+    125,
+    175
+); */
+
+/* let testDemora = obtenerMarcas(
+    "demora",
+    "",
+    ["a","b","c"],
+    [0.4,0.5,0.1],
+    1,
+    15
+); */
+
+// console.log(testDemanda);
+// console.log(testDemora);

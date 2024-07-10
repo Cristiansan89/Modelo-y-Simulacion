@@ -86,6 +86,8 @@ function simularExistencias(
             contador_dias: 0 },
         historial_de_pedidos: [],
         dias: [],
+        total_ventas: { dias: 0, vendido: 0},
+        total_perdida: { dias: 0, perdido: 0}
     };
 
     // iterador del array de numeros aleatorios
@@ -139,12 +141,16 @@ function simularExistencias(
         dia.demanda = generarValorAjustado(marca_demanda, iteradorDemanda).next().value;
 
         // si tengo stock, vendo
-        if((simulacion.stock_general - simulacion.stock_minimo) >= dia.demanda.cantidad) {
+        if(simulacion.stock_general >= dia.demanda.cantidad) {
+            
             // disminuye el stock
             simulacion.stock_general = simulacion.stock_general - dia.demanda.cantidad;
             dia.status = STATUS_VENDIDO;
+            simulacion.total_ventas.dias += 1;
+            simulacion.total_ventas.vendido += dia.demanda.cantidad;
 
             // guardar ultima demanda, ultimas segun politica de pedidos
+            // la politica indica que compro la demanda de los ultimos n dias
             if (simulacion.cantidad_proximo_pedido.length < simulacion.politica_pedidos) {
                 simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
             } else {
@@ -152,21 +158,10 @@ function simularExistencias(
                 simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
             }
 
-        } else {
-            // no tengo stock
-            dia.status = STATUS_INSATISFECHO;
-
-            // guardar ultima demanda, ultimas segun politica de pedidos
-            if (simulacion.cantidad_proximo_pedido.length < simulacion.politica_pedidos) {
-                simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
-            } else {
-                simulacion.cantidad_proximo_pedido.shift();
-                simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
-            }
-
+            // stock por debajo del minimo, detona el punto de pedido
             // hacer pedido
-            if (!simulacion.pedido_en_transito.hayPedido) {
-                
+            if (simulacion.stock_general < simulacion.stock_minimo && !simulacion.pedido_en_transito.hayPedido) {
+            
                 let pedido = {};
                 pedido.cantidad_pedido = simulacion.cantidad_proximo_pedido.reduce((suma, cantidad) => { return suma += cantidad });
                 pedido.demora = generarValorAjustado(marca_demora, iteradorDemora).next().value;
@@ -187,6 +182,21 @@ function simularExistencias(
                 dia.pedido.detalle_pedido = pedido;
 
             }
+
+        } else {
+            // no tengo stock
+            dia.status = STATUS_INSATISFECHO;
+            simulacion.total_perdida.dias += 1;
+            simulacion.total_perdida.perdido += dia.demanda.cantidad;
+
+            // guardar ultima demanda, ultimas segun politica de pedidos
+            if (simulacion.cantidad_proximo_pedido.length < simulacion.politica_pedidos) {
+                simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
+            } else {
+                simulacion.cantidad_proximo_pedido.shift();
+                simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
+            }
+
         }
         
         // stock al final del dia, haya o no vendido

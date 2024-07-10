@@ -490,6 +490,17 @@
                                     <div class="text-center">
                                         <p class="h3 font-weight-bold text-black">Resultado de la Simulaci&oacute;n</p>
                                     </div>
+                                    <div class="py-2">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Parametros Iniciales</th>
+                                                    <th scope="col">Resumen de Simulacion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablaResumenSimulacion"></tbody>
+                                        </table>
+                                    </div>
                                     <div class="overflow-y-scroll py-2" style="max-height: 700px;">
                                         <table class="table table-striped table-hover">
                                             <thead id="cabeceraTablaSimulacion"></thead>
@@ -688,13 +699,17 @@
                 }
             }
 
+            console.log(nombreClases);
+
             // validacion, la suma total de las probabilidades P(x) debe ser 1
             const sumaPxTotal = nombreClases.reduce((suma, clase) => { return suma += clase.px }, 0);
-            if (sumaPxTotal !== 1) {
+            const sumaPxTotalFormateada = Math.fround(sumaPxTotal);
+            if (sumaPxTotalFormateada !== 1) {
                 ELEM_ID('validaciones').style.display = "block";
                 ELEM_ID('validaciones').textContent = 'La suma total de todos los P(x) debe ser 1 (o el 100%)!';
                 return;
             }
+
 
             // validacion, minimo y maximo debe ser numerico
             // si minimo y maximo son NaN, quiere decir que parseFloat() no recibio un numero
@@ -1035,6 +1050,41 @@
             const simulacion = simularExistencias(min_inventario, max_inventario, politica_pedidos, 
                 dias_simular, marca_demanda, marca_demora, secuencia_aleatoria.secuencia);
 
+            // generar encabezado de resumen
+            const tabla_resumen = ELEM_ID("tablaResumenSimulacion");
+            tabla_resumen.innerHTML = `
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Stock Max: ${max_inventario}.    
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">
+                        Ventas: ${simulacion.total_ventas.vendido} unidades, en: ${simulacion.total_ventas.dias} dias.    
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Stock Min: ${min_inventario}.
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">
+                        Perdidas: ${simulacion.total_perdida.perdido} unidades, en: ${simulacion.total_perdida.dias} dias.    
+                    </td>    
+                </tr>
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Politica de pedidos: ultimos ${politica_pedidos} dias.    
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">
+                        Stock Final: ${simulacion.stock_general} unidades.  
+                    </td>    
+                </tr>
+                <tr>
+                    <td scope="col" class="text-wrap align-middle">
+                        Dias Simulados: ${dias_simular} dias.    
+                    </td>
+                    <td scope="col" class="text-wrap align-middle">-</td>    
+                </tr>
+            `;
+                
             // generar tabla de simulacion
             const filas_cabecera_tabla = `
                 <tr>

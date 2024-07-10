@@ -1,4 +1,10 @@
 /**
+ * * CONSTANTES
+ */
+const STATUS_VENDIDO = "vendido";
+const STATUS_INSATISFECHO = "insatisfecho";
+
+/**
  * * funcion iteradora.
  * a partir de un array de numeros aleatorios de entre 0 y 9,
  * captura de a 2 digitos (unidad y decena) para formar numeros de 0 a 99.
@@ -71,7 +77,13 @@ function simularExistencias(
         stock_minimo: min_inventario,
         politica_pedidos: politica_pedidos,
         cantidad_proximo_pedido: [],
-        pedido_en_transito: { hayPedido: false, pedido: { demora: {}, cantidad_pedido: 0 }, contador_dias: 0 },
+        pedido_en_transito: { 
+            hayPedido: false,
+            pedido: {
+                demora: {},
+                cantidad_pedido: 0 
+            },
+            contador_dias: 0 },
         historial_de_pedidos: [],
         dias: [],
     };
@@ -82,6 +94,23 @@ function simularExistencias(
 
     // simular n dias
     for (let i = 1; i <= n_dias_simulacion; i++) {
+
+        // crear un dia
+        let dia = { 
+            dia: `dia_${i}`,
+            stock_inicial: 0,
+            demanda: {},
+            status: "",
+            stock_final: 0,
+            pedido: {
+                hay_pedido_dia: false,
+                detalle_pedido: {}
+            },
+            reposicion: {
+                hay_reposicion_dia: false,
+                detalle_reposicion: {}
+            }
+        };
         
         // dias restantes para la llegada del pedido
         if (simulacion.pedido_en_transito.hayPedido) {
@@ -89,35 +118,45 @@ function simularExistencias(
             if (simulacion.pedido_en_transito.contador_dias > 0) {
                 simulacion.pedido_en_transito.contador_dias--;
             } else {
+
                 // llega el pedido, repongo el stock antes de crear otro dia
                 simulacion.stock_general += simulacion.pedido_en_transito.pedido.cantidad_pedido;
-                // no hay pedidos en transito
+                // indicar la reposicion realizada en el dia
+                let reposicion = { cantidad_repuesta: simulacion.pedido_en_transito.pedido.cantidad_pedido };
+                dia.reposicion.hay_reposicion_dia = true;
+                dia.reposicion.detalle_reposicion = reposicion;
+
+                // no hay pedidos en transito a este punto
                 simulacion.pedido_en_transito.hayPedido = false;
                 simulacion.pedido_en_transito.pedido = {};
                 simulacion.pedido_en_transito.contador_dias = 0;
             }
         }
 
-        // crear un dia
-        let dia = { dia: `dia_${i}`, demanda: {}, status: "", stock: 0 };
+        // stock al inicio del dia
+        dia.stock_inicial = simulacion.stock_general;
+        // demanda recibida en el dia
         dia.demanda = generarValorAjustado(marca_demanda, iteradorDemanda).next().value;
 
         // si tengo stock, vendo
-        if((simulacion.stock_general - dia.demanda.cantidad) > simulacion.stock_minimo) {
+        if((simulacion.stock_general - simulacion.stock_minimo) >= dia.demanda.cantidad) {
+            // disminuye el stock
             simulacion.stock_general = simulacion.stock_general - dia.demanda.cantidad;
-            dia.status = "vendido";
-            // guardar ultima demanda, ultimas segun politica de pedido
+            dia.status = STATUS_VENDIDO;
+
+            // guardar ultima demanda, ultimas segun politica de pedidos
             if (simulacion.cantidad_proximo_pedido.length < simulacion.politica_pedidos) {
                 simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
             } else {
                 simulacion.cantidad_proximo_pedido.shift();
                 simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
             }
+
         } else {
             // no tengo stock
-            dia.status = "insatisfecho";
+            dia.status = STATUS_INSATISFECHO;
 
-            // guardar ultima demanda, ultimas segun politica de pedido
+            // guardar ultima demanda, ultimas segun politica de pedidos
             if (simulacion.cantidad_proximo_pedido.length < simulacion.politica_pedidos) {
                 simulacion.cantidad_proximo_pedido.push(dia.demanda.cantidad);
             } else {
@@ -127,19 +166,31 @@ function simularExistencias(
 
             // hacer pedido
             if (!simulacion.pedido_en_transito.hayPedido) {
+                
                 let pedido = {};
-                pedido.demora = generarValorAjustado(marca_demora, iteradorDemora).next().value;
                 pedido.cantidad_pedido = simulacion.cantidad_proximo_pedido.reduce((suma, cantidad) => { return suma += cantidad });
+                pedido.demora = generarValorAjustado(marca_demora, iteradorDemora).next().value;
+                
+                // la simulacion mantiene el pedido en transito 
                 simulacion.pedido_en_transito.hayPedido = true;
                 simulacion.pedido_en_transito.pedido = pedido;
                 simulacion.pedido_en_transito.contador_dias = pedido.demora.cantidad;
+
+                // el pedido realizado va al historial
                 simulacion.historial_de_pedidos.push(pedido);
+
+                // la cantidad del proximo pedido se reestablece a 0
                 simulacion.cantidad_proximo_pedido = [];
+
+                // indicar el pedido realizado en el dia
+                dia.pedido.hay_pedido_dia = true;
+                dia.pedido.detalle_pedido = pedido;
+
             }
         }
         
-        // stock por dia
-        dia.stock = simulacion.stock_general;
+        // stock al final del dia, haya o no vendido
+        dia.stock_final = simulacion.stock_general;
         
         // guardo el dia simulado
         simulacion.dias.push(dia);

@@ -1,7 +1,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -223,9 +222,9 @@
 
                                         </p>
                                         <p>
-                                            <li><b>P(x1)</b> = 0.4</li>
-                                            <li><b>P(x2)</b> = 0.5</li>
-                                            <li><b>P(x3)</b> = 0.1</li>
+                                            <li><b>P(x<sub>1</sub>)</b> = 0.4</li>
+                                            <li><b>P(x<sub>2</sub>)</b> = 0.5</li>
+                                            <li><b>P(x<sub>3</sub>)</b> = 0.1</li>
                                         </p>
                                         <p>
                                             La demanda fluct&uacutea seg&uacuten una distribuci&oacute;n
@@ -423,7 +422,7 @@
                                             </div>
                                             <div class="input-group p-2" style="width: 100%;">
                                                 <span class="input-group-text font-weight-bold text-gray-900">
-                                                    Politica de Pedidos
+                                                    Pol&iacute;tica de Pedidos
                                                     (d&iacute;as)
                                                 </span>
                                                 <input type="number" class="form-control" id="politicaPedido"
@@ -711,9 +710,10 @@
             console.log(nombreClases);
 
             // validacion, la suma total de las probabilidades P(x) debe ser 1
-            const sumaPxTotal = nombreClases.reduce((suma, clase) => { return suma += clase.px }, 0);
-            const sumaPxTotalFormateada = Math.fround(sumaPxTotal);
-            if (sumaPxTotalFormateada !== 1) {
+            const sumaPxTotal = nombreClases.reduce((suma, clase) => suma += clase.px, 0);
+
+            //const sumaPxTotalFormateada = Math.fround(sumaPxTotal);
+            if (Math.abs(sumaPxTotal - 1) > Number.EPSILON) {
                 ELEM_ID('validaciones').style.display = "block";
                 ELEM_ID('validaciones').textContent = 'La suma total de todos los P(x) debe ser 1 (o el 100%)!';
                 return;
@@ -852,7 +852,7 @@
 
                 // Funcion para agregar opciones al select
                 function agregarOpcionSelect(selectElement, nombre) {
-                    const option = CREATE_ELEM("option");
+                    const option = CREATE_ELE300M("option");
                     option.value = nombre;
                     option.textContent = nombre;
                     selectElement.appendChild(option);
@@ -1034,10 +1034,10 @@
 
             console.log("de:", demanda);
 
-            // Initialize an empty array to collect error messages
+            // Inicializa un array para colecciona mensajes de errrores
             let errors = [];
 
-            // Validate inputs and add errors to the array
+            // Validando los inputs y agregando errores en el array
             if (existInitial <= 0) {
                 errors.push("Ingrese el parámetro para la Existencia Inicial");
                 console.log("entra 2");
@@ -1061,16 +1061,14 @@
                 errors.push("Seleccione una Secuencia Aleatoria");
             }
 
-            // Check if there are any errors
+            // Checkear si hay errores
             if (errors.length > 0) {
-                // Display all collected error messages
+                // Muestra una lista de falló
                 mensaje_error.textContent = errors.join('\n');
                 validation.style.display = "block";
             } else {
-                // Hide the validation message if no errors
                 validation.style.display = "none";
 
-                // Proceed with the main code
                 // tabla de simulacion
                 const cabecera_tabla = ELEM_ID("cabeceraTablaSimulacion");
                 const cuerpo_tabla = ELEM_ID("cuerpoTablaSimulacion");
@@ -1139,8 +1137,7 @@
                 </td>
                 <td scope="col" class="text-wrap align-middle">-</td>
             </tr>
-        `;
-
+            `;
                 // generar tabla de simulacion
                 const filas_cabecera_tabla = `
             <tr>

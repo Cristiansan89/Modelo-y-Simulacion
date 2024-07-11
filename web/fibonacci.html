@@ -592,7 +592,7 @@
                                                 <div class="text-center">
                                                     <button class="btn btn-success btn-xl fw-bold p-2"
                                                         onclick="guardarSecuencia()" type="submit"
-                                                        style="width: 25%;">Guardar</button>
+                                                        id="btnGuardarSecuencia" style="width: 25%;">Guardar</button>
                                                 </div>
                                             </div>
                                             <div id="noPasaTest">
@@ -600,6 +600,22 @@
                                                     <p>TEST SIN PASAR</p>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div style="display: none;">
+                                            /**
+                                            * *formato del objeto secuencia numerica:
+                                            * {
+                                            * nombre: "nombre representativo del objeto",
+                                            * tipo: "TIPO_SECUENCIA"
+                                            * algoritmo: "algoritmo usado",
+                                            * test_chi: [true | false, alfa],
+                                            * test_poker: [true | false, alfa],
+                                            * fecha_creacion: "date",
+                                            * cant_digitos: n,
+                                            * secuencia: []
+                                            * }
+                                            */
                                         </div>
                                     </div>
                                 </li>
@@ -928,6 +944,7 @@
             if (respuesta[0] === 0) {
                 mensajes.textContent = respuesta[1];
                 validaciones.textContent = '';
+                btnGuardarSecuencia.style.display = "none";
             } else {
                 // error, respuesta[0] es 1
                 validaciones.textContent = respuesta[1];

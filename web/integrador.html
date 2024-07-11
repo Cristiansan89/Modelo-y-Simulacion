@@ -468,15 +468,24 @@
                                                 </select>
                                             </div>
                                             <!-- validaciones de errores -->
-                                            <div class="text-center font-weight-bold mt-2">
-                                                <p id="validaciones_simulacion" style="color: rgb(221, 32, 32);">ejemplo error</p>
+                                            <div id="validaciones_simulacion" style="display: none;">
+                                                <div class="text-center font-weight-bold mt-2">
+                                                    <p id="mensaje_error_simulacion"
+                                                        style="color: rgb(221, 32, 32); white-space: pre-line;">
+                                                    </p>
+                                                </div>
                                             </div>
+
                                             <!-- Mensajes -->
-                                            <div class="text-center font-weight-bold mt-2">
-                                                <p id="mensajes_simulacion" style="color: rgb(20, 129, 16);">ejemplo mensaje</p>
+                                            <div id="mensajes_simulacion" style="display: none;">
+                                                <div class="text-center font-weight-bold mt-2">
+                                                    <p id="mensaje_aprobado_simulacion"
+                                                        style="color: rgb(20, 129, 16);">
+                                                    </p>
+                                                </div>
                                             </div>
                                             <div class="text-center p-2" id="btnSimular">
-                                                <button class="btn btn-primary btn-xl fw-bold p-2" type="submit"
+                                                <button class="btn btn-outline-success btn-xl fw-bold p-2" type="submit"
                                                     style="width: 15%;" onclick="generarSimulacion()">
                                                     Simular
                                                 </button>
@@ -1008,130 +1017,174 @@
             const contenedorVistaPreviaMarcas = ELEM_ID('vistaPreviaMarcas');
             contenedorVistaPreviaMarcas.innerHTML = "";
         }
-    
+
         /* simular escenario */
         function generarSimulacion() {
+            console.log("entra 1");
 
-            // tabla de simulacion
-            const cabecera_tabla = ELEM_ID("cabeceraTablaSimulacion");
-            const cuerpo_tabla = ELEM_ID("cuerpoTablaSimulacion");
-
-            // reset de las tablas antes de simular
-            cabecera_tabla.innerHTML = "";
-            cuerpo_tabla.innerHTML = "";
-
-            // parametros
-            const max_inventario = Number(ELEM_ID("existenciaInicial").value);
-            const min_inventario = Number(ELEM_ID("existenciaMinima").value);
-            const dias_simular = Number(ELEM_ID("tiempoSimulacion").value);
-            const politica_pedidos = Number(ELEM_ID("politicaPedido").value);
+            const existInitial = Number(ELEM_ID("existenciaInicial").value);
+            const existMin = Number(ELEM_ID("existenciaMinima").value);
+            const timeSimulacion = Number(ELEM_ID("tiempoSimulacion").value);
+            const policyPedido = Number(ELEM_ID("politicaPedido").value);
             const demanda = ELEM_ID("selectDemanda").value;
             const demora = ELEM_ID("selectDemora").value;
             const secuencia = ELEM_ID("selectSecuencia").value;
+            const mensaje_error = ELEM_ID('mensaje_error_simulacion');
+            const validation = ELEM_ID('validaciones_simulacion');
 
-            // faltan validaciones en los parametros, que sean numeros positivos.
-            // mensajes en el frontend
-            
-            // marcas de clase y secuencia aleatoria
-            const marca_demanda = obtenerDeLocalStorage(demanda);
-            const marca_demora = obtenerDeLocalStorage(demora);
-            const secuencia_aleatoria = obtenerDeLocalStorage(secuencia);
+            console.log("de:", demanda);
 
-            // los numeros aleatorios, tomados de a 2, alcanzan para simular los n dias?
-            let cantidad_digitos = secuencia_aleatoria.secuencia.length;
-            let cantidad_posible = Math.floor(cantidad_digitos/2);
-            if (cantidad_posible < dias_simular) {
-                // mover mensaje al frontend
-                console.log("ingrese mas numeros aleatorios para simular los dias solicitados");
-                return;
+            // Initialize an empty array to collect error messages
+            let errors = [];
+
+            // Validate inputs and add errors to the array
+            if (existInitial <= 0) {
+                errors.push("Ingrese el parámetro para la Existencia Inicial");
+                console.log("entra 2");
+            }
+            if (existMin <= 0) {
+                errors.push("Ingrese el parámetro para la Existencia Miníma");
+            }
+            if (timeSimulacion <= 0) {
+                errors.push("Ingrese el parámetro para el Tiempo de Simulación");
+            }
+            if (policyPedido <= 0) {
+                errors.push("Ingrese el parámetro para la Política de Pedido");
+            }
+            if (demanda == -1) {
+                errors.push("Seleccione una Marca de Clase para la Demanda");
+            }
+            if (demora == -1) {
+                errors.push("Seleccione una Marca de Clase para la Demora");
+            }
+            if (secuencia == -1) {
+                errors.push("Seleccione una Secuencia Aleatoria");
             }
 
-            // simulacion
-            const simulacion = simularExistencias(min_inventario, max_inventario, politica_pedidos, 
-                dias_simular, marca_demanda, marca_demora, secuencia_aleatoria.secuencia);
+            // Check if there are any errors
+            if (errors.length > 0) {
+                // Display all collected error messages
+                mensaje_error.textContent = errors.join('\n');
+                validation.style.display = "block";
+            } else {
+                // Hide the validation message if no errors
+                validation.style.display = "none";
 
-            // generar encabezado de resumen
-            const tabla_resumen = ELEM_ID("tablaResumenSimulacion");
-            tabla_resumen.innerHTML = `
+                // Proceed with the main code
+                // tabla de simulacion
+                const cabecera_tabla = ELEM_ID("cabeceraTablaSimulacion");
+                const cuerpo_tabla = ELEM_ID("cuerpoTablaSimulacion");
+
+                // reset de las tablas antes de simular
+                cabecera_tabla.innerHTML = "";
+                cuerpo_tabla.innerHTML = "";
+
+                // parametros
+                const max_inventario = existInitial;
+                const min_inventario = existMin;
+                const dias_simular = timeSimulacion;
+                const politica_pedidos = policyPedido;
+
+                // faltan validaciones en los parametros, que sean numeros positivos.
+                // mensajes en el frontend
+
+                // marcas de clase y secuencia aleatoria
+                const marca_demanda = obtenerDeLocalStorage(demanda);
+                const marca_demora = obtenerDeLocalStorage(demora);
+                const secuencia_aleatoria = obtenerDeLocalStorage(secuencia);
+
+                // los numeros aleatorios, tomados de a 2, alcanzan para simular los n dias?
+                let cantidad_digitos = secuencia_aleatoria.secuencia.length;
+                let cantidad_posible = Math.floor(cantidad_digitos / 2);
+                if (cantidad_posible < dias_simular) {
+                    // mover mensaje al frontend
+                    console.log("Ingrese más números aleatorios para simular los días solicitados");
+                    return;
+                }
+
+                // simulacion
+                const simulacion = simularExistencias(min_inventario, max_inventario, politica_pedidos,
+                    dias_simular, marca_demanda, marca_demora, secuencia_aleatoria.secuencia);
+
+                // generar encabezado de resumen
+                const tabla_resumen = ELEM_ID("tablaResumenSimulacion");
+                tabla_resumen.innerHTML = `
+            <tr>
+                <td scope="col" class="text-wrap align-middle">
+                    Stock Max: ${max_inventario}.
+                </td>
+                <td scope="col" class="text-wrap align-middle">
+                    Ventas: ${simulacion.total_ventas.vendido} unidades, en: ${simulacion.total_ventas.dias} días.
+                </td>
+            </tr>
+            <tr>
+                <td scope="col" class="text-wrap align-middle">
+                    Stock Min: ${min_inventario}.
+                </td>
+                <td scope="col" class="text-wrap align-middle">
+                    Pérdidas: ${simulacion.total_perdida.perdido} unidades, en: ${simulacion.total_perdida.dias} días.
+                </td>
+            </tr>
+            <tr>
+                <td scope="col" class="text-wrap align-middle">
+                    Política de pedidos: últimos ${politica_pedidos} días.
+                </td>
+                <td scope="col" class="text-wrap align-middle">
+                    Stock Final: ${simulacion.stock_general} unidades.
+                </td>
+            </tr>
+            <tr>
+                <td scope="col" class="text-wrap align-middle">
+                    Días Simulados: ${dias_simular} días.
+                </td>
+                <td scope="col" class="text-wrap align-middle">-</td>
+            </tr>
+        `;
+
+                // generar tabla de simulacion
+                const filas_cabecera_tabla = `
+            <tr>
+                <th scope="col" class="text-wrap align-middle text-center">Día</th>
+                <th scope="col" class="text-wrap align-middle text-center">Stock Inicial</th>
+                <th scope="col" class="text-wrap align-middle text-center">Demanda</th>
+                <th scope="col" class="text-wrap align-middle text-center">Estado</th>
+                <th scope="col" class="text-wrap align-middle text-center">Stock Final</th>
+                <th scope="col" class="text-wrap align-middle text-center">Pedido</th>
+                <th scope="col" class="text-wrap align-middle text-center">Reposición</th>
+            </tr>`;
+
+                cabecera_tabla.innerHTML = filas_cabecera_tabla;
+
+                for (let i = 0; i < dias_simular; i++) {
+                    // día
+                    let un_dia = simulacion.dias[i];
+                    // pedido al día, y reposición al día
+                    let un_pedido = un_dia.pedido;
+                    let una_reposicion = un_dia.reposicion;
+
+                    cuerpo_tabla.innerHTML += `
                 <tr>
-                    <td scope="col" class="text-wrap align-middle">
-                        Stock Max: ${max_inventario}.    
+                    <td scope="col" class="text-wrap align-middle text-center">${un_dia.dia}</td>
+                    <td scope="col" class="text-wrap align-middle text-center">${un_dia.stock_inicial}</td>
+                    <td scope="col" class="text-wrap align-middle text-center">${un_dia.demanda.cantidad + " - " + un_dia.demanda.clasificacion}</td>
+                    <td scope="col" class="text-wrap align-middle text-center">${un_dia.status}</td>
+                    <td scope="col" class="text-wrap align-middle text-center">${un_dia.stock_final}</td>
+                    <td scope="col" class="text-wrap align-middle text-center">
+                        ${(un_pedido.hay_pedido_dia)
+                            ? "Pedido: " + un_pedido.detalle_pedido.cantidad_pedido + " - (llega en: " + un_pedido.detalle_pedido.demora.cantidad + " días)"
+                            : "-"
+                        }
                     </td>
-                    <td scope="col" class="text-wrap align-middle">
-                        Ventas: ${simulacion.total_ventas.vendido} unidades, en: ${simulacion.total_ventas.dias} dias.    
+                    <td scope="col" class="text-wrap align-middle text-center">
+                        ${(una_reposicion.hay_reposicion_dia)
+                            ? "Reposición de: " + una_reposicion.detalle_reposicion.cantidad_repuesta
+                            : "-"
+                        }   
                     </td>
-                </tr>
-                <tr>
-                    <td scope="col" class="text-wrap align-middle">
-                        Stock Min: ${min_inventario}.
-                    </td>
-                    <td scope="col" class="text-wrap align-middle">
-                        Perdidas: ${simulacion.total_perdida.perdido} unidades, en: ${simulacion.total_perdida.dias} dias.    
-                    </td>    
-                </tr>
-                <tr>
-                    <td scope="col" class="text-wrap align-middle">
-                        Politica de pedidos: ultimos ${politica_pedidos} dias.    
-                    </td>
-                    <td scope="col" class="text-wrap align-middle">
-                        Stock Final: ${simulacion.stock_general} unidades.  
-                    </td>    
-                </tr>
-                <tr>
-                    <td scope="col" class="text-wrap align-middle">
-                        Dias Simulados: ${dias_simular} dias.    
-                    </td>
-                    <td scope="col" class="text-wrap align-middle">-</td>    
-                </tr>
-            `;
-                
-            // generar tabla de simulacion
-            const filas_cabecera_tabla = `
-                <tr>
-                    <th scope="col" class="text-wrap align-middle text-center">Dia</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Stock Inicial</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Demanda</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Estado</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Stock Final</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Pedido</th>
-                    <th scope="col" class="text-wrap align-middle text-center">Reposicion</th>
                 </tr>`;
-            
-            cabecera_tabla.innerHTML = filas_cabecera_tabla;
-
-            for (let i = 0; i < dias_simular; i++) {
-
-                // dia
-                let un_dia = simulacion.dias[i];
-                // pedido al dia, y reposicion al dia
-                let un_pedido = un_dia.pedido;
-                let una_reposicion = un_dia.reposicion;
-
-                cuerpo_tabla.innerHTML += `
-                    <tr>
-                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.dia}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.stock_inicial}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.demanda.cantidad + " - " + un_dia.demanda.clasificacion}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.status}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">${un_dia.stock_final}</td>
-                        <td scope="col" class="text-wrap align-middle text-center">
-                            ${(un_pedido.hay_pedido_dia) 
-                                    ? "Pedido: " + un_pedido.detalle_pedido.cantidad_pedido + " - (llega en: " + un_pedido.detalle_pedido.demora.cantidad + " dias)"
-                                    : "-"
-                            }
-                        </td>
-                        <td scope="col" class="text-wrap align-middle text-center">
-                            ${(una_reposicion.hay_reposicion_dia)
-                                    ? "Reposicion de: " + una_reposicion.detalle_reposicion.cantidad_repuesta
-                                    : "-"
-                            }   
-                        </td>
-                    </tr>`;
-            };
-            
-            return;
+                }
+            }
         }
-    
     </script>
 
 </body>
